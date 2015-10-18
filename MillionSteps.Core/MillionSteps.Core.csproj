@@ -4,14 +4,13 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{6C4EE352-63E4-439E-97DE-D3EEEDF96576}</ProjectGuid>
+    <ProjectGuid>{88AF76D4-EE92-4368-8AEE-72C98DB4FA8A}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MillionSteps.Tests</RootNamespace>
-    <AssemblyName>MillionSteps.Tests</AssemblyName>
+    <RootNamespace>MillionSteps.Core</RootNamespace>
+    <AssemblyName>MillionSteps.Core</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -42,16 +41,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\MillionSteps.Core\MillionSteps.Core.csproj">
-      <Project>{88af76d4-ee92-4368-8aee-72c98db4fa8a}</Project>
-      <Name>MillionSteps.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\MillionSteps.Web\MillionSteps.Web.csproj">
-      <Project>{4563eea6-438e-4875-89c8-4df5256e2b32}</Project>
-      <Name>MillionSteps.Web</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
