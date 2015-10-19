@@ -6,7 +6,6 @@ namespace MillionSteps.Core.Configuration
   public class Settings : SettingsBase
   {
     public string ConnectionString => GetConnectionString("MillionSteps");
-
     public string ConsumerKey => GetAppSetting("ConsumerKey");
     public string ConsumerSecret => GetAppSetting("ConsumerSecret");
     public Uri AppUrl => new Uri(GetAppSetting("AppUrl"));

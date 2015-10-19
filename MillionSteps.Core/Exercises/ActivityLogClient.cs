@@ -73,13 +73,7 @@ namespace MillionSteps.Core.Exercises
       var today = (DateTime.UtcNow + usersOffsetFromUtc).Date;
       var yesterday = today - TimeSpan.FromDays(1);
 
-      var activityLogEntries = this.UpdateActivityLog(yesterday, today, false);
-      var dbContext = this.dbContextFactory();
-      foreach (var activityLogEntry in activityLogEntries) {
-        dbContext.ActivityLogEntries.Add(activityLogEntry);
-      }
-
-      dbContext.SaveChanges();
+      this.UpdateActivityLog(yesterday, today, false);
     }
   }
 }

@@ -74,5 +74,12 @@ namespace MillionSteps.Web.Authentication
 
       return this.RedirectToAction("Index", "WebSite");
     }
+
+    [HttpGet]
+    public ActionResult Logout()
+    {
+      this.ClearUserSessionCookie();
+      return this.RedirectToAction("Index", "WebSite");
+    }
   }
 }
