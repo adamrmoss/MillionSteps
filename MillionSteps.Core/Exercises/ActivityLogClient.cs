@@ -39,7 +39,8 @@ namespace MillionSteps.Core.Exercises
       var updatedActivityLogEntries = new List<ActivityLogEntry>();
       foreach (var dateToUpdate in datesToUpdate) {
         var activityLogEntry = existingActivityLogEntries.ContainsKey(dateToUpdate) ? existingActivityLogEntries[dateToUpdate] :
-          new ActivityLogEntry(Guid.NewGuid()) {
+          new ActivityLogEntry {
+            Id = Guid.NewGuid(),
             UserId = this.userSession.UserId,
             Date = dateToUpdate,
           };

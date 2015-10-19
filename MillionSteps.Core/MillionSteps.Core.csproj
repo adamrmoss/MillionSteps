@@ -76,10 +76,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Adventures\Adventure.cs" />
+    <Compile Include="Adventures\AdventureInitialization.cs" />
     <Compile Include="Authentication\UserProfileClient.cs" />
+    <Compile Include="Characters\Adventurer.cs" />
+    <Compile Include="Characters\Character.cs" />
+    <Compile Include="Characters\Gender.cs" />
     <Compile Include="Exercises\ActivityLogClient.cs" />
     <Compile Include="Exercises\ActivityLogEntry.cs" />
-    <Compile Include="GuidEntityBase.cs" />
     <Compile Include="Authentication\UserSession.cs" />
     <Compile Include="Configuration\CoreRegistry.cs" />
     <Compile Include="Configuration\Settings.cs" />
@@ -90,8 +94,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <Content Include="Configuration\Connections.config" />
-    <Content Include="Configuration\Settings.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

@@ -7,7 +7,6 @@ using GuardClaws;
 using MillionSteps.Core;
 using MillionSteps.Core.Authentication;
 using MillionSteps.Core.Configuration;
-using HttpCookie = System.Web.HttpCookie;
 
 namespace MillionSteps.Web.Authentication
 {
@@ -34,7 +33,8 @@ namespace MillionSteps.Web.Authentication
       var completeAuthorizationUrl = new Uri(this.settings.AppUrl, this.Url.RouteUrl("CompleteAuthentication")).ToString();
       var requestToken = this.authenticator.GetRequestToken(completeAuthorizationUrl);
 
-      var userSession = new UserSession(Guid.NewGuid()) {
+      var userSession = new UserSession {
+        Id = Guid.NewGuid(),
         CreateDate = DateTime.UtcNow,
         TempToken = requestToken.Token,
         TempSecret = requestToken.Secret,
@@ -55,7 +55,7 @@ namespace MillionSteps.Web.Authentication
         .SingleOrDefault(us => us.TempToken == oauth_token);
 
       if (userSession == null)
-        throw new ArgumentException("Session not found", "oauth_token");
+        throw new ArgumentException("Session not found", nameof(oauth_token));
 
       var requestToken = new RequestToken {
         Token = userSession.TempToken,

@@ -1,25 +1,26 @@
 ﻿using System.Web.Mvc;
+using MillionSteps.Core.Authentication;
 
 namespace MillionSteps.Web
 {
   public class WebSiteController : ControllerBase
   {
-    //private readonly UserProfileClient userProfileClient;
+    private readonly UserProfileClient userProfileClient;
 
-    //public WebSiteController(UserProfileClient userProfileClient)
-    //{
-    //  this.userProfileClient = userProfileClient;
-    //}
+    public WebSiteController(UserProfileClient userProfileClient)
+    {
+      this.userProfileClient = userProfileClient;
+    }
 
     [HttpGet]
     public ActionResult Index()
     {
-      //var userProfile = this.userProfileClient.GetUserProfile();
+      var userProfile = this.userProfileClient.GetUserProfile();
 
-      //if (userProfile == null) 
+      if (userProfile == null)
         return this.RedirectToRoute("Welcome");
-      //else
-      //  return this.RedirectToRoute("Game");
+      else
+        return this.RedirectToRoute("Game");
     }
 
     [HttpGet]

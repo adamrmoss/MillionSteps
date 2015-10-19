@@ -59,8 +59,10 @@
   <ItemGroup>
     <Folder Include="Properties" />
     <Folder Include="Authentication" />
+    <Folder Include="Exercises" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Authentication\UserSession.sql" />
+    <Build Include="Exercises\ActivityLogEntry.sql" />
   </ItemGroup>
 </Project>
