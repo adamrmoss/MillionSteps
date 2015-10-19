@@ -1,0 +1,10 @@
+﻿[
+  {
+    "outputFile": "main.js",
+    "inputFile": "main.coffee"
+  },
+  {
+    "outputFile": "website.js",
+    "inputFile": "website.coffee"
+  }
+]

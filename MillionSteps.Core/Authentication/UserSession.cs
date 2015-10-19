@@ -1,7 +1,9 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MillionSteps.Core.Authentication
 {
+  [Table("UserSession")]
   public class UserSession
   {
     public const string CookieName = "UserSessionId";

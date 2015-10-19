@@ -1,0 +1,17 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+  <title>A Million Steps</title>
+  <link type="text/css" rel="stylesheet" href="~/website.css" />
+</head>
+<body>
+  <h1>A Million Steps</h1>
+  <section class="fitbit logo">
+    <a href="@Url.RouteUrl("Authenticate")">
+      <img alt="Fitbit" src="~/Authentication/fitbit_logo_dark_1000px.png" />
+      <p>Click here to Login to Fitbit&reg; (You will leave our site for a moment)</p>
+    </a>
+  </section>
+  @Html.Partial("~/Views/Footer.cshtml")
+</body>
+</html>
