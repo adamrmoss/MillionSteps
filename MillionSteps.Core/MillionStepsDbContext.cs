@@ -1,5 +1,6 @@
 using System.Data.Entity;
 using MillionSteps.Core.Authentication;
+using MillionSteps.Core.Exercises;
 
 namespace MillionSteps.Core
 {
@@ -11,9 +12,6 @@ namespace MillionSteps.Core
     }
 
     public virtual DbSet<UserSession> UserSessions { get; set; }
-
-    protected override void OnModelCreating(DbModelBuilder modelBuilder)
-    {
-    }
+    public virtual DbSet<ActivityLogEntry> ActivityLogEntries { get; set; }
   }
 }

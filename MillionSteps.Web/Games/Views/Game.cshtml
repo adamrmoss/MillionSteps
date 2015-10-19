@@ -1,0 +1,18 @@
+﻿@model MillionSteps.Web.Games.GameViewModel
+<!DOCTYPE html>
+<html>
+<head>
+  <title>A Million Miles</title>
+  <link type="text/css" rel="stylesheet" href="~/website.css" />
+  <script data-main="main" src="~/Libraries/require.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+<body>
+  <header>
+    <p>@Model.DisplayName</p>
+  </header>
+  <h1>A Million Miles</h1>
+  @RenderBody()
+  @Html.Partial("~/Views/Footer.cshtml")
+</body>
+</html>

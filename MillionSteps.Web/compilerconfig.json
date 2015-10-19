@@ -6,5 +6,13 @@
   {
     "outputFile": "website.js",
     "inputFile": "website.coffee"
+  },
+  {
+    "outputFile": "Libraries/ajax.js",
+    "inputFile": "Libraries/ajax.coffee"
+  },
+  {
+    "outputFile": "Libraries/cookies.js",
+    "inputFile": "Libraries/cookies.coffee"
   }
 ]
