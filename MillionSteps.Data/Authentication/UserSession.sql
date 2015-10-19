@@ -1,0 +1,5 @@
+﻿CREATE TABLE dbo.UserSession
+(
+  Id UNIQUEIDENTIFIER NOT NULL PRIMARY KEY,
+
+)
