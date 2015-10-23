@@ -78,11 +78,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Adventures\Adventure.cs" />
-    <Compile Include="Adventures\AdventureInitialization.cs" />
     <Compile Include="Authentication\UserProfileClient.cs" />
     <Compile Include="Characters\Adventurer.cs" />
-    <Compile Include="Characters\Character.cs" />
-    <Compile Include="Characters\Gender.cs" />
     <Compile Include="Exercises\ActivityLogClient.cs" />
     <Compile Include="Exercises\ActivityLogEntry.cs" />
     <Compile Include="Authentication\UserSession.cs" />

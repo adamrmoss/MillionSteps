@@ -6,8 +6,6 @@ namespace MillionSteps.Core.Adventures
   {
     public Guid Id { get; set; }
     public string UserId { get; set; }
-    public string AdventurerId { get; set; }
-
-    public AdventureInitialization AdventureInitialization { get; set; }
+    public Guid AdventurerId { get; set; }
   }
 }
