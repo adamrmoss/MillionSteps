@@ -1,8 +1,13 @@
 ﻿using System;
-using Fitbit.Models;
 
 namespace MillionSteps.Core.Characters
 {
+  public enum Gender
+  {
+    Male,
+    Female,
+  }
+
   public class Adventurer
   {
     public Guid Id { get; set; }

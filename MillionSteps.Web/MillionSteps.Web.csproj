@@ -239,7 +239,9 @@
     </None>
     <Content Include="website.coffee" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Adventurers\" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MillionSteps.Core\MillionSteps.Core.csproj">
       <Project>{88af76d4-ee92-4368-8aee-72c98db4fa8a}</Project>
