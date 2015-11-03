@@ -4,6 +4,7 @@ using RestSharp;
 using StructureMap;
 using StructureMap.Configuration.DSL;
 using StructureMap.Pipeline;
+using StructureMap.Web.Pipeline;
 
 namespace MillionSteps.Core.Configuration
 {
@@ -20,7 +21,7 @@ namespace MillionSteps.Core.Configuration
 
       this.For<MillionStepsDbContext>()
         .Use(context => context.GetInstance<MillionStepsDbContextFactory>()())
-        .LifecycleIs<UniquePerRequestLifecycle>();
+        .LifecycleIs<HttpContextLifecycle>();
 
       this.For<RestClient>()
         .Use(context => BuildRestClient(context))
