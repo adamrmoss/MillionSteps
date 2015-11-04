@@ -15,7 +15,7 @@ namespace MillionSteps.Web.Authentication
     private readonly Settings settings;
     private readonly Authenticator authenticator;
 
-    public AuthenticationController(Settings settings, Authenticator authenticator, MillionStepsDbContext dbContext)
+    public AuthenticationController(MillionStepsDbContext dbContext, Settings settings, Authenticator authenticator)
       : base(dbContext)
     {
       Claws.NotNull(() => settings);

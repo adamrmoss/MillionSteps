@@ -8,7 +8,7 @@ namespace MillionSteps.Web
   {
     private readonly UserProfileClient userProfileClient;
 
-    public WebSiteController(UserProfileClient userProfileClient, MillionStepsDbContext dbContext) 
+    public WebSiteController(MillionStepsDbContext dbContext, UserProfileClient userProfileClient) 
       : base(dbContext)
     {
       this.userProfileClient = userProfileClient;
