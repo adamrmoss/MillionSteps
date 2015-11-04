@@ -1,4 +1,5 @@
 ﻿using System.Web.Mvc;
+using MillionSteps.Core;
 using MillionSteps.Core.Authentication;
 
 namespace MillionSteps.Web
@@ -7,7 +8,8 @@ namespace MillionSteps.Web
   {
     private readonly UserProfileClient userProfileClient;
 
-    public WebSiteController(UserProfileClient userProfileClient)
+    public WebSiteController(UserProfileClient userProfileClient, MillionStepsDbContext dbContext) 
+      : base(dbContext)
     {
       this.userProfileClient = userProfileClient;
     }

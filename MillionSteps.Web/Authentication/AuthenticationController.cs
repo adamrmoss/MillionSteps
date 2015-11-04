@@ -14,15 +14,13 @@ namespace MillionSteps.Web.Authentication
   {
     private readonly Settings settings;
     private readonly Authenticator authenticator;
-    private readonly MillionStepsDbContext dbContext;
 
     public AuthenticationController(Settings settings, Authenticator authenticator, MillionStepsDbContext dbContext)
+      : base(dbContext)
     {
       Claws.NotNull(() => settings);
       Claws.NotNull(() => authenticator);
-      Claws.NotNull(() => dbContext);
 
-      this.dbContext = dbContext;
       this.settings = settings;
       this.authenticator = authenticator;
     }
@@ -39,8 +37,7 @@ namespace MillionSteps.Web.Authentication
         TempToken = requestToken.Token,
         TempSecret = requestToken.Secret,
       };
-      this.dbContext.UserSessions.Add(userSession);
-      this.dbContext.SaveChanges();
+      this.DbContext.UserSessions.Add(userSession);
 
       var redirectUrl = this.authenticator.GenerateAuthUrlFromRequestToken(requestToken, false);
       return this.Redirect(redirectUrl);
@@ -51,7 +48,7 @@ namespace MillionSteps.Web.Authentication
     public ActionResult Complete(string oauth_token, string oauth_verifier)
     // ReSharper restore InconsistentNaming
     {
-      var userSession = this.dbContext.UserSessions
+      var userSession = this.DbContext.UserSessions
         .SingleOrDefault(us => us.TempToken == oauth_token);
 
       if (userSession == null)
@@ -68,18 +65,17 @@ namespace MillionSteps.Web.Authentication
       userSession.Token = authenticationCallback.AuthToken;
       userSession.Secret = authenticationCallback.AuthTokenSecret;
       userSession.UserId = authenticationCallback.UserId;
-      this.dbContext.SaveChanges();
 
       this.SetUserSessionCookie(userSession.Id);
 
-      return this.RedirectToAction("Index", "WebSite");
+      return this.RedirectToRoute("Index");
     }
 
     [HttpGet]
     public ActionResult Logout()
     {
       this.ClearUserSessionCookie();
-      return this.RedirectToAction("Index", "WebSite");
+      return this.RedirectToRoute("Index");
     }
   }
 }

@@ -9,16 +9,12 @@ namespace MillionSteps.Web.Games
 {
   public class GameController : ControllerBase
   {
-    private readonly MillionStepsDbContext dbContext;
     private readonly UserSession userSession;
     private readonly UserProfileClient userProfileClient;
     private readonly ActivityLogClient activityLogClient;
 
-    public GameController(MillionStepsDbContext dbContext, UserSession userSession, UserProfileClient userProfileClient, ActivityLogClient activityLogClient)
+    public GameController(MillionStepsDbContext dbContext, UserSession userSession, UserProfileClient userProfileClient, ActivityLogClient activityLogClient) : base(dbContext)
     {
-      Claws.NotNull(() => dbContext);
-
-      this.dbContext = dbContext;
       this.userSession = userSession;
       this.userProfileClient = userProfileClient;
       this.activityLogClient = activityLogClient;
@@ -39,13 +35,13 @@ namespace MillionSteps.Web.Games
       Claws.NotNull(() => this.activityLogClient);
       this.activityLogClient.UpdateTodayAndYesterday();
       this.userSession.OffsetFromUtcMillis = userProfile.OffsetFromUTCMillis;
-      this.dbContext.SaveChanges();
+      this.DbContext.SaveChanges();
 
       var viewModel = new GameViewModel {
         DisplayName = userProfile.DisplayName,
       };
 
-      return this.View("~/Games/Views/CreateAdventurer.cshtml", viewModel);
+      return this.View("~/Games/Views/Game.cshtml", viewModel);
     }
   }
 }

@@ -90,7 +90,6 @@
     <Compile Include="Configuration\CoreRegistry.cs" />
     <Compile Include="Configuration\Settings.cs" />
     <Compile Include="MillionStepsDbContext.cs" />
-    <Compile Include="MillionStepsDbContextFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StringExtensions.cs" />
   </ItemGroup>

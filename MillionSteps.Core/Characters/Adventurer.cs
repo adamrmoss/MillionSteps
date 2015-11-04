@@ -12,6 +12,7 @@ namespace MillionSteps.Core.Characters
   {
     public Guid Id { get; set; }
     public string UserId { get; set; }
+    public DateTime DateCreated { get; set; }
     public string Name { get; set; }
     public Gender Gender { get; set; }
     public int Strength { get; set; }
