@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace MillionSteps.Core.Characters
+namespace MillionSteps.Core.Adventures
 {
   public enum Gender
   {

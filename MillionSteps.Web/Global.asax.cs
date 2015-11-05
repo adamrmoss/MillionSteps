@@ -29,6 +29,7 @@ namespace MillionSteps.Web
       routes.MapRoute("Logout", "Logout", new { controller = "Authentication", action = "Logout" });
 
       routes.MapRoute("Game", "Game", new { controller = "Game", action = "Index" });
+      routes.MapRoute("Moment", "Moment/{momentId}", new { controller = "Game", action = "Moment" });
     }
 
     private static void BuildControllerFactory()

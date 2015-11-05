@@ -43,5 +43,11 @@ namespace MillionSteps.Web.Games
 
       return this.View("~/Games/Views/Game.cshtml", viewModel);
     }
+
+    [HttpGet]
+    public ActionResult Moment(Guid momentId)
+    {
+
+    }
   }
 }

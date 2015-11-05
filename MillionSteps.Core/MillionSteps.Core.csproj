@@ -81,9 +81,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Adventures\Choice.cs" />
+    <Compile Include="Adventures\Moment.cs" />
     <Compile Include="Adventures\Adventure.cs" />
+    <Compile Include="Events\Option.cs" />
     <Compile Include="Authentication\UserProfileClient.cs" />
-    <Compile Include="Characters\Adventurer.cs" />
+    <Compile Include="Adventures\Adventurer.cs" />
+    <Compile Include="Events\Event.cs" />
     <Compile Include="Exercises\ActivityLogClient.cs" />
     <Compile Include="Exercises\ActivityLogEntry.cs" />
     <Compile Include="Authentication\UserSession.cs" />
