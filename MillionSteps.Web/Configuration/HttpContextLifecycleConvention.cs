@@ -3,7 +3,7 @@ using StructureMap.Configuration.DSL;
 using StructureMap.Graph;
 using StructureMap.Web.Pipeline;
 
-namespace MillionSteps.Core.Configuration
+namespace MillionSteps.Web.Configuration
 {
   public class HttpContextLifecycleConvention : IRegistrationConvention
   {

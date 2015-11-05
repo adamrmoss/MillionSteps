@@ -4,7 +4,6 @@ using System.Web;
 using Fasterflect;
 using MillionSteps.Core;
 using MillionSteps.Core.Authentication;
-using MillionSteps.Core.Configuration;
 using StructureMap;
 using StructureMap.Configuration.DSL;
 using StructureMap.Graph;
