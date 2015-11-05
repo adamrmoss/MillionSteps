@@ -2,36 +2,51 @@
 using System.Collections.Generic;
 using System.Linq;
 using Fitbit.Api;
+using Fitbit.Models;
 using GuardClaws;
 using MillionSteps.Core.Authentication;
 
 namespace MillionSteps.Core.Exercises
 {
-  public class ActivityLogClient
+  [UnitWorker]
+  public class ActivityLogUpdater
   {
-    private readonly MillionStepsDbContextFactory dbContextFactory;
+    private readonly UserProfileClient userProfileClient;
+    private readonly ActivityLogDao activityLogDao;
     private readonly UserSession userSession;
     private readonly FitbitClient fitbitClient;
-    private readonly UserProfileClient userProfileClient;
 
-    public ActivityLogClient(MillionStepsDbContextFactory dbContextFactory, UserSession userSession, FitbitClient fitbitClient, UserProfileClient userProfileClient)
+    public ActivityLogUpdater(UserProfileClient userProfileClient, ActivityLogDao activityLogDao, UserSession userSession, FitbitClient fitbitClient)
     {
-      Claws.NotNull(() => dbContextFactory);
       Claws.NotNull(() => userProfileClient);
+      Claws.NotNull(() => activityLogDao);
 
-      this.dbContextFactory = dbContextFactory;
+      this.userProfileClient = userProfileClient;
+      this.activityLogDao = activityLogDao;
       this.userSession = userSession;
       this.fitbitClient = fitbitClient;
-      this.userProfileClient = userProfileClient;
+    }
+
+    public void UpdateTodayAndYesterday()
+    {
+      Claws.NotNull(() => this.userSession);
+      Claws.NotNull(() => this.fitbitClient);
+
+      var userProfile = this.userProfileClient.GetUserProfile();
+      var usersOffsetFromUtc = TimeSpan.FromMilliseconds(userProfile.OffsetFromUTCMillis);
+      var today = (DateTime.UtcNow + usersOffsetFromUtc).Date;
+      var yesterday = today - TimeSpan.FromDays(1);
+
+      this.UpdateActivityLog(yesterday, today, false);
     }
 
     public ActivityLogEntry[] UpdateActivityLog(DateTime startDate, DateTime endDate, bool skipExisting) {
-      var numberOfDaysPassed = (endDate - startDate).Days;
-      var dbContext = this.dbContextFactory();
+      Claws.NotNull(() => this.userSession);
+      Claws.NotNull(() => this.fitbitClient);
 
-      var existingActivityLogEntries = dbContext.ActivityLogEntries
-        .Where(ale => ale.UserId == this.userSession.UserId && ale.Date >= startDate && ale.Date <= endDate)
-        .ToDictionary(ale => ale.Date);
+      var numberOfDaysPassed = (endDate - startDate).Days;
+
+      var existingActivityLogEntries = this.activityLogDao.GetExistingActivityLogEntries(this.userSession.UserId, startDate, endDate);
 
       var allDatesInRange = Enumerable.Range(0, numberOfDaysPassed).Select(i => startDate + TimeSpan.FromDays(i));
       var datesToUpdate = skipExisting ? allDatesInRange.Except(existingActivityLogEntries.Keys) : allDatesInRange;
@@ -54,26 +69,12 @@ namespace MillionSteps.Core.Exercises
     {
       try {
         var activityDate = activityLogEntry.Date;
-        var sleep = this.fitbitClient.GetSleep(activityDate).Summary;
         var steps = this.fitbitClient.GetDayActivitySummary(activityDate).Steps;
 
         activityLogEntry.Steps = steps;
-        activityLogEntry.SleepHours = sleep.TotalMinutesAsleep/60m;
       } catch (Exception e) {
         Console.WriteLine(e.Message);
       }
-    }
-
-    public void UpdateTodayAndYesterday()
-    {
-      Claws.NotNull(() => this.userSession);
-      Claws.NotNull(() => this.fitbitClient);
-
-      var usersOffsetFromUtc = TimeSpan.FromMilliseconds(this.userProfileClient.GetUserProfile().OffsetFromUTCMillis);
-      var today = (DateTime.UtcNow + usersOffsetFromUtc).Date;
-      var yesterday = today - TimeSpan.FromDays(1);
-
-      this.UpdateActivityLog(yesterday, today, false);
     }
   }
 }

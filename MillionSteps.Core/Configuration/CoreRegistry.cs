@@ -5,6 +5,7 @@ using StructureMap;
 using StructureMap.Configuration.DSL;
 using StructureMap.Pipeline;
 using StructureMap.Web.Pipeline;
+using Fasterflect;
 
 namespace MillionSteps.Core.Configuration
 {
@@ -15,39 +16,36 @@ namespace MillionSteps.Core.Configuration
       this.For<Settings>()
         .LifecycleIs<SingletonLifecycle>();
 
-      this.For<MillionStepsDbContextFactory>()
-        .Use(context => BuildMillionStepsDbContextFactory())
-        .LifecycleIs<SingletonLifecycle>();
-
       this.For<MillionStepsDbContext>()
-        .Use(context => context.GetInstance<MillionStepsDbContextFactory>()())
         .LifecycleIs<HttpContextLifecycle>();
 
       this.For<RestClient>()
         .Use(context => BuildRestClient(context))
-        .LifecycleIs<TransientLifecycle>();
+        .LifecycleIs<UniquePerRequestLifecycle>();
 
-      this.For<Authenticator>()
-        .Use(context => BuildAuthenticator(context))
-        .LifecycleIs<TransientLifecycle>();
+      this.ConfigureFitbitApi();
 
-      this.For<UserProfileClient>()
-        .LifecycleIs<TransientLifecycle>();
-
-      this.For<FitbitClient>()
-        .Use(context => BuildFitbitClient(context))
-        .LifecycleIs<TransientLifecycle>();
-    }
-
-    private static MillionStepsDbContextFactory BuildMillionStepsDbContextFactory()
-    {
-      return () => new MillionStepsDbContext();
+      this.Scan(scanner => {
+        scanner.Include(type => type.HasAttribute<UnitWorkerAttribute>());
+        scanner.Convention<HttpContextLifecycleConvention>();
+      });
     }
 
     private static RestClient BuildRestClient(IContext context)
     {
       var settings = context.GetInstance<Settings>();
       return new RestClient(settings.ApiUrl.OriginalString);
+    }
+
+    private void ConfigureFitbitApi()
+    {
+      this.For<Authenticator>()
+          .Use(context => BuildAuthenticator(context))
+          .LifecycleIs<UniquePerRequestLifecycle>();
+
+      this.For<FitbitClient>()
+          .Use(context => BuildFitbitClient(context))
+          .LifecycleIs<UniquePerRequestLifecycle>();
     }
 
     private static Authenticator BuildAuthenticator(IContext context)

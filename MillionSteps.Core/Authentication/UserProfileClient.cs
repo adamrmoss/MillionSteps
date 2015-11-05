@@ -4,6 +4,7 @@ using Fitbit.Models;
 
 namespace MillionSteps.Core.Authentication
 {
+  [UnitWorker]
   public class UserProfileClient
   {
     private readonly UserSession userSession;

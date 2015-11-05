@@ -11,13 +11,13 @@ namespace MillionSteps.Web.Games
   {
     private readonly UserSession userSession;
     private readonly UserProfileClient userProfileClient;
-    private readonly ActivityLogClient activityLogClient;
+    private readonly ActivityLogUpdater activityLogUpdater;
 
-    public GameController(MillionStepsDbContext dbContext, UserSession userSession, UserProfileClient userProfileClient, ActivityLogClient activityLogClient) : base(dbContext)
+    public GameController(MillionStepsDbContext dbContext, UserSession userSession, UserProfileClient userProfileClient, ActivityLogUpdater activityLogUpdater) : base(dbContext)
     {
       this.userSession = userSession;
       this.userProfileClient = userProfileClient;
-      this.activityLogClient = activityLogClient;
+      this.activityLogUpdater = activityLogUpdater;
     }
 
     [HttpGet]
@@ -32,8 +32,8 @@ namespace MillionSteps.Web.Games
       if (userProfile == null)
         return this.RedirectToRoute("Welcome");
 
-      Claws.NotNull(() => this.activityLogClient);
-      this.activityLogClient.UpdateTodayAndYesterday();
+      Claws.NotNull(() => this.activityLogUpdater);
+      this.activityLogUpdater.UpdateTodayAndYesterday();
       this.userSession.OffsetFromUtcMillis = userProfile.OffsetFromUTCMillis;
       this.DbContext.SaveChanges();
 
@@ -47,7 +47,7 @@ namespace MillionSteps.Web.Games
     [HttpGet]
     public ActionResult Moment(Guid momentId)
     {
-
+      throw new NotImplementedException();
     }
   }
 }

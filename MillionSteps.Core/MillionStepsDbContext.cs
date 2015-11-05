@@ -5,8 +5,6 @@ using MillionSteps.Core.Exercises;
 
 namespace MillionSteps.Core
 {
-  public delegate MillionStepsDbContext MillionStepsDbContextFactory();
-
   public class MillionStepsDbContext : DbContext
   {
     public MillionStepsDbContext()

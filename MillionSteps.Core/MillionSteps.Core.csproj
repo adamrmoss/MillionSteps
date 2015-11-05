@@ -39,6 +39,10 @@
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Fasterflect, Version=2.1.3.0, Culture=neutral, PublicKeyToken=38d18473284c1ca7, processorArchitecture=MSIL">
+      <HintPath>..\packages\fasterflect.2.1.3\lib\net40\Fasterflect.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Fitbit, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Fitbit.NET.1.1.1\lib\net45\Fitbit.dll</HintPath>
       <Private>True</Private>
@@ -84,15 +88,20 @@
     <Compile Include="Adventures\Choice.cs" />
     <Compile Include="Adventures\Moment.cs" />
     <Compile Include="Adventures\Adventure.cs" />
+    <Compile Include="Authentication\AuthenticationDao.cs" />
+    <Compile Include="Dao.cs" />
     <Compile Include="Events\Option.cs" />
     <Compile Include="Authentication\UserProfileClient.cs" />
     <Compile Include="Adventures\Adventurer.cs" />
     <Compile Include="Events\Event.cs" />
-    <Compile Include="Exercises\ActivityLogClient.cs" />
+    <Compile Include="Exercises\ActivityLogUpdater.cs" />
+    <Compile Include="Exercises\ActivityLogDao.cs" />
     <Compile Include="Exercises\ActivityLogEntry.cs" />
     <Compile Include="Authentication\UserSession.cs" />
     <Compile Include="Configuration\CoreRegistry.cs" />
     <Compile Include="Configuration\Settings.cs" />
+    <Compile Include="Configuration\HttpContextLifecycleConvention.cs" />
+    <Compile Include="UnitWorkerAttribute.cs" />
     <Compile Include="MillionStepsDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StringExtensions.cs" />

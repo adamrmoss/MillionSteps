@@ -10,6 +10,5 @@ namespace MillionSteps.Core.Exercises
     public string UserId { get; set; }
     public DateTime Date { get; set; }
     public int Steps { get; set; }
-    public decimal SleepHours { get; set; }
   }
 }
