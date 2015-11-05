@@ -25,6 +25,11 @@ namespace MillionSteps.Core.Authentication
       this.dbContext.UserSessions.Add(userSession);
     }
 
+    public UserSession LookupUserSession(Guid userSessionId)
+    {
+      return this.dbContext.UserSessions.Find(userSessionId);
+    }
+
     public UserSession LookupSessionByTempToken(string tempToken)
     {
       var userSession = this.dbContext.UserSessions

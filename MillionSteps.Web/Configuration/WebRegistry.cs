@@ -24,7 +24,7 @@ namespace MillionSteps.Web.Configuration
         .LifecycleIs<HttpContextLifecycle>();
 
       this.Scan(scanner => {
-        scanner.TheCallingAssembly();
+        scanner.AssembliesFromApplicationBaseDirectory();
         scanner.Include(type => type.HasAttribute<UnitWorkerAttribute>());
         scanner.Convention<HttpContextLifecycleConvention>();
       });
@@ -37,8 +37,8 @@ namespace MillionSteps.Web.Configuration
         return null;
       // ReSharper disable once PossibleNullReferenceException
       var userSessionId = Guid.Parse(request.Cookies[UserSession.CookieName].Value);
-      var dbContext = context.GetInstance<MillionStepsDbContext>();
-      return dbContext.UserSessions.Find(userSessionId);
+      var authenticationDao = context.GetInstance<AuthenticationDao>();
+      return authenticationDao.LookupUserSession(userSessionId);
     }
   }
 }

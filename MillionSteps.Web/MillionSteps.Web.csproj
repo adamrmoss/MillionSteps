@@ -233,6 +233,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="packages.config" />
+    <Content Include="Events\Views\web.config" />
     <None Include="Properties\PublishProfiles\million-steps.adamrmoss.org - Web Deploy.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -242,9 +243,7 @@
     </None>
     <Content Include="website.coffee" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Adventurers\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\MillionSteps.Core\MillionSteps.Core.csproj">
       <Project>{88af76d4-ee92-4368-8aee-72c98db4fa8a}</Project>
