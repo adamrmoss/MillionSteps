@@ -4,8 +4,6 @@ using RestSharp;
 using StructureMap;
 using StructureMap.Configuration.DSL;
 using StructureMap.Pipeline;
-using StructureMap.Web.Pipeline;
-using Fasterflect;
 
 namespace MillionSteps.Core.Configuration
 {
@@ -16,19 +14,11 @@ namespace MillionSteps.Core.Configuration
       this.For<Settings>()
         .LifecycleIs<SingletonLifecycle>();
 
-      this.For<MillionStepsDbContext>()
-        .LifecycleIs<HttpContextLifecycle>();
-
       this.For<RestClient>()
         .Use(context => BuildRestClient(context))
         .LifecycleIs<UniquePerRequestLifecycle>();
 
       this.ConfigureFitbitApi();
-
-      this.Scan(scanner => {
-        scanner.Include(type => type.HasAttribute<UnitWorkerAttribute>());
-        scanner.Convention<HttpContextLifecycleConvention>();
-      });
     }
 
     private static RestClient BuildRestClient(IContext context)

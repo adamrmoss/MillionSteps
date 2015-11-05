@@ -14,8 +14,9 @@ namespace MillionSteps.Web.Authentication
   {
     private readonly Settings settings;
     private readonly Authenticator authenticator;
+    private readonly AuthenticationDao authenticationDao;
 
-    public AuthenticationController(MillionStepsDbContext dbContext, Settings settings, Authenticator authenticator)
+    public AuthenticationController(MillionStepsDbContext dbContext, Settings settings, Authenticator authenticator, AuthenticationDao authenticationDao)
       : base(dbContext)
     {
       Claws.NotNull(() => settings);
@@ -23,6 +24,7 @@ namespace MillionSteps.Web.Authentication
 
       this.settings = settings;
       this.authenticator = authenticator;
+      this.authenticationDao = authenticationDao;
     }
 
     [HttpGet]
@@ -31,13 +33,7 @@ namespace MillionSteps.Web.Authentication
       var completeAuthorizationUrl = new Uri(this.settings.AppUrl, this.Url.RouteUrl("CompleteAuthentication")).ToString();
       var requestToken = this.authenticator.GetRequestToken(completeAuthorizationUrl);
 
-      var userSession = new UserSession {
-        Id = Guid.NewGuid(),
-        CreateDate = DateTime.UtcNow,
-        TempToken = requestToken.Token,
-        TempSecret = requestToken.Secret,
-      };
-      this.DbContext.UserSessions.Add(userSession);
+      this.authenticationDao.CreateSession(requestToken.Token, requestToken.Secret);
 
       var redirectUrl = this.authenticator.GenerateAuthUrlFromRequestToken(requestToken, false);
       return this.Redirect(redirectUrl);
@@ -48,27 +44,30 @@ namespace MillionSteps.Web.Authentication
     public ActionResult Complete(string oauth_token, string oauth_verifier)
     // ReSharper restore InconsistentNaming
     {
-      var userSession = this.DbContext.UserSessions
-        .SingleOrDefault(us => us.TempToken == oauth_token);
+      var userSession = this.authenticationDao.LookupSessionByTempToken(oauth_token);
 
       if (userSession == null)
         throw new ArgumentException("Session not found", nameof(oauth_token));
 
-      var requestToken = new RequestToken {
-        Token = userSession.TempToken,
-        Secret = userSession.TempSecret,
-        Verifier = oauth_verifier,
-      };
-      var authenticationCallback = this.authenticator.ProcessApprovedAuthCallback(requestToken);
-
       userSession.Verifier = oauth_verifier;
-      userSession.Token = authenticationCallback.AuthToken;
-      userSession.Secret = authenticationCallback.AuthTokenSecret;
-      userSession.UserId = authenticationCallback.UserId;
+
+      var authCredential = this.authenticator.ProcessApprovedAuthCallback(BuildRequestToken(userSession));
+      userSession.Token = authCredential.AuthToken;
+      userSession.Secret = authCredential.AuthTokenSecret;
+      userSession.UserId = authCredential.UserId;
 
       this.SetUserSessionCookie(userSession.Id);
 
       return this.RedirectToRoute("Index");
+    }
+
+    private static RequestToken BuildRequestToken(UserSession userSession)
+    {
+      return new RequestToken {
+        Token = userSession.TempToken,
+        Secret = userSession.TempSecret,
+        Verifier = userSession.Verifier,
+      };
     }
 
     [HttpGet]

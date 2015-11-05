@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Linq;
 using System.Web;
+using Fasterflect;
 using MillionSteps.Core;
 using MillionSteps.Core.Authentication;
+using MillionSteps.Core.Configuration;
 using StructureMap;
 using StructureMap.Configuration.DSL;
+using StructureMap.Graph;
 using StructureMap.Web.Pipeline;
 
 namespace MillionSteps.Web.Configuration
@@ -20,6 +23,12 @@ namespace MillionSteps.Web.Configuration
       this.For<UserSession>()
         .Use(context => BuildUserSession(context))
         .LifecycleIs<HttpContextLifecycle>();
+
+      this.Scan(scanner => {
+        scanner.TheCallingAssembly();
+        scanner.Include(type => type.HasAttribute<UnitWorkerAttribute>());
+        scanner.Convention<HttpContextLifecycleConvention>();
+      });
     }
 
     private static UserSession BuildUserSession(IContext context)

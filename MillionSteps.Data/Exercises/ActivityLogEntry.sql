@@ -4,5 +4,4 @@
   UserId NVARCHAR(1024) NOT NULL,
   [Date] DATETIME NOT NULL,
   Steps INT NOT NULL,
-  SleepHours DECIMAL(4, 2) NOT NULL,
 )

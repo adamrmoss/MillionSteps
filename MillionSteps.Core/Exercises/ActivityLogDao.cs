@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MillionSteps.Core.Exercises
 {
@@ -22,12 +20,13 @@ namespace MillionSteps.Core.Exercises
 
     public void AddActivityLogEntry(string userId, DateTime date, int steps)
     {
-      this.DbContext.ActivityLogEntries.Add(new ActivityLogEntry {
+      var activityLogEntry = new ActivityLogEntry {
         Id = Guid.NewGuid(),
         UserId = userId,
         Date = date,
         Steps = steps,
-      });
+      };
+      this.DbContext.ActivityLogEntries.Add(activityLogEntry);
     }
   }
 }

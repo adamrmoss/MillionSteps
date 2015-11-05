@@ -35,7 +35,6 @@ namespace MillionSteps.Web.Games
       Claws.NotNull(() => this.activityLogUpdater);
       this.activityLogUpdater.UpdateTodayAndYesterday();
       this.userSession.OffsetFromUtcMillis = userProfile.OffsetFromUTCMillis;
-      this.DbContext.SaveChanges();
 
       var viewModel = new GameViewModel {
         DisplayName = userProfile.DisplayName,

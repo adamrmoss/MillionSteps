@@ -200,6 +200,7 @@
     <Compile Include="Authentication\AuthenticationController.cs" />
     <Compile Include="Authentication\AuthenticationRequest.cs" />
     <Compile Include="Authentication\UserProfileClient.cs" />
+    <Compile Include="Configuration\HttpContextLifecycleConvention.cs" />
     <Compile Include="Configuration\StructureMapControllerFactory.cs" />
     <Compile Include="Configuration\WebRegistry.cs" />
     <Compile Include="ControllerBase.cs" />

@@ -13,10 +13,10 @@ namespace MillionSteps.Web
     protected ControllerBase(MillionStepsDbContext dbContext)
     {
       Claws.NotNull(() => dbContext);
-      this.DbContext = dbContext;
+      this.dbContext = dbContext;
     }
 
-    protected readonly MillionStepsDbContext DbContext;
+    private readonly MillionStepsDbContext dbContext;
 
     protected void SetUserSessionCookie(Guid userSessionId)
     {
@@ -52,7 +52,7 @@ namespace MillionSteps.Web
     protected override void OnActionExecuted(ActionExecutedContext filterContext)
     {
       if (filterContext.Exception == null)
-        this.DbContext.SaveChanges();
+        this.dbContext.SaveChanges();
     }
   }
 }

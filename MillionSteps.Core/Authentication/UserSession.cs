@@ -16,7 +16,7 @@ namespace MillionSteps.Core.Authentication
     public string Token { get; set; }
     public string Secret { get; set; }
     public string UserId { get; set; }
-    public DateTime CreateDate { get; set; }
+    public DateTime DateCreated { get; set; }
     public int OffsetFromUtcMillis { get; set; }
   }
 }

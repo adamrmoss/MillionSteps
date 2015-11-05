@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using Fitbit.Api;
-using Fitbit.Models;
 using GuardClaws;
 using MillionSteps.Core.Authentication;
 
@@ -40,7 +38,7 @@ namespace MillionSteps.Core.Exercises
       this.UpdateActivityLog(yesterday, today, false);
     }
 
-    public ActivityLogEntry[] UpdateActivityLog(DateTime startDate, DateTime endDate, bool skipExisting) {
+    public void UpdateActivityLog(DateTime startDate, DateTime endDate, bool skipExisting) {
       Claws.NotNull(() => this.userSession);
       Claws.NotNull(() => this.fitbitClient);
 
@@ -51,29 +49,12 @@ namespace MillionSteps.Core.Exercises
       var allDatesInRange = Enumerable.Range(0, numberOfDaysPassed).Select(i => startDate + TimeSpan.FromDays(i));
       var datesToUpdate = skipExisting ? allDatesInRange.Except(existingActivityLogEntries.Keys) : allDatesInRange;
 
-      var updatedActivityLogEntries = new List<ActivityLogEntry>();
       foreach (var dateToUpdate in datesToUpdate) {
-        var activityLogEntry = existingActivityLogEntries.ContainsKey(dateToUpdate) ? existingActivityLogEntries[dateToUpdate] :
-          new ActivityLogEntry {
-            Id = Guid.NewGuid(),
-            UserId = this.userSession.UserId,
-            Date = dateToUpdate,
-          };
-        this.UpdateActivityLogEntry(activityLogEntry);
-        updatedActivityLogEntries.Add(activityLogEntry);
-      }
-      return updatedActivityLogEntries.ToArray();
-    }
-
-    private void UpdateActivityLogEntry(ActivityLogEntry activityLogEntry)
-    {
-      try {
-        var activityDate = activityLogEntry.Date;
-        var steps = this.fitbitClient.GetDayActivitySummary(activityDate).Steps;
-
-        activityLogEntry.Steps = steps;
-      } catch (Exception e) {
-        Console.WriteLine(e.Message);
+        var steps = this.fitbitClient.GetDayActivitySummary(dateToUpdate).Steps;
+        if (existingActivityLogEntries.ContainsKey(dateToUpdate))
+          existingActivityLogEntries[dateToUpdate].Steps = steps;
+        else
+          this.activityLogDao.AddActivityLogEntry(this.userSession.UserId, dateToUpdate, steps);
       }
     }
   }
