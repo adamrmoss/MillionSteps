@@ -60,11 +60,12 @@
     <Folder Include="Properties" />
     <Folder Include="Authentication" />
     <Folder Include="Exercises" />
-    <Folder Include="Adventurers" />
+    <Folder Include="Adventures" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Authentication\UserSession.sql" />
     <Build Include="Exercises\ActivityLogEntry.sql" />
-    <Build Include="Adventurers\Adventurer.sql" />
+    <Build Include="Adventures\Adventure.sql" />
+    <Build Include="Adventures\Moment.sql" />
   </ItemGroup>
 </Project>

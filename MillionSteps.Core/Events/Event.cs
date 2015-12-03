@@ -7,7 +7,10 @@ namespace MillionSteps.Core.Events
   {
     public Guid Id { get; set; }
     public string Name { get; set; }
+    public bool Automatic { get; set; }
     public bool OneTime { get; set; }
-    public List<string> FlagsToSet { get; set; } 
+    public int StepsConsumed { get; set; }
+    public List<string> FlagsToSet { get; set; }
+    public List<string> FlagsToClear { get; set; }
   }
 }
