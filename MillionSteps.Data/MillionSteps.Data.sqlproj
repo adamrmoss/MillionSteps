@@ -61,11 +61,15 @@
     <Folder Include="Authentication" />
     <Folder Include="Exercises" />
     <Folder Include="Adventures" />
+    <Folder Include="Events" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Authentication\UserSession.sql" />
     <Build Include="Exercises\ActivityLogEntry.sql" />
     <Build Include="Adventures\Adventure.sql" />
     <Build Include="Adventures\Moment.sql" />
+    <Build Include="Events\Event.sql" />
+    <Build Include="Events\EventSetFlag.sql" />
+    <Build Include="Events\EventClearFlag.sql" />
   </ItemGroup>
 </Project>

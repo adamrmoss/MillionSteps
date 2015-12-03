@@ -1,7 +1,9 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MillionSteps.Core.Adventures
 {
+  [Table("Moment")]
   public class Moment
   {
     public Guid Id { get; set; }

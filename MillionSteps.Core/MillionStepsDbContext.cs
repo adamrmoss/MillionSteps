@@ -16,6 +16,6 @@ namespace MillionSteps.Core
     public virtual DbSet<UserSession> UserSessions { get; set; }
     public virtual DbSet<ActivityLogEntry> ActivityLogEntries { get; set; }
     public virtual DbSet<Adventure> Adventures { get; set; }
-    public virtual DbSet<Adventurer> Adventurers { get; set; }
+    public virtual DbSet<Moment> Moments { get; set; }
   }
 }
