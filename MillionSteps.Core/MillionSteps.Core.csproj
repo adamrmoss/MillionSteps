@@ -87,6 +87,7 @@
     <Compile Include="Dao.cs" />
     <Compile Include="Authentication\UserProfileClient.cs" />
     <Compile Include="Events\Event.cs" />
+    <Compile Include="Events\EventSetFlag.cs" />
     <Compile Include="Exercises\ActivityLogUpdater.cs" />
     <Compile Include="Exercises\ActivityLogDao.cs" />
     <Compile Include="Exercises\ActivityLogEntry.cs" />

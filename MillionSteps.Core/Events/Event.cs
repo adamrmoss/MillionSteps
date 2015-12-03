@@ -7,6 +7,12 @@ namespace MillionSteps.Core.Events
   [Table("Event")]
   public class Event
   {
+    public Event()
+    {
+      this.FlagsToSet = new HashSet<string>();
+      this.FlagsToClear = new HashSet<string>();
+    }
+
     public Guid Id { get; set; }
     public string Name { get; set; }
     public string Text { get; set; }
