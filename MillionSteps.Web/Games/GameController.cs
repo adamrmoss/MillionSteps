@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Linq;
 using System.Web.Mvc;
 using GuardClaws;
+using MillionSteps.Core.Adventures;
 using MillionSteps.Core.Authentication;
 using MillionSteps.Core.Exercises;
 using Raven.Client;
@@ -35,6 +37,16 @@ namespace MillionSteps.Web.Games
       Claws.NotNull(() => this.activityLogUpdater);
       this.activityLogUpdater.UpdateTodayAndYesterday();
       this.userSession.OffsetFromUtcMillis = userProfile.OffsetFromUTCMillis;
+
+      var adventure = this.DocumentSession.Query<Adventure, AdventureIndex>()
+                          .SingleOrDefault(a => a.UserId == this.userSession.UserId);
+      if (adventure == null) {
+        adventure = new Adventure(Guid.NewGuid()) {
+          UserId = this.userSession.UserId,
+          DateCreated = DateTime.UtcNow,
+        };
+        this.DocumentSession.Store(adventure);
+      }
 
       var viewModel = new GameViewModel {
         DisplayName = userProfile.DisplayName,

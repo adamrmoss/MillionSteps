@@ -55,7 +55,7 @@ namespace MillionSteps.Web.Authentication
       userSession.Secret = authCredential.AuthTokenSecret;
       userSession.UserId = authCredential.UserId;
 
-      this.SetUserSessionCookie(userSession.Id);
+      this.SetUserSessionCookie(userSession.DocumentId);
 
       return this.RedirectToRoute("Index");
     }

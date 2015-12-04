@@ -40,7 +40,7 @@ namespace MillionSteps.Web
     public ActionResult Initialize()
     {
       IndexCreation.CreateIndexes(typeof(UserSessionIndex).Assembly, this.DocumentSession.Advanced.DocumentStore);
-      foreach (var @event in IntroductionEvents.GetAll()) {
+      foreach (var @event in IntroductionEvents.All) {
         this.DocumentSession.CreateIfNew(@event);
       }
 
