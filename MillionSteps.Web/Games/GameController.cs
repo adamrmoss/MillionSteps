@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Web.Mvc;
 using GuardClaws;
-using MillionSteps.Core;
 using MillionSteps.Core.Authentication;
 using MillionSteps.Core.Exercises;
+using Raven.Client;
 
 namespace MillionSteps.Web.Games
 {
@@ -13,7 +13,7 @@ namespace MillionSteps.Web.Games
     private readonly UserProfileClient userProfileClient;
     private readonly ActivityLogUpdater activityLogUpdater;
 
-    public GameController(MillionStepsDbContext dbContext, UserSession userSession, UserProfileClient userProfileClient, ActivityLogUpdater activityLogUpdater) : base(dbContext)
+    public GameController(IDocumentSession documentSession, UserSession userSession, UserProfileClient userProfileClient, ActivityLogUpdater activityLogUpdater) : base(documentSession)
     {
       this.userSession = userSession;
       this.userProfileClient = userProfileClient;

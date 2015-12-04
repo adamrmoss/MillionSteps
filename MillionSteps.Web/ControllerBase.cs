@@ -5,18 +5,20 @@ using System.Web.Mvc;
 using GuardClaws;
 using MillionSteps.Core;
 using MillionSteps.Core.Authentication;
+using Raven.Client;
 
 namespace MillionSteps.Web
 {
+  [UnitWorker]
   public abstract class ControllerBase : Controller
   {
-    protected ControllerBase(MillionStepsDbContext dbContext)
+    protected ControllerBase(IDocumentSession documentSession)
     {
-      Claws.NotNull(() => dbContext);
-      this.dbContext = dbContext;
+      Claws.NotNull(() => documentSession);
+      this.documentSession = documentSession;
     }
 
-    private readonly MillionStepsDbContext dbContext;
+    private readonly IDocumentSession documentSession;
 
     protected void SetUserSessionCookie(Guid userSessionId)
     {
@@ -52,7 +54,7 @@ namespace MillionSteps.Web
     protected override void OnActionExecuted(ActionExecutedContext filterContext)
     {
       if (filterContext.Exception == null)
-        this.dbContext.SaveChanges();
+        this.documentSession.SaveChanges();
     }
   }
 }

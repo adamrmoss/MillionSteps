@@ -1,18 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Raven.Client;
 
 namespace MillionSteps.Core.Exercises
 {
   public class ActivityLogDao : Dao
   {
-    public ActivityLogDao(MillionStepsDbContext dbContext) : base(dbContext)
+    public ActivityLogDao(IDocumentSession documentSession) : base(documentSession)
     {
     }
 
     public Dictionary<DateTime, ActivityLogEntry> GetExistingActivityLogEntries(string userId, DateTime startDate, DateTime endDate)
     {
-      var existingActivityLogEntries = this.DbContext.ActivityLogEntries
+      var existingActivityLogEntries = this.DocumentSession.Query<ActivityLogEntry, ActivityLogIndex>()
                                            .Where(ale => ale.UserId == userId && ale.Date >= startDate && ale.Date <= endDate)
                                            .ToDictionary(ale => ale.Date);
       return existingActivityLogEntries;
@@ -26,7 +27,7 @@ namespace MillionSteps.Core.Exercises
         Date = date,
         Steps = steps,
       };
-      this.DbContext.ActivityLogEntries.Add(activityLogEntry);
+      this.DocumentSession.Store(activityLogEntry);
     }
   }
 }

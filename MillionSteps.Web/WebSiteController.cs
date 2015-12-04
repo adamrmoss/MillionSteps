@@ -1,6 +1,6 @@
 ﻿using System.Web.Mvc;
-using MillionSteps.Core;
 using MillionSteps.Core.Authentication;
+using Raven.Client;
 
 namespace MillionSteps.Web
 {
@@ -8,8 +8,8 @@ namespace MillionSteps.Web
   {
     private readonly UserProfileClient userProfileClient;
 
-    public WebSiteController(MillionStepsDbContext dbContext, UserProfileClient userProfileClient) 
-      : base(dbContext)
+    public WebSiteController(IDocumentSession documentSession, UserProfileClient userProfileClient) 
+      : base(documentSession)
     {
       this.userProfileClient = userProfileClient;
     }

@@ -1,18 +1,16 @@
 ﻿using System;
 using System.Linq;
-using GuardClaws;
+using Raven.Client;
 
 namespace MillionSteps.Core.Authentication
 {
-  public class AuthenticationDao
+  public class AuthenticationDao : Dao
   {
-    public AuthenticationDao(MillionStepsDbContext dbContext)
-    {
-      Claws.NotNull(() => dbContext);
-      this.dbContext = dbContext;
-    }
+    public AuthenticationDao(IDocumentSession documentSession)
+      : base(documentSession)
+    { }
 
-    private readonly MillionStepsDbContext dbContext;
+    private readonly IDocumentSession documentSession;
 
     public void CreateSession(string tempToken, string tempSecret)
     {
@@ -22,18 +20,18 @@ namespace MillionSteps.Core.Authentication
         TempToken = tempToken,
         TempSecret = tempSecret,
       };
-      this.dbContext.UserSessions.Add(userSession);
+      this.DocumentSession.Store(userSession);
     }
 
     public UserSession LookupUserSession(Guid userSessionId)
     {
-      return this.dbContext.UserSessions.Find(userSessionId);
+      return this.DocumentSession.Load<UserSession>(userSessionId);
     }
 
     public UserSession LookupSessionByTempToken(string tempToken)
     {
-      var userSession = this.dbContext.UserSessions
-        .SingleOrDefault(us => us.TempToken == tempToken);
+      var userSession = this.DocumentSession.Query<UserSession, UserSessionIndex>()
+                            .SingleOrDefault(us => us.TempToken == tempToken);
       return userSession;
     }
   }

@@ -1,12 +1,15 @@
-﻿namespace MillionSteps.Core
+﻿using Raven.Client;
+
+namespace MillionSteps.Core
 {
+  [UnitWorker]
   public abstract class Dao
   {
-    protected readonly MillionStepsDbContext DbContext;
+    protected readonly IDocumentSession DocumentSession;
 
-    protected Dao(MillionStepsDbContext dbContext)
+    protected Dao(IDocumentSession documentSession)
     {
-      this.DbContext = dbContext;
+      this.DocumentSession = documentSession;
     }
   }
 }

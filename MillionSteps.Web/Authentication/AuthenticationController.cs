@@ -1,12 +1,11 @@
 ﻿using System;
-using System.Linq;
 using System.Web.Mvc;
 using Fitbit.Api;
 using Fitbit.Models;
 using GuardClaws;
-using MillionSteps.Core;
 using MillionSteps.Core.Authentication;
 using MillionSteps.Core.Configuration;
+using Raven.Client;
 
 namespace MillionSteps.Web.Authentication
 {
@@ -16,8 +15,8 @@ namespace MillionSteps.Web.Authentication
     private readonly Authenticator authenticator;
     private readonly AuthenticationDao authenticationDao;
 
-    public AuthenticationController(MillionStepsDbContext dbContext, Settings settings, Authenticator authenticator, AuthenticationDao authenticationDao)
-      : base(dbContext)
+    public AuthenticationController(IDocumentSession documentSession, Settings settings, Authenticator authenticator, AuthenticationDao authenticationDao)
+      : base(documentSession)
     {
       Claws.NotNull(() => settings);
       Claws.NotNull(() => authenticator);
