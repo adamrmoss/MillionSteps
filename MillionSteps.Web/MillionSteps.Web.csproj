@@ -235,7 +235,7 @@
     </Content>
     <Content Include="packages.config" />
     <Content Include="Events\Views\web.config" />
-    <None Include="Properties\PublishProfiles\million-steps.adamrmoss.org - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\a-million-steps.org - Web Deploy.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

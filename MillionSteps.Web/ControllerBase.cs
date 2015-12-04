@@ -15,10 +15,10 @@ namespace MillionSteps.Web
     protected ControllerBase(IDocumentSession documentSession)
     {
       Claws.NotNull(() => documentSession);
-      this.documentSession = documentSession;
+      this.DocumentSession = documentSession;
     }
 
-    private readonly IDocumentSession documentSession;
+    protected readonly IDocumentSession DocumentSession;
 
     protected void SetUserSessionCookie(Guid userSessionId)
     {
@@ -54,7 +54,7 @@ namespace MillionSteps.Web
     protected override void OnActionExecuted(ActionExecutedContext filterContext)
     {
       if (filterContext.Exception == null)
-        this.documentSession.SaveChanges();
+        this.DocumentSession.SaveChanges();
     }
   }
 }
