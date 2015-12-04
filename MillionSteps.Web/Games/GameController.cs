@@ -30,7 +30,6 @@ namespace MillionSteps.Web.Games
 
       Claws.NotNull(() => this.userProfileClient);
       var userProfile = this.userProfileClient.GetUserProfile();
-
       if (userProfile == null)
         return this.RedirectToRoute("Welcome");
 

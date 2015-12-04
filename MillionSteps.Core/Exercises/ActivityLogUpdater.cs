@@ -42,7 +42,7 @@ namespace MillionSteps.Core.Exercises
       Claws.NotNull(() => this.userSession);
       Claws.NotNull(() => this.fitbitClient);
 
-      var numberOfDaysPassed = (endDate - startDate).Days;
+      var numberOfDaysPassed = (endDate - startDate).Days + 1;
 
       var existingActivityLogEntries = this.activityLogDao.GetExistingActivityLogEntries(this.userSession.UserId, startDate, endDate);
 
