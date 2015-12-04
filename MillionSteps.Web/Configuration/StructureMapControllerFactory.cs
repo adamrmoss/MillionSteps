@@ -7,12 +7,12 @@ namespace MillionSteps.Web.Configuration
 {
   public class StructureMapControllerFactory : DefaultControllerFactory
   {
-    private readonly IContainer container;
-
     public StructureMapControllerFactory(IContainer container)
     {
       this.container = container;
     }
+
+    private readonly IContainer container;
 
     protected override IController GetControllerInstance(RequestContext requestContext, Type controllerType)
     {

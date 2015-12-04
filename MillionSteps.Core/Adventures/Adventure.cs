@@ -2,9 +2,12 @@
 
 namespace MillionSteps.Core.Adventures
 {
-  public class Adventure
+  public class Adventure : GuidRavenDocument<Adventure>
   {
-    public Guid Id { get; set; }
+    public Adventure(Guid documentId) 
+      : base(documentId)
+    { }
+
     public string UserId { get; set; }
     public DateTime DateCreated { get; set; }
     public int StepsTravelled { get; set; }

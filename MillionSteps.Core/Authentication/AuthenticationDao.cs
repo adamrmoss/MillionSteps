@@ -10,12 +10,9 @@ namespace MillionSteps.Core.Authentication
       : base(documentSession)
     { }
 
-    private readonly IDocumentSession documentSession;
-
     public void CreateSession(string tempToken, string tempSecret)
     {
-      var userSession = new UserSession {
-        Id = Guid.NewGuid(),
+      var userSession = new UserSession(Guid.NewGuid()) {
         DateCreated = DateTime.UtcNow,
         TempToken = tempToken,
         TempSecret = tempSecret,

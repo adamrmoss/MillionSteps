@@ -1,12 +1,13 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MillionSteps.Core.Adventures
 {
-  [Table("Moment")]
-  public class Moment
+  public class Moment : GuidRavenDocument<Moment>
   {
-    public Guid Id { get; set; }
+    public Moment(Guid documentId) 
+      : base(documentId)
+    { }
+
     public string UserId { get; set; }
     public Guid AdventureId { get; set; }
     public Guid EventId { get; set; }

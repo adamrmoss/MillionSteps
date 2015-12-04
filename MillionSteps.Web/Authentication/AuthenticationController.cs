@@ -11,10 +11,6 @@ namespace MillionSteps.Web.Authentication
 {
   public class AuthenticationController : ControllerBase
   {
-    private readonly Settings settings;
-    private readonly Authenticator authenticator;
-    private readonly AuthenticationDao authenticationDao;
-
     public AuthenticationController(IDocumentSession documentSession, Settings settings, Authenticator authenticator, AuthenticationDao authenticationDao)
       : base(documentSession)
     {
@@ -25,6 +21,10 @@ namespace MillionSteps.Web.Authentication
       this.authenticator = authenticator;
       this.authenticationDao = authenticationDao;
     }
+
+    private readonly Settings settings;
+    private readonly Authenticator authenticator;
+    private readonly AuthenticationDao authenticationDao;
 
     [HttpGet]
     public ActionResult Authenticate(AuthenticationRequest authenticationRequest)

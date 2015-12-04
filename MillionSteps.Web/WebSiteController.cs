@@ -1,5 +1,7 @@
 ﻿using System.Web.Mvc;
+using MillionSteps.Core;
 using MillionSteps.Core.Authentication;
+using MillionSteps.Core.Events;
 using Raven.Client;
 using Raven.Client.Indexes;
 
@@ -7,13 +9,13 @@ namespace MillionSteps.Web
 {
   public class WebSiteController : ControllerBase
   {
-    private readonly UserProfileClient userProfileClient;
-
     public WebSiteController(IDocumentSession documentSession, UserProfileClient userProfileClient) 
       : base(documentSession)
     {
       this.userProfileClient = userProfileClient;
     }
+
+    private readonly UserProfileClient userProfileClient;
 
     [HttpGet]
     public ActionResult Index()
@@ -38,6 +40,10 @@ namespace MillionSteps.Web
     public ActionResult Initialize()
     {
       IndexCreation.CreateIndexes(typeof(UserSessionIndex).Assembly, this.DocumentSession.Advanced.DocumentStore);
+      foreach (var @event in IntroductionEvents.GetAll()) {
+        this.DocumentSession.CreateIfNew(@event);
+      }
+
       return this.RedirectToRoute("Index");
     }
   }

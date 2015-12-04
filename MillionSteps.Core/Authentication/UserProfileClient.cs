@@ -7,14 +7,14 @@ namespace MillionSteps.Core.Authentication
   [UnitWorker]
   public class UserProfileClient
   {
-    private readonly UserSession userSession;
-    private readonly FitbitClient fitbitClient;
-
     public UserProfileClient(UserSession userSession, FitbitClient fitbitClient)
     {
       this.userSession = userSession;
       this.fitbitClient = fitbitClient;
     }
+
+    private readonly UserSession userSession;
+    private readonly FitbitClient fitbitClient;
 
     public UserProfile GetUserProfile()
     {

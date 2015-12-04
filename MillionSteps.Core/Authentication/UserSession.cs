@@ -1,15 +1,16 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MillionSteps.Core.Authentication
 {
-  [Table("UserSession")]
-  public class UserSession
+  public class UserSession : GuidRavenDocument<UserSession>
   {
     public const string CookieName = "UserSessionId";
     public static readonly TimeSpan Lifetime = TimeSpan.FromDays(30);
 
-    public Guid Id { get; set; }
+    public UserSession(Guid documentId) 
+      : base(documentId)
+    { }
+
     public string TempToken { get; set; }
     public string TempSecret { get; set; }
     public string Verifier { get; set; }

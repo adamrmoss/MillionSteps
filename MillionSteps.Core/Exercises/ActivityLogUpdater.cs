@@ -9,11 +9,6 @@ namespace MillionSteps.Core.Exercises
   [UnitWorker]
   public class ActivityLogUpdater
   {
-    private readonly UserProfileClient userProfileClient;
-    private readonly ActivityLogDao activityLogDao;
-    private readonly UserSession userSession;
-    private readonly FitbitClient fitbitClient;
-
     public ActivityLogUpdater(UserProfileClient userProfileClient, ActivityLogDao activityLogDao, UserSession userSession, FitbitClient fitbitClient)
     {
       Claws.NotNull(() => userProfileClient);
@@ -24,6 +19,11 @@ namespace MillionSteps.Core.Exercises
       this.userSession = userSession;
       this.fitbitClient = fitbitClient;
     }
+
+    private readonly UserProfileClient userProfileClient;
+    private readonly ActivityLogDao activityLogDao;
+    private readonly UserSession userSession;
+    private readonly FitbitClient fitbitClient;
 
     public void UpdateTodayAndYesterday()
     {

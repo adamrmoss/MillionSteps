@@ -9,16 +9,16 @@ namespace MillionSteps.Web.Games
 {
   public class GameController : ControllerBase
   {
-    private readonly UserSession userSession;
-    private readonly UserProfileClient userProfileClient;
-    private readonly ActivityLogUpdater activityLogUpdater;
-
     public GameController(IDocumentSession documentSession, UserSession userSession, UserProfileClient userProfileClient, ActivityLogUpdater activityLogUpdater) : base(documentSession)
     {
       this.userSession = userSession;
       this.userProfileClient = userProfileClient;
       this.activityLogUpdater = activityLogUpdater;
     }
+
+    private readonly UserSession userSession;
+    private readonly UserProfileClient userProfileClient;
+    private readonly ActivityLogUpdater activityLogUpdater;
 
     [HttpGet]
     public ActionResult Index()

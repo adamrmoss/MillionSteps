@@ -7,9 +7,9 @@ namespace MillionSteps.Core.Exercises
 {
   public class ActivityLogDao : Dao
   {
-    public ActivityLogDao(IDocumentSession documentSession) : base(documentSession)
-    {
-    }
+    public ActivityLogDao(IDocumentSession documentSession)
+      : base(documentSession)
+    { }
 
     public Dictionary<DateTime, ActivityLogEntry> GetExistingActivityLogEntries(string userId, DateTime startDate, DateTime endDate)
     {
@@ -21,8 +21,7 @@ namespace MillionSteps.Core.Exercises
 
     public void AddActivityLogEntry(string userId, DateTime date, int steps)
     {
-      var activityLogEntry = new ActivityLogEntry {
-        Id = Guid.NewGuid(),
+      var activityLogEntry = new ActivityLogEntry(Guid.NewGuid()) {
         UserId = userId,
         Date = date,
         Steps = steps,
