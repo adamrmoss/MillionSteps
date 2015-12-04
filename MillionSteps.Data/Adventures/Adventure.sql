@@ -1,7 +1,0 @@
-﻿CREATE TABLE dbo.Adventure
-(
-  Id UNIQUEIDENTIFIER NOT NULL PRIMARY KEY,
-  UserId NVARCHAR(32) NOT NULL,
-  DateCreated DATETIME NOT NULL,
-  StepsTravelled INT NOT NULL,
-)

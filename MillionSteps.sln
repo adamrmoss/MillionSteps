@@ -9,8 +9,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MillionSteps.Core", "Millio
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MillionSteps.Web", "MillionSteps.Web\MillionSteps.Web.csproj", "{4563EEA6-438E-4875-89C8-4DF5256E2B32}"
 EndProject
-Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "MillionSteps.Data", "MillionSteps.Data\MillionSteps.Data.sqlproj", "{BF8A4FDD-78B2-481C-9A2A-04F19EBCFFF8}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,12 +27,6 @@ Global
 		{4563EEA6-438E-4875-89C8-4DF5256E2B32}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4563EEA6-438E-4875-89C8-4DF5256E2B32}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4563EEA6-438E-4875-89C8-4DF5256E2B32}.Release|Any CPU.Build.0 = Release|Any CPU
-		{BF8A4FDD-78B2-481C-9A2A-04F19EBCFFF8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BF8A4FDD-78B2-481C-9A2A-04F19EBCFFF8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BF8A4FDD-78B2-481C-9A2A-04F19EBCFFF8}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
-		{BF8A4FDD-78B2-481C-9A2A-04F19EBCFFF8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BF8A4FDD-78B2-481C-9A2A-04F19EBCFFF8}.Release|Any CPU.Build.0 = Release|Any CPU
-		{BF8A4FDD-78B2-481C-9A2A-04F19EBCFFF8}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
