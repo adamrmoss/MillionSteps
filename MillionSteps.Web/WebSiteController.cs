@@ -1,7 +1,5 @@
 ﻿using System.Web.Mvc;
-using MillionSteps.Core;
 using MillionSteps.Core.Authentication;
-using MillionSteps.Core.Events;
 using Raven.Client;
 using Raven.Client.Indexes;
 
@@ -40,9 +38,6 @@ namespace MillionSteps.Web
     public ActionResult Initialize()
     {
       IndexCreation.CreateIndexes(typeof(UserSessionIndex).Assembly, this.DocumentSession.Advanced.DocumentStore);
-      foreach (var @event in IntroductionEvents.All) {
-        this.DocumentSession.CreateIfNew(@event);
-      }
 
       return this.RedirectToRoute("Index");
     }
