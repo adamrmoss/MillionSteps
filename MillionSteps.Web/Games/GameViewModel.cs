@@ -1,6 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using MillionSteps.Core.Events;
+using MillionSteps.Core.Adventures;
 
 namespace MillionSteps.Web.Games
 {
@@ -8,6 +7,6 @@ namespace MillionSteps.Web.Games
   {
     public string DisplayName { get; set; }
     public Guid MomentId { get; set; }
-    public List<Event> Events { get; set; }
+    public FlagDictionary Flags { get; set; }
   }
 }

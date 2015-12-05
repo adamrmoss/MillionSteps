@@ -1,22 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using MillionSteps.Core.Adventures;
 
 namespace MillionSteps.Core.Events
 {
-  public static class IntroductionEvents
+  public class FemalePlayerChosen : Event
   {
-    public static List<Event> All => new List<Event> {FemalePlayerChosen, MalePlayerChosen}; 
+    public override string Text => "Mommy, tell me a story!";
+    public override bool CanExecute(FlagDictionary flagDictionary) => !flagDictionary["PlayerGenderChosen"];
+    public override HashSet<string> FlagsToSet => new HashSet<string> {"PlayerGenderChosen", "PlayerIsFemale"};
+  }
 
-    public static Event FemalePlayerChosen => new Event(new Guid("a74fe02a-29ba-4a05-8976-20b708be29ce")) {
-      Name = "FemalePlayerChosen",
-      Text = "Mommy, tell me a story!",
-      FlagsToSet = new HashSet<string> { "PlayerGenderChosen" },
-    };
-
-    public static Event MalePlayerChosen => new Event(new Guid("52e5267c-93b3-4c0a-9751-28bc8319a6d2")) {
-      Name = "MalePlayerChosen",
-      Text = "Daddy, tell me a story!",
-      FlagsToSet = new HashSet<string> { "PlayerGenderChosen" },
-    };
+  public class MalePlayerChosen : Event
+  {
+    public override string Text => "Daddy, tell me a story!";
+    public override bool CanExecute(FlagDictionary flagDictionary) => !flagDictionary["PlayerGenderChosen"];
+    public override HashSet<string> FlagsToSet => new HashSet<string> {"PlayerGenderChosen", "PlayerIsMale" };
   }
 }

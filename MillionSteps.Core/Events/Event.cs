@@ -1,23 +1,29 @@
 ﻿using System;
 using System.Collections.Generic;
+using MillionSteps.Core.Adventures;
 
 namespace MillionSteps.Core.Events
 {
-  public class Event : GuidRavenDocument<Event>
+  public abstract class Event
   {
-    public Event(Guid documentId)
-      : base(documentId)
-    {
-      this.FlagsToSet = new HashSet<string>();
-      this.FlagsToClear = new HashSet<string>();
-    }
+    public string Name => this.GetType().Name;
 
-    public string Name { get; set; }
-    public string Text { get; set; }
-    public bool Automatic { get; set; }
-    public bool Repeatable { get; set; }
-    public int Steps { get; set; }
-    public HashSet<string> FlagsToSet { get; set; }
-    public HashSet<string> FlagsToClear { get; set; }
+    public abstract string Text { get; }
+    public abstract bool CanExecute(FlagDictionary flagDictionary);
+
+    public virtual bool Automatic => false;
+    public virtual bool Repeatable => false;
+    public virtual EventPriority Priority => EventPriority.Medium;
+    public virtual int StepsConsumed => 0;
+
+    public virtual HashSet<string> FlagsToSet => new HashSet<string>();
+    public virtual HashSet<string> FlagsToClear => new HashSet<string>();
+  }
+
+  public enum EventPriority
+  {
+    Low,
+    Medium,
+    High,
   }
 }

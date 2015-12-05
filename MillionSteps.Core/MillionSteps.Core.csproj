@@ -89,6 +89,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Adventures\AdventureIndex.cs" />
+    <Compile Include="Adventures\FlagDictionary.cs" />
     <Compile Include="Adventures\Moment.cs" />
     <Compile Include="Adventures\Adventure.cs" />
     <Compile Include="Authentication\AuthenticationDao.cs" />
@@ -96,6 +97,7 @@
     <Compile Include="Dao.cs" />
     <Compile Include="Authentication\UserProfileClient.cs" />
     <Compile Include="DocumentSessionExtensions.cs" />
+    <Compile Include="Events\EventDriver.cs" />
     <Compile Include="Events\IntroductionEvents.cs" />
     <Compile Include="RavenDocument.cs" />
     <Compile Include="Events\Event.cs" />
