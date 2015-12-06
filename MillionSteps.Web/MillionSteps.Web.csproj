@@ -212,7 +212,7 @@
     <Compile Include="Configuration\WebRegistry.cs" />
     <Compile Include="ControllerBase.cs" />
     <Compile Include="Games\GameController.cs" />
-    <Compile Include="Games\GameViewModel.cs" />
+    <Compile Include="Games\MomentViewModel.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -229,7 +229,7 @@
     <Content Include="compilerconfig.json.defaults">
       <DependentUpon>compilerconfig.json</DependentUpon>
     </Content>
-    <Content Include="Games\Views\Game.cshtml" />
+    <Content Include="Games\Views\Moment.cshtml" />
     <Content Include="Games\Views\web.config" />
     <Content Include="Libraries\ajax.coffee" />
     <Content Include="Libraries\cookies.coffee" />

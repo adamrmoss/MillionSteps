@@ -1,0 +1,27 @@
+﻿@model MillionSteps.Web.Games.MomentViewModel
+<!DOCTYPE html>
+<html>
+<head>
+  <title>A Million Steps</title>
+  <link type="text/css" rel="stylesheet" href="~/website.css"/>
+  <script data-main="main" src="~/Libraries/require.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+<header>
+  <p>@Model.DisplayName</p>
+  <p>
+    <a href="@Url.RouteUrl("Logout")">[logout]</a>
+  </p>
+</header>
+<h1>A Million Steps</h1>
+<form action="@Url.RouteUrl("Choose")" method="POST">
+  @Html.Hidden("momentId", Model.MomentId)
+  @foreach (var choice in Model.Choices) {
+    <div></div>
+    <button type="submit" name="eventName" value="@choice.Name" disabled="@(Model.ReadOnly && @Model.ChosenChoice == choice.Name)">@choice.Text</button>
+  }
+</form>
+@Html.Partial("~/Views/Footer.cshtml")
+</body>
+</html>

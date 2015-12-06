@@ -5,11 +5,13 @@ using MillionSteps.Core.Events;
 
 namespace MillionSteps.Web.Games
 {
-  public class GameViewModel
+  public class MomentViewModel
   {
-    public string DisplayName { get; set; }
     public Guid MomentId { get; set; }
+    public bool ReadOnly { get; set; }
+    public string DisplayName { get; set; }
     public FlagDictionary Flags { get; set; }
-    public List<Event> Choices { get; set; } 
+    public List<Event> Choices { get; set; }
+    public string ChosenChoice { get; set; }
   }
 }

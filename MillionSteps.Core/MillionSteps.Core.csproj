@@ -101,6 +101,7 @@
     <Compile Include="Dao.cs" />
     <Compile Include="Authentication\UserProfileClient.cs" />
     <Compile Include="DocumentSessionExtensions.cs" />
+    <Compile Include="EnumerableExtensions.cs" />
     <Compile Include="Events\EventDriver.cs" />
     <Compile Include="Events\IntroductionEvents.cs" />
     <Compile Include="RavenDocument.cs" />

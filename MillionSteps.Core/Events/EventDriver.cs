@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Fasterflect;
+using MillionSteps.Core.Adventures;
 
 namespace MillionSteps.Core.Events
 {
@@ -16,6 +17,21 @@ namespace MillionSteps.Core.Events
                                       .ToList();
     }
 
-    private List<Event> allEvents;
+    private readonly List<Event> allEvents;
+
+    public List<Event> GetValidEvents(FlagDictionary flagDictionary)
+    {
+      return this.allEvents.Where(@event => EventCanExecute(@event, flagDictionary)).ToList();
+    }
+
+    private static bool EventCanExecute(Event @event, FlagDictionary flagDictionary)
+    {
+      return (@event.Repeatable || !flagDictionary[@event.Name]) && @event.CanExecute(flagDictionary);
+    }
+
+    public Event LookupEvent(string eventName)
+    {
+      return this.allEvents.SingleOrDefault(e => e.Name == eventName);
+    }
   }
 }

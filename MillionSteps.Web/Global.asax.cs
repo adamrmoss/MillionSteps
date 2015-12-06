@@ -31,6 +31,7 @@ namespace MillionSteps.Web
 
       routes.MapRoute("Game", "Game", new { controller = "Game", action = "Index" });
       routes.MapRoute("Moment", "Moment/{momentId}", new { controller = "Game", action = "Moment" });
+      routes.MapRoute("Choose", "Choose/{momentId}", new { controller = "Game", action = "Choose" });
     }
 
     private static void BuildControllerFactory()
