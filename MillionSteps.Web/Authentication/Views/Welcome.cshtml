@@ -5,6 +5,7 @@
   <link type="text/css" rel="stylesheet" href="~/website.css" />
 </head>
 <body>
+<main>
   <h1>A Million Steps</h1>
   <section class="fitbit logo">
     <a href="@Url.RouteUrl("Authenticate")">
@@ -12,6 +13,7 @@
       <p>Click here to Login to Fitbit&reg; (You will leave our site for a moment)</p>
     </a>
   </section>
-  @Html.Partial("~/Views/Footer.cshtml")
+</main>
+@Html.Partial("~/Views/Footer.cshtml")
 </body>
 </html>
