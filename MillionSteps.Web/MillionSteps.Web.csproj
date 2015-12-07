@@ -181,6 +181,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Authentication\fitbit_logo_dark_1000px.png" />
+    <Content Include="Authentication\fitbit_logo_light_1000px.png" />
     <Content Include="Global.asax" />
     <Content Include="Libraries\ajax.js">
       <DependentUpon>ajax.coffee</DependentUpon>
