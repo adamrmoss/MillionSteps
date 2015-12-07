@@ -8,15 +8,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 </head>
 <body>
-<header>
-  <div>
-    <p>@Model.DisplayName</p>
-    <p>
-      <a href="@Url.RouteUrl("Logout")">[logout]</a>
-    </p>
-  </div>
-</header>
 <main>
+  <header>
+    <div>
+      <p>@Model.DisplayName</p>
+      <p>
+        <a href="@Url.RouteUrl("Logout")">[logout]</a>
+      </p>
+    </div>
+  </header>
   <h1>A Million Steps</h1>
   <section>
     <form action="@Url.RouteUrl("Choose")" method="POST">
@@ -27,7 +27,7 @@
       }
     </form>
   </section>
-</main>
   @Html.Partial("~/Views/Footer.cshtml")
+</main>
 </body>
 </html>
