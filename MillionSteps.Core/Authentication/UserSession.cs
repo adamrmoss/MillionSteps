@@ -2,7 +2,7 @@
 
 namespace MillionSteps.Core.Authentication
 {
-  public class UserSession : GuidRavenDocument<UserSession>
+  public class UserSession : GuidRavenDocument
   {
     public const string CookieName = "UserSessionId";
     public static readonly TimeSpan Lifetime = TimeSpan.FromDays(30);

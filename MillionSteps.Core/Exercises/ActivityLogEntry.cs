@@ -2,7 +2,7 @@
 
 namespace MillionSteps.Core.Exercises
 {
-  public class ActivityLogEntry : GuidRavenDocument<ActivityLogEntry>
+  public class ActivityLogEntry : GuidRavenDocument
   {
     public ActivityLogEntry(Guid documentId) 
       : base(documentId)

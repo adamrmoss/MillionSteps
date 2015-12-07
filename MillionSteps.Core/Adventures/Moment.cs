@@ -2,7 +2,7 @@
 
 namespace MillionSteps.Core.Adventures
 {
-  public class Moment : GuidRavenDocument<Moment>
+  public class Moment : GuidRavenDocument
   {
     public Moment(Guid documentId) 
       : base(documentId)
