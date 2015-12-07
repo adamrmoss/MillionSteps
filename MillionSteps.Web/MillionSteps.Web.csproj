@@ -48,6 +48,14 @@
       <HintPath>..\packages\BouncyCastle.1.7.0\lib\Net40-Client\BouncyCastle.Crypto.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Elmah, Version=1.2.13605.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\elmah.corelibrary.1.2\lib\Elmah.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Elmah.Mvc, Version=2.1.2.1389, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Elmah.Mvc.2.1.2\lib\net40\Elmah.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Fasterflect, Version=2.1.3.0, Culture=neutral, PublicKeyToken=38d18473284c1ca7, processorArchitecture=MSIL">
       <HintPath>..\packages\fasterflect.2.1.3\lib\net40\Fasterflect.dll</HintPath>
       <Private>True</Private>
