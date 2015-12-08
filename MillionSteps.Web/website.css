@@ -103,7 +103,8 @@ div.choice button {
   background-color: #103810;
   color:#dddddd;
   position: relative;
-  font-size: 20px;
+  font-size: 24px;
+  font-family: 'Georgia', 'serif';
   padding: 16px;
   margin: 1em 0 3em;
   -ms-border-radius: 6px;
