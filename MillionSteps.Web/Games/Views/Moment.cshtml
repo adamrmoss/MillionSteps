@@ -12,9 +12,7 @@
   <header>
     <div>
       <p>@Model.DisplayName</p>
-      <p>
-        <a href="@Url.RouteUrl("Logout")">[logout]</a>
-      </p>
+      <a href="@Url.RouteUrl("Logout")"><p>[logout]</p></a>
     </div>
   </header>
   <h1>A Million Steps</h1>
@@ -27,7 +25,7 @@
             var disabled = Model.ReadOnly && @Model.ChosenChoice == choice.Name;
             var templateName = "~/Games/Views/" + choice.Name + ".cshtml";
           }
-          <button type="submit" name="eventName" value="@choice.Name" disabled="@disabled">@Html.Partial(templateName)</button>
+          <button type="submit" name="eventName" value="@choice.Name" disabled="@disabled">@Html.Partial(templateName, Model)</button>
         </div>
       }
     </form>
