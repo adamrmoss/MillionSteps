@@ -24,6 +24,7 @@ namespace MillionSteps.Web
       routes.MapRoute("Index", "", new { controller = "WebSite", action = "Index" });
       routes.MapRoute("Welcome", "Welcome", new { controller = "WebSite", action = "Welcome" });
       routes.MapRoute("Initialize", "Initialize", new { controller = "WebSite", action = "Initialize" });
+      routes.MapRoute("Reset", "Reset", new { controller = "WebSite", action = "Reset" });
 
       routes.MapRoute("Authenticate", "Authenticate", new { controller = "Authentication", action = "Authenticate" });
       routes.MapRoute("CompleteAuthentication", "Authenticate/Complete", new { controller = "Authentication", action = "Complete" });

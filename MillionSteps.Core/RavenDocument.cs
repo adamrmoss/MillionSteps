@@ -13,9 +13,7 @@ namespace MillionSteps.Core
 
     private string BuildId(TId documentId)
     {
-      var collectionName = this.GetType().Name
-        .InflectTo().Pluralized;
-      return "{0}/{1}".FormatWith(collectionName, documentId);
+      return "{0}/{1}".FormatWith(this.GetType().GetCollectionName(), documentId);
     }
 
     public TId DocumentId { get; }

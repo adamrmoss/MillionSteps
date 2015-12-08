@@ -101,9 +101,10 @@
     <Compile Include="Authentication\UserSessionIndex.cs" />
     <Compile Include="Dao.cs" />
     <Compile Include="Authentication\UserProfileClient.cs" />
-    <Compile Include="DocumentSessionExtensions.cs" />
+    <Compile Include="RavenExtensions.cs" />
     <Compile Include="EnumerableExtensions.cs" />
     <Compile Include="Events\EventDriver.cs" />
+    <Compile Include="Events\OverviewEvents.cs" />
     <Compile Include="Events\PreludeEvents.cs" />
     <Compile Include="RavenDocument.cs" />
     <Compile Include="Events\Event.cs" />

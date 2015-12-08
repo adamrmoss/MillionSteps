@@ -103,10 +103,11 @@ div.choice button {
   background-color: #103810;
   color:#dddddd;
   position: relative;
+  text-align: left;
   font-size: 24px;
   font-family: 'Georgia', 'serif';
   padding: 16px;
-  margin: 1em 0 3em;
+  margin: 1em 0 1.5em;
   -ms-border-radius: 6px;
   border-radius: 6px;
   border-color: #103810;
@@ -116,8 +117,7 @@ div.choice button {
 div.choice button:after {
   content: '';
   position: absolute;
-  bottom: -16px;
-  border-width: 16px 16px 0;
+  bottom: -24px;
   border-style: solid;
   border-color: #103810 transparent;
   display: block;
@@ -125,11 +125,13 @@ div.choice button:after {
 }
 
 div.narrator.choice button:after {
-  left: 16px;
+  left: 24px;
+  border-width: 24px 0 0 24px;
 }
 
 div.audience.choice button:after {
-  right: 16px;
+  right: 24px;
+  border-width: 24px 24px 0 0;
 }
 
 footer {

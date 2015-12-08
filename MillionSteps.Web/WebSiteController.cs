@@ -1,4 +1,6 @@
 ﻿using System.Web.Mvc;
+using MillionSteps.Core;
+using MillionSteps.Core.Adventures;
 using MillionSteps.Core.Authentication;
 using Raven.Client;
 using Raven.Client.Indexes;
@@ -37,7 +39,19 @@ namespace MillionSteps.Web
     [HttpGet]
     public ActionResult Initialize()
     {
-      IndexCreation.CreateIndexes(typeof(UserSessionIndex).Assembly, this.DocumentSession.Advanced.DocumentStore);
+      var documentStore = this.DocumentSession.Advanced.DocumentStore;
+      IndexCreation.CreateIndexes(typeof(UserSessionIndex).Assembly, documentStore);
+
+      return this.RedirectToRoute("Index");
+    }
+
+    [HttpGet]
+    public ActionResult Reset()
+    {
+      var documentStore = this.DocumentSession.Advanced.DocumentStore;
+      documentStore.DeleteAll<UserSession>();
+      documentStore.DeleteAll<Adventure>();
+      documentStore.DeleteAll<Moment>();
 
       return this.RedirectToRoute("Index");
     }
