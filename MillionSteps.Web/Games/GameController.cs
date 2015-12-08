@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Web.Mvc;
 using GuardClaws;
-using MillionSteps.Core;
 using MillionSteps.Core.Adventures;
 using MillionSteps.Core.Authentication;
 using MillionSteps.Core.Events;
@@ -14,7 +11,7 @@ namespace MillionSteps.Web.Games
 {
   public class GameController : ControllerBase
   {
-    public GameController(IDocumentSession documentSession, UserSession userSession, UserProfileClient userProfileClient, ActivityLogUpdater activityLogUpdater, EventDriver eventDriver) : base(documentSession)
+    public GameController(IDocumentSession documentSession, UserSession userSession, UserProfileClient userProfileClient, ActivityLogUpdater activityLogUpdater, EventDriver eventDriver, AdventureDao adventureDao) : base(documentSession)
     {
       Claws.NotNull(() => eventDriver);
 
@@ -22,12 +19,14 @@ namespace MillionSteps.Web.Games
       this.userProfileClient = userProfileClient;
       this.activityLogUpdater = activityLogUpdater;
       this.eventDriver = eventDriver;
+      this.adventureDao = adventureDao;
     }
 
     private readonly UserSession userSession;
     private readonly UserProfileClient userProfileClient;
     private readonly ActivityLogUpdater activityLogUpdater;
     private readonly EventDriver eventDriver;
+    private readonly AdventureDao adventureDao;
 
     [HttpGet]
     public ActionResult Index()
@@ -44,26 +43,8 @@ namespace MillionSteps.Web.Games
       this.activityLogUpdater.UpdateTodayAndYesterday();
       this.userSession.OffsetFromUtcMillis = userProfile.OffsetFromUTCMillis;
 
-      var adventure = this.DocumentSession.Query<Adventure, AdventureIndex>()
-                          .SingleOrDefault(a => a.UserId == this.userSession.UserId);
-      if (adventure == null) {
-        var adventureId = Guid.NewGuid();
-        var initialMomentId = Guid.NewGuid();
-
-        adventure = new Adventure(adventureId) {
-          UserId = this.userSession.UserId,
-          DateCreated = DateTime.UtcNow,
-          CurrentMomentId = initialMomentId,
-        };
-        this.DocumentSession.Store(adventure);
-
-        var initialMoment = new Moment(initialMomentId) {
-          UserId = this.userSession.UserId,
-          AdventureId = adventure.DocumentId,
-          Ordinal = 0,
-        };
-        this.DocumentSession.Store(initialMoment);
-      }
+      var adventure = this.adventureDao.LookupAdventureByUserId(this.userSession.UserId) ??
+                      this.adventureDao.CreateAdventure(this.userSession.UserId);
 
       return this.RedirectToRoute("Moment", new { momentId = adventure.CurrentMomentId });
     }
@@ -79,8 +60,7 @@ namespace MillionSteps.Web.Games
       if (userProfile == null)
         return this.RedirectToRoute("Welcome");
 
-      var adventure = this.DocumentSession.Query<Adventure, AdventureIndex>()
-                          .SingleOrDefault(a => a.UserId == this.userSession.UserId);
+      var adventure = this.adventureDao.LookupAdventureByUserId(this.userSession.UserId);
       if (adventure == null)
         return this.RedirectToRoute("Game");
 
@@ -120,16 +100,7 @@ namespace MillionSteps.Web.Games
       if (@event == null)
         throw new InvalidOperationException($"Can't find event named: {eventName}");
 
-      var newMoment = new Moment(Guid.NewGuid()) {
-        UserId = this.userSession.UserId,
-        AdventureId = adventure.DocumentId,
-        EventName = eventName,
-        Ordinal = priorMoment.Ordinal + 1,
-        Flags = priorMoment.Flags.Append(eventName).Concat(@event.FlagsToSet).Except(@event.FlagsToClear).Distinct().ToArray(),
-      };
-      this.DocumentSession.Store(newMoment);
-
-      adventure.CurrentMomentId = newMoment.DocumentId;
+      var newMoment = this.adventureDao.BuildNextMoment(adventure, priorMoment, @event);
 
       return this.RedirectToRoutePermanent("Moment", new { momentId = newMoment.DocumentId });
     }

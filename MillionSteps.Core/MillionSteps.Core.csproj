@@ -92,6 +92,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Adventures\AdventureDao.cs" />
     <Compile Include="Adventures\AdventureIndex.cs" />
     <Compile Include="Adventures\FlagDictionary.cs" />
     <Compile Include="Adventures\Moment.cs" />
