@@ -104,7 +104,7 @@
     <Compile Include="DocumentSessionExtensions.cs" />
     <Compile Include="EnumerableExtensions.cs" />
     <Compile Include="Events\EventDriver.cs" />
-    <Compile Include="Events\IntroductionEvents.cs" />
+    <Compile Include="Events\PreludeEvents.cs" />
     <Compile Include="RavenDocument.cs" />
     <Compile Include="Events\Event.cs" />
     <Compile Include="Exercises\ActivityLogIndex.cs" />

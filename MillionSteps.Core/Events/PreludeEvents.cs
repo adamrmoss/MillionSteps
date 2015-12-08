@@ -40,6 +40,7 @@ namespace MillionSteps.Core.Events
   public class AgreedToTellStory : Event
   {
     public override bool CanExecute(FlagDictionary flagDictionary) => flagDictionary["AllCapsStory"];
+    public override HashSet<string> FlagsToSet => new HashSet<string> {"IntroductionFinished"};
     public override bool Automatic => true;
   }
 }

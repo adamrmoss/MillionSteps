@@ -74,9 +74,10 @@ namespace MillionSteps.Web.Games
       var events = this.eventDriver.GetValidEvents(flagDictionary);
 
       var viewModel = new MomentViewModel {
+        DisplayName = userProfile.DisplayName,
+        StrideLength = userProfile.StrideLengthWalking,
         MomentId = momentId,
         ReadOnly = readOnly,
-        DisplayName = userProfile.DisplayName,
         Flags = flagDictionary,
         Choices = events,
       };
