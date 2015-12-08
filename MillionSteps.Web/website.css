@@ -47,6 +47,7 @@ main {
   text-align: left;
   margin: 0;
   padding: 16px;
+  -ms-border-radius: 12px;
   border-radius: 12px;
 }
 
@@ -77,10 +78,6 @@ header p {
   font-family: 'Calibri', 'Helvetica', 'sans-serif';
 }
 
-section.game {
-  padding-top: 30px;
-}
-
 section.fitbit.logo {
   text-align: center;
   width: 500px;
@@ -88,6 +85,50 @@ section.fitbit.logo {
 
 section.fitbit.logo img {
   width: 250px;
+}
+
+section.game {
+  padding-top: 30px;
+}
+
+div.choice {
+  padding-bottom: 8px;
+}
+
+div.choice:last-child {
+  padding-bottom: 0;
+}
+
+div.choice button {
+  background-color: #103810;
+  color:#dddddd;
+  position: relative;
+  font-size: 20px;
+  padding: 16px;
+  margin: 1em 0 3em;
+  -ms-border-radius: 6px;
+  border-radius: 6px;
+  border-color: #103810;
+  cursor: pointer;
+}
+
+div.choice button:after {
+  content: '';
+  position: absolute;
+  bottom: -16px;
+  border-width: 16px 16px 0;
+  border-style: solid;
+  border-color: #103810 transparent;
+  display: block;
+  width: 0;
+}
+
+div.narrator.choice button:after {
+  left: 16px;
+}
+
+div.audience.choice button:after {
+  right: 16px;
 }
 
 footer {

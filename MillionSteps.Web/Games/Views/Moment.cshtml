@@ -22,8 +22,9 @@
     <form action="@Url.RouteUrl("Choose")" method="POST">
       @Html.Hidden("momentId", Model.MomentId)
       @foreach (var choice in Model.Choices) {
-        <div></div>
-        <button type="submit" name="eventName" value="@choice.Name" disabled="@(Model.ReadOnly && @Model.ChosenChoice == choice.Name)">@choice.Text</button>
+        <div class="choice @(choice.SpokenByNarrator ? "narrator" : "audience")">
+          <button type="submit" name="eventName" value="@choice.Name" disabled="@(Model.ReadOnly && @Model.ChosenChoice == choice.Name)">@choice.Text</button>
+        </div>
       }
     </form>
   </section>

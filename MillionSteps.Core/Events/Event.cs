@@ -13,6 +13,7 @@ namespace MillionSteps.Core.Events
 
     public virtual bool Automatic => false;
     public virtual bool Repeatable => false;
+    public virtual bool SpokenByNarrator => true;
     public virtual EventPriority Priority => EventPriority.Medium;
     public virtual int StepsConsumed => 0;
 

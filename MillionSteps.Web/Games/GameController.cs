@@ -123,6 +123,7 @@ namespace MillionSteps.Web.Games
       var newMoment = new Moment(Guid.NewGuid()) {
         UserId = this.userSession.UserId,
         AdventureId = adventure.DocumentId,
+        EventName = eventName,
         Ordinal = priorMoment.Ordinal + 1,
         Flags = priorMoment.Flags.Append(eventName).Concat(@event.FlagsToSet).Except(@event.FlagsToClear).Distinct().ToArray(),
       };
