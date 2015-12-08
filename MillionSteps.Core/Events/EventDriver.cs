@@ -21,6 +21,10 @@ namespace MillionSteps.Core.Events
 
     public List<Event> GetValidEvents(FlagDictionary flagDictionary)
     {
+      var automaticEvents = this.allEvents.Where(@event => @event.Automatic && EventCanExecute(@event, flagDictionary)).ToList();
+      if (automaticEvents.Any())
+        return new List<Event> {automaticEvents.First()};
+
       return this.allEvents.Where(@event => EventCanExecute(@event, flagDictionary)).ToList();
     }
 
