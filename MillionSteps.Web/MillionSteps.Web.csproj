@@ -249,6 +249,12 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="packages.config" />
+    <Content Include="Games\Views\StoryStarted.cshtml" />
+    <Content Include="Games\Views\FemalePlayerChosen.cshtml" />
+    <Content Include="Games\Views\MalePlayerChosen.cshtml" />
+    <Content Include="Games\Views\YeahStory.cshtml" />
+    <Content Include="Games\Views\AllCapsStory.cshtml" />
+    <Content Include="Games\Views\AgreedToTellStory.cshtml" />
     <None Include="Properties\PublishProfiles\a-million-steps.org - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\Manual Deploy.pubxml" />
     <None Include="Web.Debug.config">

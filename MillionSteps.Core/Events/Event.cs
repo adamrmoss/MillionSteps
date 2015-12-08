@@ -8,7 +8,6 @@ namespace MillionSteps.Core.Events
   {
     public string Name => this.GetType().Name;
 
-    public abstract string Text { get; }
     public abstract bool CanExecute(FlagDictionary flagDictionary);
 
     public virtual bool Automatic => false;

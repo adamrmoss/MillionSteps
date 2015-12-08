@@ -23,7 +23,11 @@
       @Html.Hidden("momentId", Model.MomentId)
       @foreach (var choice in Model.Choices) {
         <div class="choice @(choice.SpokenByNarrator ? "narrator" : "audience")">
-          <button type="submit" name="eventName" value="@choice.Name" disabled="@(Model.ReadOnly && @Model.ChosenChoice == choice.Name)">@choice.Text</button>
+          @{
+            var disabled = Model.ReadOnly && @Model.ChosenChoice == choice.Name;
+            var templateName = "~/Games/Views/" + choice.Name + ".cshtml";
+          }
+          <button type="submit" name="eventName" value="@choice.Name" disabled="@disabled">@Html.Partial(templateName)</button>
         </div>
       }
     </form>
