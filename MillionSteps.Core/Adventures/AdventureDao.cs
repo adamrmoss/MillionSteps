@@ -45,6 +45,7 @@ namespace MillionSteps.Core.Adventures
         UserId = adventure.UserId,
         AdventureId = adventure.DocumentId,
         EventName = @event.Name,
+        StepsConsumed = @event.StepsConsumed,
         Ordinal = priorMoment.Ordinal + 1,
         Flags = priorMoment.Flags.Append(@event.Name).Concat(@event.FlagsToSet).Except(@event.FlagsToClear).Distinct().ToArray(),
       };

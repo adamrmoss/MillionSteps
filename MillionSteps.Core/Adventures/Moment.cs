@@ -13,6 +13,7 @@ namespace MillionSteps.Core.Adventures
     public string UserId { get; set; }
     public Guid AdventureId { get; set; }
     public string EventName { get; set; }
+    public int StepsConsumed { get; set; }
     public int Ordinal { get; set; }
     public string[] Flags { get; set; }
   }

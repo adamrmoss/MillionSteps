@@ -94,6 +94,8 @@
   <ItemGroup>
     <Compile Include="Adventures\AdventureDao.cs" />
     <Compile Include="Adventures\AdventureIndex.cs" />
+    <Compile Include="Adventures\AdventureSummary.cs" />
+    <Compile Include="Adventures\AdventureSummaryIndex.cs" />
     <Compile Include="Adventures\FlagDictionary.cs" />
     <Compile Include="Adventures\Moment.cs" />
     <Compile Include="Adventures\Adventure.cs" />
@@ -101,6 +103,8 @@
     <Compile Include="Authentication\UserSessionIndex.cs" />
     <Compile Include="Dao.cs" />
     <Compile Include="Authentication\UserProfileClient.cs" />
+    <Compile Include="Exercises\ActivityLogSummary.cs" />
+    <Compile Include="Exercises\ActivityLogSummaryIndex.cs" />
     <Compile Include="RavenExtensions.cs" />
     <Compile Include="EnumerableExtensions.cs" />
     <Compile Include="Events\EventDriver.cs" />

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using MillionSteps.Core.Adventures;
 
 namespace MillionSteps.Core.Events
