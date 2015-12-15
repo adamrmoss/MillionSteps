@@ -3,14 +3,15 @@
   define(['jquery', 'ajax'], function($, ajax) {
     var website;
     website = {
-      choicesFormSelector: 'form.choices',
+      choicesSectionSelector: 'section.choices',
+      choicesFormSelector: 'section.choices form',
       initialize: function() {
-        return ajax.setupForm(website.choicesFormSelector, website.handleAjax, website.handleAjaxError);
+        return ajax.setupLiveForm(website.choicesFormSelector, website.handleAjax, website.handleAjaxError);
       },
       handleChoiceResponse: function(response) {
-        var newForm;
-        newForm = $(response).find(website.choicesFormSelector);
-        return $(website.choicesFormSelector).replaceWith(newForm);
+        var newChoicesSection;
+        newChoicesSection = $(response).find(website.choicesSectionSelector);
+        return $(website.choicesSectionSelector).replaceWith(newChoicesSection);
       },
       handleAjaxError: function() {
         return alert('Ajax error');

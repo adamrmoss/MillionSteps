@@ -3,8 +3,8 @@
   define(['jquery'], function($) {
     var ajax;
     return ajax = {
-      setupForm: function(formSelector, success, error) {
-        return $(formSelector).submit(function(event) {
+      setupLiveForm: function(formSelector, success, error) {
+        return $(document).on('submit', formSelector, {}, function(event) {
           var action, data, form, method;
           event.preventDefault();
           form = $(this);
@@ -15,7 +15,7 @@
             url: action,
             type: method,
             data: data,
-            dataType: 'json',
+            dataType: 'html',
             success: success,
             error: error
           });
