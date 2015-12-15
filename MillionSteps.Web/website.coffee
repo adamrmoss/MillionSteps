@@ -1,15 +1,18 @@
 ﻿define ['ajax', 'xhr'], (ajax, xhr) ->
+  _xhr = xhr
+
   website =
     choicesSectionSelector: 'section.choices'
     choicesFormSelector: 'section.choices form'
 
-    xhr: xhr
-
     handleChoiceResponse: (response) ->
-      newUrl = website.xhr.fromLastCall.responseURL
+      newUrl = _xhr.fromLastCall.responseURL
       history.replaceState({}, '', newUrl)
       newChoicesSection = $(response).find(website.choicesSectionSelector)
       $(website.choicesSectionSelector).replaceWith(newChoicesSection)
+      newChoices = $(website.choicesFormSelector)
+      newChoices.hide()
+      newChoices.fadeIn(200)
 
     handleAjaxError: ->
       alert('Ajax error')
