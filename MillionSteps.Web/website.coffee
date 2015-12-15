@@ -4,15 +4,15 @@
     choicesFormSelector: 'section.choices form'
 
     initialize: ->
-      ajax.setupLiveForm(website.choicesFormSelector, website.handleAjax, website.handleAjaxError)
+      ajax.setupLiveForm(website.choicesFormSelector, website.handleChoiceResponse, website.handleAjaxError)
 
-    handleChoiceResponse: (response) ->
+    handleChoiceResponse: (response) ->      
       newChoicesSection = $(response).find(website.choicesSectionSelector)
       $(website.choicesSectionSelector).replaceWith(newChoicesSection)
 
     handleAjaxError: ->
       alert('Ajax error')
 
-  #website.initialize()
+  website.initialize()
 
   website

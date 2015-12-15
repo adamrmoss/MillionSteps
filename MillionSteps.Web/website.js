@@ -6,7 +6,7 @@
       choicesSectionSelector: 'section.choices',
       choicesFormSelector: 'section.choices form',
       initialize: function() {
-        return ajax.setupLiveForm(website.choicesFormSelector, website.handleAjax, website.handleAjaxError);
+        return ajax.setupLiveForm(website.choicesFormSelector, website.handleChoiceResponse, website.handleAjaxError);
       },
       handleChoiceResponse: function(response) {
         var newChoicesSection;
@@ -17,6 +17,7 @@
         return alert('Ajax error');
       }
     };
+    website.initialize();
     return website;
   });
 
