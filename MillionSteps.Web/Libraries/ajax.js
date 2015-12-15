@@ -3,11 +3,12 @@
   define(function() {
     var ajax;
     return ajax = {
+      ajaxStartTime: null,
       setupLiveForm: function(formSelector, success, error) {
         var _formSelector;
         _formSelector = formSelector;
         return $(document).on('submit', formSelector, {}, function(event) {
-          var action, data, form, method, otherChoices, performAjax;
+          var action, data, form, method, otherChoices;
           event.preventDefault();
           form = $(this);
           otherChoices = $(_formSelector).not(form);
@@ -18,17 +19,14 @@
           action = form.attr('action');
           method = form.attr('method');
           data = form.serialize();
-          performAjax = function() {
-            return $.ajax({
-              url: action,
-              type: method,
-              data: data,
-              dataType: 'html',
-              success: success,
-              error: error
-            });
-          };
-          return window.setTimeout(performAjax, 800);
+          return $.ajax({
+            url: action,
+            type: method,
+            data: data,
+            dataType: 'html',
+            success: success,
+            error: error
+          });
         });
       }
     };

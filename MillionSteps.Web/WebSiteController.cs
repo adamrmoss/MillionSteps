@@ -9,7 +9,7 @@ namespace MillionSteps.Web
 {
   public class WebSiteController : ControllerBase
   {
-    public WebSiteController(IDocumentSession documentSession, UserProfileClient userProfileClient) 
+    public WebSiteController(IDocumentSession documentSession, UserProfileClient userProfileClient)
       : base(documentSession)
     {
       this.userProfileClient = userProfileClient;

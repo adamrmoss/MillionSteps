@@ -3,35 +3,37 @@
 <html>
 <head>
   <title>A Million Steps</title>
-  <link type="text/css" rel="stylesheet" href="~/website.css" />
+  <link type="text/css" rel="stylesheet" href="~/website.css"/>
   <script data-main="../main" src="~/Libraries/require.js"></script>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 </head>
 <body>
-  <main>
-    <header>
-      <div>
-        <p>@Model.DisplayName</p>
-        <a href="@Url.RouteUrl("Logout")"><p>[logout]</p></a>
-      </div>
-    </header>
-    <h1>A Million Steps</h1>
-    <section class="choices">
-      @foreach (var choice in Model.Choices) {
-        <form action="@Url.RouteUrl("Choose")" method="POST">
-          @Html.Hidden("momentId", Model.MomentId)
-          @Html.Hidden("eventName", choice.Name)
-          @{
-            var disabled = Model.ReadOnly && @Model.ChosenChoice == choice.Name;
-            var templateName = "~/Games/Views/" + choice.Name + ".cshtml";
-          }
-          <div class="choice @(choice.SpokenByNarrator ? "narrator" : "audience")">
-            <button type="submit" disabled="@disabled">@Html.Partial(templateName, Model)</button>
-          </div>
-        </form>
-      }
-    </section>
-    @Html.Partial("~/Views/Footer.cshtml")
-  </main>
+<main>
+  <header>
+    <div>
+      <p>@Model.DisplayName</p>
+      <a href="@Url.RouteUrl("Logout")">
+        <p>[logout]</p>
+      </a>
+    </div>
+  </header>
+  <h1>A Million Steps</h1>
+  <section class="choices">
+    @foreach (var choice in Model.Choices) {
+      <form action="@Url.RouteUrl("Choose")" method="POST">
+        @Html.Hidden("momentId", Model.MomentId)
+        @Html.Hidden("eventName", choice.Name)
+        @{
+          var disabled = Model.ReadOnly && @Model.ChosenChoice == choice.Name;
+          var templateName = "~/Games/Views/" + choice.Name + ".cshtml";
+        }
+        <div class="choice @(choice.SpokenByNarrator ? "narrator" : "audience")">
+          <button type="submit" disabled="@disabled">@Html.Partial(templateName, Model)</button>
+        </div>
+      </form>
+    }
+  </section>
+  @Html.Partial("~/Views/Footer.cshtml")
+</main>
 </body>
 </html>

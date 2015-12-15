@@ -9,12 +9,12 @@ namespace MillionSteps.Core.Adventures
   {
     public AdventureDao(IDocumentSession documentSession)
       : base(documentSession)
-    { }
+    {}
 
     public Adventure LookupAdventureByUserId(string userId)
     {
       return this.DocumentSession.Query<Adventure, AdventureIndex>()
-        .SingleOrDefault(a => a.UserId == userId);
+                 .SingleOrDefault(a => a.UserId == userId);
     }
 
     public Adventure CreateAdventure(string userId)

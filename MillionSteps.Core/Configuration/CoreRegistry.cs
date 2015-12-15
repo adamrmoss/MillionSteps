@@ -12,11 +12,11 @@ namespace MillionSteps.Core.Configuration
     public CoreRegistry()
     {
       this.For<Settings>()
-        .LifecycleIs<SingletonLifecycle>();
+          .LifecycleIs<SingletonLifecycle>();
 
       this.For<RestClient>()
-        .Use(context => BuildRestClient(context))
-        .LifecycleIs<UniquePerRequestLifecycle>();
+          .Use(context => BuildRestClient(context))
+          .LifecycleIs<UniquePerRequestLifecycle>();
 
       this.ConfigureFitbitApi();
     }

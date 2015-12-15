@@ -38,7 +38,8 @@ namespace MillionSteps.Core.Exercises
       this.UpdateActivityLog(yesterday, today, false);
     }
 
-    public void UpdateActivityLog(DateTime startDate, DateTime endDate, bool skipExisting) {
+    public void UpdateActivityLog(DateTime startDate, DateTime endDate, bool skipExisting)
+    {
       Claws.NotNull(() => this.userSession);
       Claws.NotNull(() => this.fitbitClient);
 

@@ -41,7 +41,6 @@ namespace MillionSteps.Web.Authentication
     [HttpGet]
     // ReSharper disable InconsistentNaming
     public ActionResult Complete(string oauth_token, string oauth_verifier)
-    // ReSharper restore InconsistentNaming
     {
       var userSession = this.authenticationDao.LookupSessionByTempToken(oauth_token);
 
@@ -59,6 +58,7 @@ namespace MillionSteps.Web.Authentication
 
       return this.RedirectToRoute("Index");
     }
+    // ReSharper restore InconsistentNaming
 
     private static RequestToken BuildRequestToken(UserSession userSession)
     {

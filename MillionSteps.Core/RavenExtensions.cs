@@ -21,9 +21,9 @@ namespace MillionSteps.Core
       var collectionName = typeof(TDocument).GetCollectionName();
 
       documentStore.DatabaseCommands
-        .DeleteByIndex("Raven/DocumentsByEntityName",
-                       new IndexQuery { Query = "Tag:" + collectionName },
-                       new BulkOperationOptions { AllowStale = false, StaleTimeout = TimeSpan.FromMinutes(1) });
+                   .DeleteByIndex("Raven/DocumentsByEntityName",
+                                  new IndexQuery {Query = "Tag:" + collectionName},
+                                  new BulkOperationOptions {AllowStale = false, StaleTimeout = TimeSpan.FromMinutes(1)});
     }
 
     public static string GetCollectionName(this Type type)

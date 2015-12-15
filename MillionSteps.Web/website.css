@@ -15,22 +15,16 @@ h2 {
   font-size: 36px;
 }
 
-h3 {
-  font-size: 32px;
-}
+h3 { font-size: 32px; }
 
-h4 {
-  font-size: 28px;
-}
+h4 { font-size: 28px; }
 
 p {
   font-family: 'Courier New', 'Courier', 'monospace';
   font-size: 20px;
 }
 
-a {
-  color: #ffffff;
-}
+a { color: #ffffff; }
 
 body {
   background-color: #000055;
@@ -40,7 +34,7 @@ body {
 
 main {
   background-color: #333388;
-  color:#dddddd;
+  color: #dddddd;
   display: inline-block;
   width: 800px;
   max-width: 800px;
@@ -51,21 +45,13 @@ main {
   border-radius: 12px;
 }
 
-section, header > * {
-  padding: 2px 8px;
-}
+section, header > * { padding: 2px 8px; }
 
-section, header > :first-child {
-  padding-top: 0;
-}
+section, header > :first-child { padding-top: 0; }
 
-section, header > :last-child {
-  padding-bottom: 0;
-}
+section, header > :last-child { padding-bottom: 0; }
 
-header {
-  text-align: right;
-}
+header { text-align: right; }
 
 header > div {
   display: inline-block;
@@ -83,25 +69,17 @@ section.fitbit.logo {
   width: 500px;
 }
 
-section.fitbit.logo img {
-  width: 250px;
-}
+section.fitbit.logo img { width: 250px; }
 
-section.game {
-  padding-top: 30px;
-}
+section.game { padding-top: 30px; }
 
-div.choice {
-  padding-bottom: 8px;
-}
+div.choice { padding-bottom: 8px; }
 
-div.choice:last-child {
-  padding-bottom: 0;
-}
+div.choice:last-child { padding-bottom: 0; }
 
 div.choice button {
   background-color: #103810;
-  color:#dddddd;
+  color: #dddddd;
   position: relative;
   text-align: left;
   font-size: 32px;

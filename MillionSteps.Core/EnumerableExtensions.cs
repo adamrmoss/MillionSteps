@@ -10,6 +10,6 @@ namespace MillionSteps.Core
         yield return sequenceElement;
 
       yield return element;
-    } 
+    }
   }
 }

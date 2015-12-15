@@ -9,7 +9,7 @@ namespace MillionSteps.Core.Exercises
   {
     public ActivityLogDao(IDocumentSession documentSession)
       : base(documentSession)
-    { }
+    {}
 
     public Dictionary<DateTime, ActivityLogEntry> GetExistingActivityLogEntries(string userId, DateTime startDate, DateTime endDate)
     {

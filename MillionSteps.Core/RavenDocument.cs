@@ -23,13 +23,13 @@ namespace MillionSteps.Core
   {
     protected RavenDocument(string documentId)
       : base(documentId)
-    { }
+    {}
   }
 
   public abstract class GuidRavenDocument : RavenDocument<Guid>
   {
     protected GuidRavenDocument(Guid documentId)
       : base(documentId)
-    { }
+    {}
   }
 }

@@ -1,5 +1,7 @@
 ﻿define () ->
   ajax =
+    ajaxStartTime: null
+
     setupLiveForm: (formSelector, success, error) ->
       _formSelector = formSelector
 
@@ -16,13 +18,11 @@
         method = form.attr('method')
         data = form.serialize()
 
-        performAjax = ->
-          $.ajax
-            url: action
-            type: method
-            data: data
-            dataType: 'html'
-            success: success
-            error: error
-        window.setTimeout(performAjax, 800)
+        $.ajax
+          url: action
+          type: method
+          data: data
+          dataType: 'html'
+          success: success
+          error: error
       )

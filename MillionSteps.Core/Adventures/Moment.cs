@@ -4,7 +4,7 @@ namespace MillionSteps.Core.Adventures
 {
   public class Moment : GuidRavenDocument
   {
-    public Moment(Guid documentId) 
+    public Moment(Guid documentId)
       : base(documentId)
     {
       this.Flags = new string[0];

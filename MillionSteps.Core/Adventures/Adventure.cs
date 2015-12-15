@@ -6,7 +6,7 @@ namespace MillionSteps.Core.Adventures
   {
     public Adventure(Guid documentId)
       : base(documentId)
-    { }
+    {}
 
     public string UserId { get; set; }
     public DateTime DateCreated { get; set; }

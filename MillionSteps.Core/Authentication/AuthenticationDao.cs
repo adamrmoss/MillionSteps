@@ -8,7 +8,7 @@ namespace MillionSteps.Core.Authentication
   {
     public AuthenticationDao(IDocumentSession documentSession)
       : base(documentSession)
-    { }
+    {}
 
     public void CreateSession(string tempToken, string tempSecret)
     {

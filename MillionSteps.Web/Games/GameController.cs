@@ -46,7 +46,7 @@ namespace MillionSteps.Web.Games
       var adventure = this.adventureDao.LookupAdventureByUserId(this.userSession.UserId) ??
                       this.adventureDao.CreateAdventure(this.userSession.UserId);
 
-      return this.RedirectToRoute("Moment", new { momentId = adventure.CurrentMomentId });
+      return this.RedirectToRoute("Moment", new {momentId = adventure.CurrentMomentId});
     }
 
     [HttpGet]
@@ -103,7 +103,7 @@ namespace MillionSteps.Web.Games
 
       var newMoment = this.adventureDao.BuildNextMoment(adventure, priorMoment, @event);
 
-      return this.RedirectToRoutePermanent("Moment", new { momentId = newMoment.DocumentId });
+      return this.RedirectToRoutePermanent("Moment", new {momentId = newMoment.DocumentId});
     }
   }
 }
