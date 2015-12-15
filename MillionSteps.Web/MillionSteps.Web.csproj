@@ -205,6 +205,12 @@
     <Content Include="website.min.js">
       <DependentUpon>website.js</DependentUpon>
     </Content>
+    <Content Include="xhr.js">
+      <DependentUpon>xhr.coffee</DependentUpon>
+    </Content>
+    <Content Include="xhr.min.js">
+      <DependentUpon>xhr.js</DependentUpon>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Authentication\AuthenticationController.cs" />
@@ -259,6 +265,7 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
     <Content Include="website.coffee" />
+    <Content Include="xhr.coffee" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

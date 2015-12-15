@@ -1,4 +1,4 @@
-﻿define ['jquery'], ($) ->
+﻿define () ->
   ajax =
     setupLiveForm: (formSelector, success, error) ->
       $(document).on('submit', formSelector, {}, (event) ->
