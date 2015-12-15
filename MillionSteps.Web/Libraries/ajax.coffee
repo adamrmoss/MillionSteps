@@ -1,6 +1,10 @@
 ﻿define () ->
   ajax =
-    ajaxStartTime: null
+    flashFadeTime: 100
+    quickFadeTime: 200
+    longFadeTime: 1200
+
+    startTime: null
 
     setupLiveForm: (formSelector, success, error) ->
       _formSelector = formSelector
@@ -8,12 +12,9 @@
       $(document).on('submit', formSelector, {}, (event) ->
         event.preventDefault()
 
-        form = $(this)
-        otherChoices = $(_formSelector).not(form)
-        if otherChoices.length > 0
-          otherChoices.fadeTo(100, 0.01)
-        form.fadeTo(800, 0.01)        
+        ajax.startTime = Date.now()
 
+        form = $(this)
         action = form.attr('action')
         method = form.attr('method')
         data = form.serialize()
@@ -25,4 +26,9 @@
           dataType: 'html'
           success: success
           error: error
+
+        otherChoices = $(_formSelector).not(form)
+        if otherChoices.length > 0
+          otherChoices.fadeTo(ajax.flashFadeTime, 0.01)
+        form.fadeTo(ajax.longFadeTime, 0.01)        
       )

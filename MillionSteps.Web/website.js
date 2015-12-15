@@ -7,17 +7,23 @@
       choicesSectionSelector: 'section.choices',
       choicesFormSelector: 'section.choices form',
       handleChoiceResponse: function(response) {
-        var newChoices, newChoicesSection, newUrl;
+        var fadeInNewChoices, newUrl, timeToWait, timeWaited;
         newUrl = _xhr.fromLastCall.responseURL;
         history.replaceState({}, '', newUrl);
-        newChoicesSection = $(response).find(website.choicesSectionSelector);
-        $(website.choicesSectionSelector).replaceWith(newChoicesSection);
-        newChoices = $(website.choicesFormSelector);
-        newChoices.hide();
-        return newChoices.fadeIn(200);
+        timeWaited = Date.now() - ajax.startTime;
+        timeToWait = Math.max(0, ajax.longFadeTime - timeWaited);
+        fadeInNewChoices = function() {
+          var newChoices, newChoicesSection;
+          newChoicesSection = $(response).find(website.choicesSectionSelector);
+          $(website.choicesSectionSelector).replaceWith(newChoicesSection);
+          newChoices = $(website.choicesFormSelector);
+          newChoices.hide();
+          return newChoices.fadeIn(ajax.quickFadeTime);
+        };
+        return window.setTimeout(fadeInNewChoices, timeToWait);
       },
       handleAjaxError: function() {
-        return alert('Ajax error');
+        return window.location.replace('/');
       }
     };
     ajax.setupLiveForm(website.choicesFormSelector, website.handleChoiceResponse, website.handleAjaxError);

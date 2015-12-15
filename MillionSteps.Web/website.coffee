@@ -8,14 +8,21 @@
     handleChoiceResponse: (response) ->
       newUrl = _xhr.fromLastCall.responseURL
       history.replaceState({}, '', newUrl)
-      newChoicesSection = $(response).find(website.choicesSectionSelector)
-      $(website.choicesSectionSelector).replaceWith(newChoicesSection)
-      newChoices = $(website.choicesFormSelector)
-      newChoices.hide()
-      newChoices.fadeIn(200)
+
+      timeWaited = Date.now() - ajax.startTime
+      timeToWait = Math.max(0, ajax.longFadeTime - timeWaited)
+
+      fadeInNewChoices = ->
+        newChoicesSection = $(response).find(website.choicesSectionSelector)
+        $(website.choicesSectionSelector).replaceWith(newChoicesSection)
+        newChoices = $(website.choicesFormSelector)
+        newChoices.hide()
+        newChoices.fadeIn(ajax.quickFadeTime)
+
+      window.setTimeout(fadeInNewChoices, timeToWait)
 
     handleAjaxError: ->
-      alert('Ajax error')
+      window.location.replace('/')
 
   ajax.setupLiveForm(website.choicesFormSelector, website.handleChoiceResponse, website.handleAjaxError)
 

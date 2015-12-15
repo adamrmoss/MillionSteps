@@ -3,23 +3,22 @@
   define(function() {
     var ajax;
     return ajax = {
-      ajaxStartTime: null,
+      flashFadeTime: 100,
+      quickFadeTime: 200,
+      longFadeTime: 1200,
+      startTime: null,
       setupLiveForm: function(formSelector, success, error) {
         var _formSelector;
         _formSelector = formSelector;
         return $(document).on('submit', formSelector, {}, function(event) {
           var action, data, form, method, otherChoices;
           event.preventDefault();
+          ajax.startTime = Date.now();
           form = $(this);
-          otherChoices = $(_formSelector).not(form);
-          if (otherChoices.length > 0) {
-            otherChoices.fadeTo(100, 0.01);
-          }
-          form.fadeTo(800, 0.01);
           action = form.attr('action');
           method = form.attr('method');
           data = form.serialize();
-          return $.ajax({
+          $.ajax({
             url: action,
             type: method,
             data: data,
@@ -27,6 +26,11 @@
             success: success,
             error: error
           });
+          otherChoices = $(_formSelector).not(form);
+          if (otherChoices.length > 0) {
+            otherChoices.fadeTo(ajax.flashFadeTime, 0.01);
+          }
+          return form.fadeTo(ajax.longFadeTime, 0.01);
         });
       }
     };
