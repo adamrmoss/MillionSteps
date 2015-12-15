@@ -1,9 +1,17 @@
-﻿define ['jquery', 'ajax', 'cookies'], ($, ajax, cookies) ->
+﻿define ['jquery', 'ajax'], ($, ajax) ->
   website =
-    initialize: ->
-      return null
+    choicesFormSelector: 'form.choices'
 
-  #ajax.setupForm(login.selector, (-> website.handleLogin()), (-> website.handleError()))
-  website.initialize()
+    initialize: ->
+      ajax.setupForm(website.choicesFormSelector, website.handleAjax, website.handleAjaxError)
+
+    handleChoiceResponse: (response) ->
+      newForm = $(response).find(website.choicesFormSelector)
+      $(website.choicesFormSelector).replaceWith(newForm)
+
+    handleAjaxError: ->
+      alert('Ajax error')
+
+  #website.initialize()
 
   website

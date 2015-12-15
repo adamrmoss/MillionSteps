@@ -189,12 +189,6 @@
     <Content Include="Libraries\ajax.min.js">
       <DependentUpon>ajax.js</DependentUpon>
     </Content>
-    <Content Include="Libraries\cookies.js">
-      <DependentUpon>cookies.coffee</DependentUpon>
-    </Content>
-    <Content Include="Libraries\cookies.min.js">
-      <DependentUpon>cookies.js</DependentUpon>
-    </Content>
     <Content Include="Libraries\jquery.js" />
     <Content Include="Libraries\require.js" />
     <Content Include="main.js">
@@ -241,7 +235,6 @@
     <Content Include="Games\Views\Moment.cshtml" />
     <Content Include="Games\Views\web.config" />
     <Content Include="Libraries\ajax.coffee" />
-    <Content Include="Libraries\cookies.coffee" />
     <Content Include="Configuration\Connections.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

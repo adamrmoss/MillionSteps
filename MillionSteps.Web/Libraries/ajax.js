@@ -2,10 +2,10 @@
 (function() {
   define(['jquery'], function($) {
     var ajax;
-    ajax = {
-      setupForm: function(form, success, error) {
-        return $(form).submit(function(event) {
-          var action, data, method;
+    return ajax = {
+      setupForm: function(formSelector, success, error) {
+        return $(formSelector).submit(function(event) {
+          var action, data, form, method;
           event.preventDefault();
           form = $(this);
           action = form.attr('action');
@@ -22,7 +22,6 @@
         });
       }
     };
-    return ajax;
   });
 
 }).call(this);

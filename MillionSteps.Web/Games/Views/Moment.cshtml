@@ -4,7 +4,7 @@
 <head>
   <title>A Million Steps</title>
   <link type="text/css" rel="stylesheet" href="~/website.css"/>
-  <script data-main="main" src="~/Libraries/require.js"></script>
+  <script data-main="../main" src="~/Libraries/require.js"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 </head>
 <body>
@@ -17,7 +17,7 @@
   </header>
   <h1>A Million Steps</h1>
   <section>
-    <form action="@Url.RouteUrl("Choose")" method="POST">
+    <form class="choices" action="@Url.RouteUrl("Choose")" method="POST">
       @Html.Hidden("momentId", Model.MomentId)
       @foreach (var choice in Model.Choices) {
         <div class="choice @(choice.SpokenByNarrator ? "narrator" : "audience")">

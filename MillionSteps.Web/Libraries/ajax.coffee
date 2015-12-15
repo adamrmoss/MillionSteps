@@ -1,7 +1,7 @@
 ﻿define ['jquery'], ($) ->
   ajax =
-    setupForm: (form, success, error) ->
-      $(form).submit (event) ->
+    setupForm: (formSelector, success, error) ->
+      $(formSelector).submit (event) ->
         event.preventDefault()
         form = $(this)
         action = form.attr('action')
@@ -14,5 +14,3 @@
           dataType: 'json'
           success: success
           error: error
-
-  ajax
