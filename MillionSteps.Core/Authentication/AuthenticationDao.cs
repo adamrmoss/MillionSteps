@@ -28,6 +28,7 @@ namespace MillionSteps.Core.Authentication
     public UserSession LookupSessionByTempToken(string tempToken)
     {
       var userSession = this.DocumentSession.Query<UserSession, UserSessionIndex>()
+                            .Customize(c => c.WaitForNonStaleResults())
                             .SingleOrDefault(us => us.TempToken == tempToken);
       return userSession;
     }

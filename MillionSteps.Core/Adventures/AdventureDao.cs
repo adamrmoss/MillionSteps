@@ -14,7 +14,8 @@ namespace MillionSteps.Core.Adventures
     public Adventure LookupAdventureByUserId(string userId)
     {
       return this.DocumentSession.Query<Adventure, AdventureIndex>()
-                 .SingleOrDefault(a => a.UserId == userId);
+                                 .Customize(c => c.WaitForNonStaleResults())
+                                 .SingleOrDefault(a => a.UserId == userId);
     }
 
     public Adventure CreateAdventure(string userId)
