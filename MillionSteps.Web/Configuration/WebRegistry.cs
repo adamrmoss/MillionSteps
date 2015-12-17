@@ -48,7 +48,7 @@ namespace MillionSteps.Web.Configuration
       // ReSharper disable once PossibleNullReferenceException
       var userSessionId = Guid.Parse(request.Cookies[UserSession.CookieName].Value);
       var authenticationDao = context.GetInstance<AuthenticationDao>();
-      return authenticationDao.LookupUserSession(userSessionId);
+      return authenticationDao.LoadUserSession(userSessionId);
     }
   }
 }

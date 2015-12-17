@@ -20,7 +20,7 @@ namespace MillionSteps.Core.Authentication
       this.DocumentSession.Store(userSession);
     }
 
-    public UserSession LookupUserSession(Guid userSessionId)
+    public UserSession LoadUserSession(Guid userSessionId)
     {
       return this.DocumentSession.Load<UserSession>(userSessionId);
     }
