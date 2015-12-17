@@ -11,13 +11,6 @@ namespace MillionSteps.Core.Adventures
       : base(documentSession)
     {}
 
-    public Adventure LookupAdventureByUserId(string userId)
-    {
-      return this.DocumentSession.Query<Adventure, AdventureIndex>()
-                                 .Customize(c => c.WaitForNonStaleResults())
-                                 .SingleOrDefault(a => a.UserId == userId);
-    }
-
     public Adventure CreateAdventure(string userId)
     {
       var adventureId = Guid.NewGuid();
@@ -38,6 +31,13 @@ namespace MillionSteps.Core.Adventures
       this.DocumentSession.Store(initialMoment);
 
       return adventure;
+    }
+
+    public AdventureSummary LookupAdventureByUserId(string userId)
+    {
+      return this.DocumentSession.Query<AdventureSummary, AdventureSummaryIndex>()
+                                 .Customize(c => c.WaitForNonStaleResults())
+                                 .SingleOrDefault(a => a.UserId == userId);
     }
 
     public Moment BuildNextMoment(Adventure adventure, Moment priorMoment, Event @event)

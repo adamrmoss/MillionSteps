@@ -93,7 +93,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Adventures\AdventureDao.cs" />
-    <Compile Include="Adventures\AdventureIndex.cs" />
     <Compile Include="Adventures\AdventureSummary.cs" />
     <Compile Include="Adventures\AdventureSummaryIndex.cs" />
     <Compile Include="Adventures\FlagDictionary.cs" />

@@ -25,7 +25,7 @@
         @Html.Hidden("eventName", choice.Name)
         @{
           var disabled = Model.ReadOnly && @Model.ChosenChoice == choice.Name;
-          var templateName = "~/Games/Views/" + choice.Name + ".cshtml";
+          var templateName = "~/Events/Views/" + choice.Name + ".cshtml";
         }
         <div class="choice @(choice.SpokenByNarrator ? "narrator" : "audience")">
           <button type="submit" disabled="@disabled">@Html.Partial(templateName, Model)</button>
