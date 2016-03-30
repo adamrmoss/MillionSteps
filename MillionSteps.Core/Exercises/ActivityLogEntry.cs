@@ -2,12 +2,9 @@
 
 namespace MillionSteps.Core.Exercises
 {
-  public class ActivityLogEntry : GuidRavenDocument
+  public class ActivityLogEntry
   {
-    public ActivityLogEntry(Guid documentId)
-      : base(documentId)
-    {}
-
+    public Guid Id { get; set; }
     public string UserId { get; set; }
     public DateTime Date { get; set; }
     public int Steps { get; set; }

@@ -2,9 +2,11 @@
 using System.Linq;
 using Fitbit.Api;
 using GuardClaws;
+using MillionSteps.Core;
 using MillionSteps.Core.Authentication;
+using MillionSteps.Core.Data;
 
-namespace MillionSteps.Core.Exercises
+namespace MillionSteps.Web.Exercises
 {
   [UnitWorker]
   public class ActivityLogUpdater

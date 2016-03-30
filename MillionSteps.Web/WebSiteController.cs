@@ -1,16 +1,13 @@
 ﻿using System.Web.Mvc;
-using MillionSteps.Core;
-using MillionSteps.Core.Adventures;
 using MillionSteps.Core.Authentication;
-using Raven.Client;
-using Raven.Client.Indexes;
+using MillionSteps.Core.Data;
 
 namespace MillionSteps.Web
 {
   public class WebSiteController : ControllerBase
   {
-    public WebSiteController(IDocumentSession documentSession, UserProfileClient userProfileClient)
-      : base(documentSession)
+    public WebSiteController(MillionStepsContext dbContext, UserProfileClient userProfileClient)
+      : base(dbContext)
     {
       this.userProfileClient = userProfileClient;
     }
@@ -39,8 +36,7 @@ namespace MillionSteps.Web
     [HttpGet]
     public ActionResult Initialize()
     {
-      var documentStore = this.DocumentSession.Advanced.DocumentStore;
-      IndexCreation.CreateIndexes(typeof(UserSessionIndex).Assembly, documentStore);
+      // TODO: Still need this?
 
       return this.RedirectToRoute("Index");
     }
@@ -48,10 +44,7 @@ namespace MillionSteps.Web
     [HttpGet]
     public ActionResult Reset()
     {
-      var documentStore = this.DocumentSession.Advanced.DocumentStore;
-      documentStore.DeleteAll<UserSession>();
-      documentStore.DeleteAll<Adventure>();
-      documentStore.DeleteAll<Moment>();
+      // TODO: Delete everything
 
       return this.RedirectToRoute("Index");
     }

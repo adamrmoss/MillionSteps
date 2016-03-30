@@ -4,8 +4,8 @@ using System.Web;
 using Fasterflect;
 using MillionSteps.Core;
 using MillionSteps.Core.Authentication;
-using Raven.Client;
-using Raven.Client.Document;
+using MillionSteps.Core.Configuration;
+using MillionSteps.Core.Data;
 using StructureMap;
 using StructureMap.Configuration.DSL;
 using StructureMap.Graph;
@@ -25,12 +25,8 @@ namespace MillionSteps.Web.Configuration
           .Use(context => BuildUserSession(context))
           .LifecycleIs<HttpContextLifecycle>();
 
-      this.For<IDocumentStore>()
-          .Use(() => new DocumentStore {ConnectionStringName = "MillionSteps"}.Initialize())
-          .LifecycleIs<HttpContextLifecycle>();
-
-      this.For<IDocumentSession>()
-          .Use(context => context.GetInstance<IDocumentStore>().OpenSession())
+      this.For<MillionStepsContext>()
+          .Use(context => new MillionStepsContext(context.GetInstance<Settings>()))
           .LifecycleIs<HttpContextLifecycle>();
 
       this.Scan(scanner => {

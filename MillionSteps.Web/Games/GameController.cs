@@ -3,15 +3,16 @@ using System.Web.Mvc;
 using GuardClaws;
 using MillionSteps.Core.Adventures;
 using MillionSteps.Core.Authentication;
+using MillionSteps.Core.Data;
 using MillionSteps.Core.Events;
 using MillionSteps.Core.Exercises;
-using Raven.Client;
+using MillionSteps.Web.Exercises;
 
 namespace MillionSteps.Web.Games
 {
   public class GameController : ControllerBase
   {
-    public GameController(IDocumentSession documentSession, UserSession userSession, UserProfileClient userProfileClient, ActivityLogUpdater activityLogUpdater, EventDriver eventDriver, AdventureDao adventureDao) : base(documentSession)
+    public GameController(MillionStepsContext dbContext, UserSession userSession, UserProfileClient userProfileClient, ActivityLogUpdater activityLogUpdater, EventDriver eventDriver, AdventureDao adventureDao) : base(dbContext)
     {
       Claws.NotNull(() => eventDriver);
 
@@ -46,13 +47,13 @@ namespace MillionSteps.Web.Games
       var existingAdventure = this.adventureDao.LookupAdventureByUserId(this.userSession.UserId);
       var currentMomentId = existingAdventure != null ?
                             existingAdventure.CurrentMomentId :
-                            this.adventureDao.CreateAdventure(this.userSession.UserId).CurrentMomentId ;
+                            this.adventureDao.CreateAdventure(this.userSession.UserId).CurrentMoment.Id ;
 
       return this.RedirectToRoute("Moment", new {momentId = currentMomentId});
     }
 
     [HttpGet]
-    public ActionResult Moment(Guid momentId)
+    public ActionResult Moment(int momentId)
     {
       if (this.userSession == null)
         return this.RedirectToRoute("Welcome");
@@ -66,7 +67,7 @@ namespace MillionSteps.Web.Games
       if (adventure == null)
         return this.RedirectToRoute("Game");
 
-      var moment = this.DocumentSession.Load<Moment>(momentId);
+      var moment = this.dbContext.Moments.Find(momentId);
       if (moment == null)
         return this.RedirectToRoute("Game");
 
@@ -88,15 +89,15 @@ namespace MillionSteps.Web.Games
     }
 
     [HttpPost]
-    public ActionResult Choose(Guid momentId, string eventName)
+    public ActionResult Choose(int momentId, string eventName)
     {
       if (this.userSession == null)
         return this.RedirectToRoutePermanent("Welcome");
 
-      var priorMoment = this.DocumentSession.Load<Moment>(momentId);
-      var adventure = this.DocumentSession.Load<Adventure>(priorMoment.AdventureId);
+      var priorMoment = this.dbContext.Moments.Find(momentId);
+      var adventure = priorMoment.Adventure;
 
-      if (adventure == null || adventure.CurrentMomentId != momentId)
+      if (adventure == null || adventure.CurrentMoment.Id != momentId)
         return this.RedirectToRoute("Game");
 
       var @event = this.eventDriver.LookupEvent(eventName);
@@ -105,7 +106,7 @@ namespace MillionSteps.Web.Games
 
       var newMoment = this.adventureDao.BuildNextMoment(adventure, priorMoment, @event);
 
-      return this.RedirectToRoutePermanent("Moment", new {momentId = newMoment.DocumentId});
+      return this.RedirectToRoutePermanent("Moment", new {momentId = newMoment.Id});
     }
   }
 }

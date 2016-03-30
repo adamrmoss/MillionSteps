@@ -56,6 +56,14 @@
       <HintPath>..\packages\Elmah.Mvc.2.1.2\lib\net40\Elmah.Mvc.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Fasterflect, Version=2.1.3.0, Culture=neutral, PublicKeyToken=38d18473284c1ca7, processorArchitecture=MSIL">
       <HintPath>..\packages\fasterflect.2.1.3\lib\net40\Fasterflect.dll</HintPath>
       <Private>True</Private>
@@ -214,12 +222,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Authentication\AuthenticationController.cs" />
-    <Compile Include="Authentication\AuthenticationRequest.cs" />
     <Compile Include="Authentication\UserProfileClient.cs" />
     <Compile Include="Configuration\HttpContextLifecycleConvention.cs" />
     <Compile Include="Configuration\StructureMapControllerFactory.cs" />
     <Compile Include="Configuration\WebRegistry.cs" />
     <Compile Include="ControllerBase.cs" />
+    <Compile Include="Exercises\ActivityLogUpdater.cs" />
     <Compile Include="Games\GameController.cs" />
     <Compile Include="Games\MomentViewModel.cs" />
     <Compile Include="Global.asax.cs">
@@ -270,6 +278,10 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <ProjectReference Include="..\MillionSteps.Core.Data\MillionSteps.Core.Data.csproj">
+      <Project>{89d565dc-d7a1-479a-84e3-92a471b36324}</Project>
+      <Name>MillionSteps.Core.Data</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MillionSteps.Core\MillionSteps.Core.csproj">
       <Project>{88af76d4-ee92-4368-8aee-72c98db4fa8a}</Project>
       <Name>MillionSteps.Core</Name>

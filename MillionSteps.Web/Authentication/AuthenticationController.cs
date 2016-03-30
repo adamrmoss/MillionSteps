@@ -5,14 +5,14 @@ using Fitbit.Models;
 using GuardClaws;
 using MillionSteps.Core.Authentication;
 using MillionSteps.Core.Configuration;
-using Raven.Client;
+using MillionSteps.Core.Data;
 
 namespace MillionSteps.Web.Authentication
 {
   public class AuthenticationController : ControllerBase
   {
-    public AuthenticationController(IDocumentSession documentSession, Settings settings, Authenticator authenticator, AuthenticationDao authenticationDao)
-      : base(documentSession)
+    public AuthenticationController(MillionStepsContext dbContext, Settings settings, Authenticator authenticator, AuthenticationDao authenticationDao)
+      : base(dbContext)
     {
       Claws.NotNull(() => settings);
       Claws.NotNull(() => authenticator);
@@ -27,7 +27,7 @@ namespace MillionSteps.Web.Authentication
     private readonly AuthenticationDao authenticationDao;
 
     [HttpGet]
-    public ActionResult Authenticate(AuthenticationRequest authenticationRequest)
+    public ActionResult Authenticate()
     {
       var completeAuthorizationUrl = new Uri(this.settings.AppUrl, this.Url.RouteUrl("CompleteAuthentication")).ToString();
       var requestToken = this.authenticator.GetRequestToken(completeAuthorizationUrl);
@@ -54,7 +54,7 @@ namespace MillionSteps.Web.Authentication
       userSession.Secret = authCredential.AuthTokenSecret;
       userSession.UserId = authCredential.UserId;
 
-      this.SetUserSessionCookie(userSession.DocumentId);
+      this.SetUserSessionCookie(userSession.Id);
 
       return this.RedirectToRoute("Index");
     }

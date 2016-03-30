@@ -9,7 +9,7 @@ namespace MillionSteps.Web.Games
   {
     public string DisplayName { get; set; }
     public double StrideLength { get; set; }
-    public Guid MomentId { get; set; }
+    public int MomentId { get; set; }
     public bool ReadOnly { get; set; }
     public FlagDictionary Flags { get; set; }
     public List<Event> Choices { get; set; }

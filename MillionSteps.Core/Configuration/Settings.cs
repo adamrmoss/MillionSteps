@@ -14,12 +14,12 @@ namespace MillionSteps.Core.Configuration
     public Uri AccessTokenUrl => new Uri(GetAppSetting("AccessTokenUrl"));
     public Uri AuthorizeUrl => new Uri(GetAppSetting("AuthorizeUrl"));
 
-    protected static string GetConnectionString(string name)
+    private static string GetConnectionString(string name)
     {
       return ConfigurationManager.ConnectionStrings[name].ConnectionString;
     }
 
-    protected static string GetAppSetting(string settingName)
+    private static string GetAppSetting(string settingName)
     {
       return ConfigurationManager.AppSettings[settingName];
     }

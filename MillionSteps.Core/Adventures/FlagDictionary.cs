@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using Raven.Abstractions.Extensions;
 
 namespace MillionSteps.Core.Adventures
 {
@@ -9,7 +8,7 @@ namespace MillionSteps.Core.Adventures
 
     public FlagDictionary(IEnumerable<string> flags)
     {
-      this.flags = flags.ToHashSet();
+      this.flags = new HashSet<string>(flags);
     }
 
     public bool this[string flag] => this.flags.Contains(flag);
