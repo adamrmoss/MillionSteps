@@ -4,6 +4,7 @@ namespace MillionSteps.Core.Adventures
 {
   public class MomentFlag
   {
+    [Key]
     public int Id { get; set; }
 
     [MaxLength(64)]

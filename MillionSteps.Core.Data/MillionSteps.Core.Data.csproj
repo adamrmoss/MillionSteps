@@ -55,6 +55,10 @@
     <Compile Include="AdventureDao.cs" />
     <Compile Include="AuthenticationDao.cs" />
     <Compile Include="Dao.cs" />
+    <Compile Include="Migrations\201604031816375_InitialMigration.cs" />
+    <Compile Include="Migrations\201604031816375_InitialMigration.Designer.cs">
+      <DependentUpon>201604031816375_InitialMigration.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="MillionStepsDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -75,6 +79,11 @@
       <Project>{88af76d4-ee92-4368-8aee-72c98db4fa8a}</Project>
       <Name>MillionSteps.Core</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201604031816375_InitialMigration.resx">
+      <DependentUpon>201604031816375_InitialMigration.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

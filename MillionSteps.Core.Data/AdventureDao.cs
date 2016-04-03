@@ -17,6 +17,7 @@ namespace MillionSteps.Core.Data
       var initialMoment = this.dbContext.Moments.Create();
       adventure.UserId = userId;
       adventure.DateCreated = DateTime.UtcNow;
+      adventure.Moments.Add(initialMoment);
       adventure.CurrentMoment = initialMoment;
 
       initialMoment.Ordinal = 0;
@@ -27,7 +28,9 @@ namespace MillionSteps.Core.Data
 
     public AdventureSummary LookupAdventureByUserId(string userId)
     {
-      var adventure = this.dbContext.Adventures.SingleOrDefault(a => a.UserId == userId);
+      var adventure = this.dbContext.Adventures
+        .OrderByDescending(a => a.DateCreated)
+        .FirstOrDefault(a => a.UserId == userId);
       return adventure?.GetSummary();
     }
 
@@ -45,6 +48,7 @@ namespace MillionSteps.Core.Data
         newMoment.MomentFlags.Add(momentFlag);
       };
 
+      adventure.Moments.Add(newMoment);
       adventure.CurrentMoment = newMoment;
 
       return newMoment;

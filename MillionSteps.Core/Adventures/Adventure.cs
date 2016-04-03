@@ -1,13 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 
 namespace MillionSteps.Core.Adventures
 {
   public class Adventure
   {
+    [Key]
     public int Id { get; set; }
+
+    [MaxLength(16)]
     public string UserId { get; set; }
+
     public DateTime DateCreated { get; set; }
 
     public virtual Moment CurrentMoment { get; set; }
