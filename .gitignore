@@ -122,6 +122,8 @@ DocProject/Help/html
 # Click-Once directory
 publish/
 
+PublishProfiles/
+
 # Publish Web Output
 *.[Pp]ublish.xml
 *.azurePubxml
@@ -138,6 +140,7 @@ publish/
 !**/packages/build/
 # If using the old MSBuild-Integrated Package Restore, uncomment this:
 #!**/packages/repositories.config
+packages
 
 # Windows Azure Build Output
 csx/

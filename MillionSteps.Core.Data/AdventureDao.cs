@@ -9,19 +9,24 @@ namespace MillionSteps.Core.Data
   {
     public AdventureDao(MillionStepsDbContext dbContext)
       : base(dbContext)
-    {}
+    { }
 
     public Adventure CreateAdventure(string userId)
     {
-      var adventure = this.dbContext.Adventures.Create();
-      var initialMoment = this.dbContext.Moments.Create();
-      adventure.UserId = userId;
-      adventure.DateCreated = DateTime.UtcNow;
-      adventure.Moments.Add(initialMoment);
-      adventure.CurrentMoment = initialMoment;
+      var adventure = new Adventure {
+        UserId = userId,
+        DateCreated = DateTime.UtcNow
+      };
+      this.dbContext.Adventures.Add(adventure);
 
-      initialMoment.Ordinal = 0;
-      initialMoment.Adventure = adventure;
+      var initialMoment = new Moment {
+        Ordinal = 0,
+        Adventure = adventure
+      };
+      this.dbContext.Moments.Add(initialMoment);
+
+      //adventure.Moments.Add(initialMoment);
+      //adventure.CurrentMoment = initialMoment;
 
       return adventure;
     }
@@ -37,14 +42,19 @@ namespace MillionSteps.Core.Data
     public Moment BuildNextMoment(Adventure adventure, Moment priorMoment, Event @event)
     {
       var flags = priorMoment.Flags.Append(@event.Name).Concat(@event.FlagsToSet).Except(@event.FlagsToClear).Distinct().ToArray();
-      var newMoment = this.dbContext.Moments.Create();
-      newMoment.Adventure = adventure;
-      newMoment.EventName = @event.Name;
-      newMoment.StepsConsumed = @event.StepsConsumed;
-      newMoment.Ordinal = priorMoment.Ordinal + 1;
+      var newMoment = new Moment {
+        Adventure = adventure,
+        EventName = @event.Name,
+        StepsConsumed = @event.StepsConsumed,
+        Ordinal = priorMoment.Ordinal + 1
+      };
+      this.dbContext.Moments.Add(newMoment);
+
       foreach (var flag in flags) {
-        var momentFlag = this.dbContext.MomentFlags.Create();
-        momentFlag.Flag = flag;
+        var momentFlag = new MomentFlag {
+          Flag = flag
+        };
+        this.dbContext.MomentFlags.Add(momentFlag);
         newMoment.MomentFlags.Add(momentFlag);
       };
 

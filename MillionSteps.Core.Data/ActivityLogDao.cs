@@ -33,10 +33,13 @@ namespace MillionSteps.Core.Data
 
     public void AddActivityLogEntry(string userId, DateTime date, int steps)
     {
-      var activityLogEntry = this.dbContext.ActivityLogEntries.Create();
-      activityLogEntry.UserId = userId;
-      activityLogEntry.Date = date;
-      activityLogEntry.Steps = steps;
+      var activityLogEntry = new ActivityLogEntry
+      {
+        UserId = userId,
+        Date = date,
+        Steps = steps
+      };
+      this.dbContext.ActivityLogEntries.Add(activityLogEntry);
     }
   }
 }

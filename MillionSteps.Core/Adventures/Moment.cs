@@ -18,5 +18,10 @@ namespace MillionSteps.Core.Adventures
     public virtual Adventure Adventure { get; set; }
     public virtual ICollection<MomentFlag> MomentFlags { get; set; }
     public IEnumerable<string> Flags => this.MomentFlags.Select(mf => mf.Flag);
+
+    public Moment()
+    {
+      this.MomentFlags = new List<MomentFlag>();
+    }
   }
 }

@@ -18,6 +18,11 @@ namespace MillionSteps.Core.Adventures
     public virtual Moment CurrentMoment { get; set; }
     public virtual ICollection<Moment> Moments { get; set; }
 
+    public Adventure()
+    {
+      this.Moments = new List<Moment>();
+    }
+
     public AdventureSummary GetSummary()
     {
       return new AdventureSummary {
