@@ -7,7 +7,7 @@ namespace MillionSteps.Core.Data
 {
   public class AdventureDao : Dao
   {
-    public AdventureDao(MillionStepsContext dbContext)
+    public AdventureDao(MillionStepsDbContext dbContext)
       : base(dbContext)
     {}
 

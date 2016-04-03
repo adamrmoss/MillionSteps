@@ -6,7 +6,7 @@ namespace MillionSteps.Core.Data
 {
   public class AuthenticationDao : Dao
   {
-    public AuthenticationDao(MillionStepsContext dbContext)
+    public AuthenticationDao(MillionStepsDbContext dbContext)
       : base(dbContext)
     {}
 

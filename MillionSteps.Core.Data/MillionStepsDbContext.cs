@@ -1,15 +1,14 @@
 ﻿using System.Data.Entity;
 using MillionSteps.Core.Adventures;
 using MillionSteps.Core.Authentication;
-using MillionSteps.Core.Configuration;
 using MillionSteps.Core.Exercises;
 
 namespace MillionSteps.Core.Data
 {
-  public class MillionStepsContext : DbContext
+  public class MillionStepsDbContext : DbContext
   {
-    public MillionStepsContext(Settings settings)
-      : base(settings.ConnectionString)
+    public MillionStepsDbContext()
+      : base("MillionSteps")
     { }
 
     public DbSet<UserSession> UserSessions { get; set; }

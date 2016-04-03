@@ -11,7 +11,7 @@ namespace MillionSteps.Web.Authentication
 {
   public class AuthenticationController : ControllerBase
   {
-    public AuthenticationController(MillionStepsContext dbContext, Settings settings, Authenticator authenticator, AuthenticationDao authenticationDao)
+    public AuthenticationController(MillionStepsDbContext dbContext, Settings settings, Authenticator authenticator, AuthenticationDao authenticationDao)
       : base(dbContext)
     {
       Claws.NotNull(() => settings);

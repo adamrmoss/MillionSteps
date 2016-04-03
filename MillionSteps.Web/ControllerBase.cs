@@ -12,13 +12,13 @@ namespace MillionSteps.Web
   [UnitWorker]
   public abstract class ControllerBase : Controller
   {
-    protected ControllerBase(MillionStepsContext dbContext)
+    protected ControllerBase(MillionStepsDbContext dbContext)
     {
       Claws.NotNull(() => dbContext);
       this.dbContext = dbContext;
     }
 
-    protected readonly MillionStepsContext dbContext;
+    protected readonly MillionStepsDbContext dbContext;
 
     protected void SetUserSessionCookie(Guid userSessionId)
     {

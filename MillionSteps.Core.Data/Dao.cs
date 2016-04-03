@@ -3,11 +3,11 @@
   [UnitWorker]
   public abstract class Dao
   {
-    protected Dao(MillionStepsContext dbContext)
+    protected Dao(MillionStepsDbContext dbContext)
     {
       this.dbContext = dbContext;
     }
 
-    protected readonly MillionStepsContext dbContext;
+    protected readonly MillionStepsDbContext dbContext;
   }
 }

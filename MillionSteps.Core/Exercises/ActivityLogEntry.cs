@@ -4,7 +4,7 @@ namespace MillionSteps.Core.Exercises
 {
   public class ActivityLogEntry
   {
-    public Guid Id { get; set; }
+    public int Id { get; set; }
     public string UserId { get; set; }
     public DateTime Date { get; set; }
     public int Steps { get; set; }

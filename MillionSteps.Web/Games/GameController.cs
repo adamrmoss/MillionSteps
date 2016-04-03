@@ -12,7 +12,7 @@ namespace MillionSteps.Web.Games
 {
   public class GameController : ControllerBase
   {
-    public GameController(MillionStepsContext dbContext, UserSession userSession, UserProfileClient userProfileClient, ActivityLogUpdater activityLogUpdater, EventDriver eventDriver, AdventureDao adventureDao) : base(dbContext)
+    public GameController(MillionStepsDbContext dbContext, UserSession userSession, UserProfileClient userProfileClient, ActivityLogUpdater activityLogUpdater, EventDriver eventDriver, AdventureDao adventureDao) : base(dbContext)
     {
       Claws.NotNull(() => eventDriver);
 

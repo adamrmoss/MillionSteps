@@ -8,5 +8,7 @@ namespace MillionSteps.Core.Adventures
 
     [MaxLength(64)]
     public string Flag { get; set; }
+
+    public virtual Moment Moment { get; set; }
   }
 }

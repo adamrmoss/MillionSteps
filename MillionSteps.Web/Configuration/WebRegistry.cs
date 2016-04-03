@@ -25,8 +25,7 @@ namespace MillionSteps.Web.Configuration
           .Use(context => BuildUserSession(context))
           .LifecycleIs<HttpContextLifecycle>();
 
-      this.For<MillionStepsContext>()
-          .Use(context => new MillionStepsContext(context.GetInstance<Settings>()))
+      this.For<MillionStepsDbContext>()
           .LifecycleIs<HttpContextLifecycle>();
 
       this.Scan(scanner => {

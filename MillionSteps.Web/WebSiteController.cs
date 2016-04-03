@@ -6,7 +6,7 @@ namespace MillionSteps.Web
 {
   public class WebSiteController : ControllerBase
   {
-    public WebSiteController(MillionStepsContext dbContext, UserProfileClient userProfileClient)
+    public WebSiteController(MillionStepsDbContext dbContext, UserProfileClient userProfileClient)
       : base(dbContext)
     {
       this.userProfileClient = userProfileClient;
