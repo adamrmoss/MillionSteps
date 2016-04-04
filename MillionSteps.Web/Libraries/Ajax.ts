@@ -9,25 +9,27 @@ namespace Ajax {
 
       startTime = Date.now();
 
-      let form = $(this);
+      let form = $(event.target);
       let action = form.attr("action");
       let method = form.attr("method");
       let data = form.serialize();
 
-      $.ajax({
-        url: action,
-        type: method,
-        data: data,
-        dataType: "html",
-        success: (response) => respondToAjax(success, response),
-        error: error
-      });
+      //$.ajax({
+      //  url: action,
+      //  type: method,
+      //  data: data,
+      //  dataType: "html",
+      //  success: (response) => {
+      //    //Ajax.respondToAjax(success, response);
+      //  },
+      //  error: error
+      //});
 
       meanwhile(form);
     });
   }
 
-  function respondToAjax(success, response) {
+  export function respondToAjax(success, response) {
     let newUrl = Xhr.result.responseURL;
     history.replaceState({}, "", newUrl);
     success(response);
