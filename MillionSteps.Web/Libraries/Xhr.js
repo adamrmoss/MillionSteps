@@ -9,4 +9,3 @@ var Xhr;
     Xhr.xhr = xhr;
 })(Xhr || (Xhr = {}));
 $.ajaxSettings.xhr = Xhr.xhr;
-//# sourceMappingURL=Xhr.js.map
