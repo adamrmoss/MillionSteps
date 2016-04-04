@@ -25,8 +25,11 @@ namespace MillionSteps.Core.Data
       };
       this.dbContext.Moments.Add(initialMoment);
 
-      //adventure.Moments.Add(initialMoment);
-      //adventure.CurrentMoment = initialMoment;
+      adventure.Moments.Add(initialMoment);
+
+      this.dbContext.SaveChanges();
+
+      adventure.CurrentMomentId = initialMoment.Id;
 
       return adventure;
     }
@@ -59,7 +62,10 @@ namespace MillionSteps.Core.Data
       };
 
       adventure.Moments.Add(newMoment);
-      adventure.CurrentMoment = newMoment;
+
+      this.dbContext.SaveChanges();
+
+      adventure.CurrentMomentId = newMoment.Id;
 
       return newMoment;
     }

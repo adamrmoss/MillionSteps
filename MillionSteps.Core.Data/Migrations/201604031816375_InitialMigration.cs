@@ -7,7 +7,7 @@ namespace MillionSteps.Core.Data.Migrations
   {
     public override void Up()
     {
-      CreateTable(
+      this.CreateTable(
           "dbo.UserSessions",
           c => new {
             Id = c.Guid(nullable: false),
@@ -24,7 +24,7 @@ namespace MillionSteps.Core.Data.Migrations
           .Index(t => t.TempToken, unique: true)
           .Index(t => t.UserId);
 
-      CreateTable(
+      this.CreateTable(
           "dbo.ActivityLogEntries",
           c => new {
             Id = c.Int(nullable: false, identity: true),
@@ -35,37 +35,36 @@ namespace MillionSteps.Core.Data.Migrations
           .PrimaryKey(t => t.Id)
           .Index(t => t.UserId);
 
-      CreateTable(
+      this.CreateTable(
           "dbo.Adventures",
           c => new {
             Id = c.Int(nullable: false, identity: true),
             UserId = c.String(maxLength: 16),
             DateCreated = c.DateTime(nullable: false),
-            CurrentMoment_Id = c.Int(),
+            CurrentMomentId = c.Int(nullable: false),
           })
           .PrimaryKey(t => t.Id)
-          .ForeignKey("dbo.Moments", t => t.CurrentMoment_Id)
           .Index(t => t.UserId);
 
-      CreateTable(
+      this.CreateTable(
           "dbo.Moments",
           c => new {
             Id = c.Int(nullable: false, identity: true),
             EventName = c.String(maxLength: 128),
             StepsConsumed = c.Int(nullable: false),
             Ordinal = c.Int(nullable: false),
-            Adventure_Id = c.Int(),
+            Adventure_Id = c.Int(nullable: false),
           })
           .PrimaryKey(t => t.Id)
           .ForeignKey("dbo.Adventures", t => t.Adventure_Id)
           .Index(t => t.Adventure_Id);
 
-      CreateTable(
+      this.CreateTable(
           "dbo.MomentFlags",
           c => new {
             Id = c.Int(nullable: false, identity: true),
             Flag = c.String(maxLength: 64),
-            Moment_Id = c.Int(),
+            Moment_Id = c.Int(nullable: false),
           })
           .PrimaryKey(t => t.Id)
           .ForeignKey("dbo.Moments", t => t.Moment_Id)
@@ -74,25 +73,23 @@ namespace MillionSteps.Core.Data.Migrations
 
     public override void Down()
     {
-      DropForeignKey("dbo.MomentFlags", "Moment_Id", "dbo.Moments");
-      DropIndex("dbo.MomentFlags", new[] { "Moment_Id" });
-      DropTable("dbo.MomentFlags");
+      this.DropForeignKey("dbo.MomentFlags", "Moment_Id", "dbo.Moments");
+      this.DropIndex("dbo.MomentFlags", new[] { "Moment_Id" });
+      this.DropTable("dbo.MomentFlags");
 
-      DropForeignKey("dbo.Moments", "Adventure_Id", "dbo.Adventures");
-      DropIndex("dbo.Moments", new[] { "Adventure_Id" });
+      this.DropForeignKey("dbo.Moments", "Adventure_Id", "dbo.Adventures");
+      this.DropIndex("dbo.Moments", new[] { "Adventure_Id" });
+      this.DropTable("dbo.Moments");
 
-      DropForeignKey("dbo.Adventures", "CurrentMoment_Id", "dbo.Moments");
-      DropTable("dbo.Moments");
+      this.DropIndex("dbo.Adventures", new[] { "UserId" });
+      this.DropTable("dbo.Adventures");
 
-      DropIndex("dbo.Adventures", new[] { "UserId" });
-      DropTable("dbo.Adventures");
+      this.DropIndex("dbo.ActivityLogEntries", new[] { "UserId" });
+      this.DropTable("dbo.ActivityLogEntries");
 
-      DropIndex("dbo.ActivityLogEntries", new[] { "UserId" });
-      DropTable("dbo.ActivityLogEntries");
-
-      DropIndex("dbo.UserSessions", new[] { "UserId" });
-      DropIndex("dbo.UserSessions", new[] { "TempToken" });
-      DropTable("dbo.UserSessions");
+      this.DropIndex("dbo.UserSessions", new[] { "UserId" });
+      this.DropIndex("dbo.UserSessions", new[] { "TempToken" });
+      this.DropTable("dbo.UserSessions");
     }
   }
 }

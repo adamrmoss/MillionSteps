@@ -32,7 +32,7 @@ namespace MillionSteps.Web.Authentication
       var completeAuthorizationUrl = new Uri(this.settings.AppUrl, this.Url.RouteUrl("CompleteAuthentication")).ToString();
       var requestToken = this.authenticator.GetRequestToken(completeAuthorizationUrl);
 
-      this.authenticationDao.CreateSession(requestToken.Token, requestToken.Secret);
+      var userSession = this.authenticationDao.CreateSession(requestToken.Token, requestToken.Secret);
 
       var redirectUrl = this.authenticator.GenerateAuthUrlFromRequestToken(requestToken, false);
       return this.Redirect(redirectUrl);

@@ -47,7 +47,7 @@ namespace MillionSteps.Web.Games
       var existingAdventure = this.adventureDao.LookupAdventureByUserId(this.userSession.UserId);
       var currentMomentId = existingAdventure != null ?
                             existingAdventure.CurrentMomentId :
-                            this.adventureDao.CreateAdventure(this.userSession.UserId).CurrentMoment.Id ;
+                            this.adventureDao.CreateAdventure(this.userSession.UserId).CurrentMomentId ;
 
       return this.RedirectToRoute("Moment", new {momentId = currentMomentId});
     }
@@ -97,7 +97,7 @@ namespace MillionSteps.Web.Games
       var priorMoment = this.dbContext.Moments.Find(momentId);
       var adventure = priorMoment.Adventure;
 
-      if (adventure == null || adventure.CurrentMoment.Id != momentId)
+      if (adventure == null || adventure.CurrentMomentId != momentId)
         return this.RedirectToRoute("Game");
 
       var @event = this.eventDriver.LookupEvent(eventName);

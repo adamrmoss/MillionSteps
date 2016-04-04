@@ -10,15 +10,17 @@ namespace MillionSteps.Core.Data
       : base(dbContext)
     {}
 
-    public void CreateSession(string tempToken, string tempSecret)
+    public UserSession CreateSession(string tempToken, string tempSecret)
     {
       var userSession = new UserSession
       {
+        Id = Guid.NewGuid(),
         DateCreated = DateTime.UtcNow,
         TempToken = tempToken,
         TempSecret = tempSecret
       };
       this.dbContext.UserSessions.Add(userSession);
+      return userSession;
     }
 
     public UserSession LoadUserSession(Guid userSessionId)

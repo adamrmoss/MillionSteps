@@ -14,8 +14,8 @@ namespace MillionSteps.Core.Adventures
     public string UserId { get; set; }
 
     public DateTime DateCreated { get; set; }
+    public int CurrentMomentId { get; set; }
 
-    public virtual Moment CurrentMoment { get; set; }
     public virtual ICollection<Moment> Moments { get; set; }
 
     public Adventure()
@@ -29,7 +29,7 @@ namespace MillionSteps.Core.Adventures
         AdventureId = this.Id,
         UserId = this.UserId,
         DateCreated = this.DateCreated,
-        CurrentMomentId = this.CurrentMoment.Id,
+        CurrentMomentId = this.CurrentMomentId,
         TotalStepsConsumed = this.Moments.Sum(moment => moment.StepsConsumed),
       };
     }
