@@ -7,6 +7,10 @@ namespace Xhr {
   export function xhr(): void {
     result = $xhr();
   }
+
+  export function initialize(): void {
+    $.ajaxSettings.xhr = xhr;
+  }
 }
 
-$.ajaxSettings.xhr = Xhr.xhr;
+$(Xhr.initialize);

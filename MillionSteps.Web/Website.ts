@@ -11,9 +11,6 @@
   }
 
   function handleChoiceResponse(response): void {
-    let newUrl = Xhr.result.responseURL;
-    history.replaceState({}, "", newUrl);
-
     let timeWaited = Date.now() - Ajax.startTime;
     let timeToWait = Math.max(0, longFadeTime - timeWaited);
 

@@ -16,11 +16,16 @@ var Ajax;
                 type: method,
                 data: data,
                 dataType: "html",
-                success: success,
+                success: function (response) { return respondToAjax(success, response); },
                 error: error
             });
             meanwhile(form);
         });
     }
     Ajax.setupLiveForm = setupLiveForm;
+    function respondToAjax(success, response) {
+        var newUrl = Xhr.result.responseURL;
+        history.replaceState({}, "", newUrl);
+        success(response);
+    }
 })(Ajax || (Ajax = {}));

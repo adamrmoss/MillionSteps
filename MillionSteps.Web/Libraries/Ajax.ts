@@ -19,11 +19,17 @@ namespace Ajax {
         type: method,
         data: data,
         dataType: "html",
-        success: success,
+        success: (response) => respondToAjax(success, response),
         error: error
       });
 
       meanwhile(form);
     });
+  }
+
+  function respondToAjax(success, response) {
+    let newUrl = Xhr.result.responseURL;
+    history.replaceState({}, "", newUrl);
+    success(response);
   }
 }

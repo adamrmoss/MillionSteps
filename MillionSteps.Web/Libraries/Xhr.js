@@ -7,5 +7,9 @@ var Xhr;
         Xhr.result = $xhr();
     }
     Xhr.xhr = xhr;
+    function initialize() {
+        $.ajaxSettings.xhr = xhr;
+    }
+    Xhr.initialize = initialize;
 })(Xhr || (Xhr = {}));
-$.ajaxSettings.xhr = Xhr.xhr;
+$(Xhr.initialize);
