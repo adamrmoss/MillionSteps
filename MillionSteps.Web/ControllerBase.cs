@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using GuardClaws;
@@ -44,11 +45,21 @@ namespace MillionSteps.Web
       this.Response.Cookies.Add(httpCookie);
     }
 
-    protected ActionResult BuildJsonResult(object data)
+    protected JsonResult BuildJsonResult(object data)
     {
       return new JsonResult {
         Data = data,
       };
+    }
+
+    protected HttpStatusCodeResult ForbiddenResult()
+    {
+      return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
+    }
+
+    protected HttpStatusCodeResult PreconditionFailedResult()
+    {
+      return new HttpStatusCodeResult(HttpStatusCode.PreconditionFailed);
     }
 
     protected override void OnActionExecuted(ActionExecutedContext filterContext)

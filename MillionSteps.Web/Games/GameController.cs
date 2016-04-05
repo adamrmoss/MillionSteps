@@ -5,7 +5,6 @@ using MillionSteps.Core.Adventures;
 using MillionSteps.Core.Authentication;
 using MillionSteps.Core.Data;
 using MillionSteps.Core.Events;
-using MillionSteps.Core.Exercises;
 using MillionSteps.Web.Exercises;
 
 namespace MillionSteps.Web.Games
@@ -45,9 +44,7 @@ namespace MillionSteps.Web.Games
       this.userSession.OffsetFromUtcMillis = userProfile.OffsetFromUTCMillis;
 
       var existingAdventure = this.adventureDao.LookupAdventureByUserId(this.userSession.UserId);
-      var currentMomentId = existingAdventure != null ?
-                            existingAdventure.CurrentMomentId :
-                            this.adventureDao.CreateAdventure(this.userSession.UserId).CurrentMomentId ;
+      var currentMomentId = existingAdventure?.CurrentMomentId ?? this.adventureDao.CreateAdventure(this.userSession.UserId).CurrentMomentId ;
 
       return this.RedirectToRoute("Moment", new {momentId = currentMomentId});
     }
@@ -86,6 +83,42 @@ namespace MillionSteps.Web.Games
       };
 
       return this.View("~/Games/Views/Moment.cshtml", viewModel);
+    }
+
+    [HttpGet]
+    public ActionResult Choices(int momentId)
+    {
+      if (this.userSession == null)
+        return this.ForbiddenResult();
+
+      Claws.NotNull(() => this.userProfileClient);
+      var userProfile = this.userProfileClient.GetUserProfile();
+      if (userProfile == null)
+        return this.ForbiddenResult();
+
+      var adventure = this.adventureDao.LookupAdventureByUserId(this.userSession.UserId);
+      if (adventure == null)
+        return this.PreconditionFailedResult();
+
+      var moment = this.dbContext.Moments.Find(momentId);
+      if (moment == null)
+        return this.PreconditionFailedResult();
+
+      var readOnly = adventure.CurrentMomentId != momentId;
+
+      var flagDictionary = new FlagDictionary(moment.Flags);
+      var events = this.eventDriver.GetValidEvents(flagDictionary);
+
+      var viewModel = new MomentViewModel {
+        DisplayName = userProfile.DisplayName,
+        StrideLength = userProfile.StrideLengthWalking,
+        MomentId = momentId,
+        ReadOnly = readOnly,
+        Flags = flagDictionary,
+        Choices = events,
+      };
+
+      return this.View("~/Games/Views/Choices.cshtml", viewModel);
     }
 
     [HttpPost]

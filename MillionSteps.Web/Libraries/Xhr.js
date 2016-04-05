@@ -13,3 +13,4 @@ var Xhr;
     Xhr.initialize = initialize;
 })(Xhr || (Xhr = {}));
 $(Xhr.initialize);
+//# sourceMappingURL=Xhr.js.map

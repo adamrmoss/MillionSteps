@@ -1,0 +1,16 @@
+﻿@model MillionSteps.Web.Games.MomentViewModel
+<section class="choices">
+  @foreach (var choice in Model.Choices) {
+    <form action="@Url.RouteUrl("Choose")" method="POST">
+      @Html.Hidden("momentId", Model.MomentId)
+      @Html.Hidden("eventName", choice.Name)
+      @{
+        var disabled = Model.ReadOnly && @Model.ChosenChoice == choice.Name;
+        var templateName = "~/Events/Views/" + choice.Name + ".cshtml";
+      }
+      <div class="choice @(choice.SpokenByNarrator ? "narrator" : "audience")">
+        <button type="submit" disabled="@disabled">@Html.Partial(templateName, Model)</button>
+      </div>
+    </form>
+  }
+</section>

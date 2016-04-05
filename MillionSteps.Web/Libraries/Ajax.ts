@@ -4,7 +4,7 @@ namespace Ajax {
   export let startTime = null;
 
   export function setupLiveForm(formSelector, success, error, meanwhile): void {
-    $(document).on("submit", formSelector, {}, (event) => {
+    $(document).on("click", formSelector, {}, (event) => {
       event.preventDefault();
 
       startTime = Date.now();
@@ -14,18 +14,18 @@ namespace Ajax {
       let method = form.attr("method");
       let data = form.serialize();
 
-      //$.ajax({
-      //  url: action,
-      //  type: method,
-      //  data: data,
-      //  dataType: "html",
-      //  success: (response) => {
-      //    //Ajax.respondToAjax(success, response);
-      //  },
-      //  error: error
-      //});
+      $.ajax({
+        url: action,
+        type: method,
+        data: data,
+        dataType: "html",
+        success: (response) => {
+          Ajax.respondToAjax(success, response);
+        },
+        error: error
+      });
 
-      meanwhile(form);
+      //meanwhile(form);
     });
   }
 
