@@ -16,11 +16,15 @@ namespace MillionSteps.Core.Adventures
     public DateTime DateCreated { get; set; }
     public int CurrentMomentId { get; set; }
 
-    public virtual ICollection<Moment> Moments { get; set; }
+    private ICollection<Moment> momentsBacker; 
+    public virtual ICollection<Moment> Moments {
+      get { return this.momentsBacker; }
+      set { this.momentsBacker = value; }
+    }
 
     public Adventure()
     {
-      this.Moments = new List<Moment>();
+      this.momentsBacker = new List<Moment>();
     }
 
     public AdventureSummary GetSummary()
