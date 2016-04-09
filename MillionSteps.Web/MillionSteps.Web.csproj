@@ -185,9 +185,20 @@
     <Content Include="Authentication\fitbit_logo_dark_1000px.png" />
     <Content Include="Authentication\fitbit_logo_light_1000px.png" />
     <Content Include="Global.asax" />
+    <Content Include="layout.css">
+      <DependentUpon>layout.less</DependentUpon>
+    </Content>
+    <Content Include="layout.min.css">
+      <DependentUpon>layout.css</DependentUpon>
+    </Content>
     <Content Include="Libraries\jquery.js" />
+    <Content Include="theme.css">
+      <DependentUpon>theme.less</DependentUpon>
+    </Content>
+    <Content Include="theme.min.css">
+      <DependentUpon>theme.css</DependentUpon>
+    </Content>
     <Content Include="Web.config" />
-    <Content Include="website.css" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Authentication\AuthenticationController.cs" />
@@ -230,6 +241,11 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Games\Views\Choices.cshtml" />
+    <Content Include="layout.less" />
+    <None Include="compilerconfig.json" />
+    <None Include="compilerconfig.json.defaults">
+      <DependentUpon>compilerconfig.json</DependentUpon>
+    </None>
     <None Include="Properties\PublishProfiles\a-million-steps.org - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\Manual Deploy.pubxml" />
     <None Include="Web.Debug.config">
@@ -238,6 +254,7 @@
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
+    <Content Include="theme.less" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MillionSteps.Core.Data\MillionSteps.Core.Data.csproj">

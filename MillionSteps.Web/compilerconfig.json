@@ -1,0 +1,10 @@
+﻿[
+  {
+    "outputFile": "layout.css",
+    "inputFile": "layout.less"
+  },
+  {
+    "outputFile": "theme.css",
+    "inputFile": "theme.less"
+  }
+]
