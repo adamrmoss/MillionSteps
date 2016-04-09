@@ -3,6 +3,13 @@ using MillionSteps.Core.Adventures;
 
 namespace MillionSteps.Core.Events
 {
+  public enum Speaker
+  {
+    Meta,
+    Narrator,
+    Audience,
+  }
+
   public abstract class Event
   {
     public string Name => this.GetType().Name;
@@ -12,7 +19,7 @@ namespace MillionSteps.Core.Events
 
     public virtual bool Automatic => false;
     public virtual bool Repeatable => false;
-    public virtual bool SpokenByNarrator => true;
+    public virtual Speaker SpokenBy => Speaker.Meta;
     public virtual EventPriority Priority => EventPriority.Medium;
     public virtual int StepsConsumed => 0;
 

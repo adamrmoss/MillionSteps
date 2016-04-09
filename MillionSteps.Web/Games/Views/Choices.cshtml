@@ -1,4 +1,5 @@
 ﻿@using MillionSteps.Core
+@using MillionSteps.Core.Events
 @model MillionSteps.Web.Games.MomentViewModel
 <section class="choices">
   @foreach (var choice in Model.Choices) {
@@ -9,9 +10,25 @@
         var disabled = Model.ReadOnly && @Model.ChosenChoice == choice.Name;
         var templateName = "~/Events/Views/{0}/{1}.cshtml".FormatWith(choice.Category, choice.Name);
       }
-      <div class="choice @(choice.SpokenByNarrator ? "narrator" : "audience")">
+      <div class="choice @GetClass(choice.SpokenBy)">
         <button type="submit" disabled="@disabled">@Html.Partial(templateName, Model)</button>
       </div>
     </form>
   }
 </section>
+
+@functions {
+  public string GetClass(Speaker speaker)
+  {
+    switch (speaker) {
+      case Speaker.Meta:
+        return "";
+      case Speaker.Narrator:
+        return "narrator";
+      case Speaker.Audience:
+        return "audience";
+      default:
+        return null;
+    }
+  }
+}

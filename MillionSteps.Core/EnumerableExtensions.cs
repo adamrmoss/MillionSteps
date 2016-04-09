@@ -11,5 +11,10 @@ namespace MillionSteps.Core
 
       yield return element;
     }
+
+    public static HashSet<TElement> ToHashSet<TElement>(this IEnumerable<TElement> sequence)
+    {
+      return new HashSet<TElement>(sequence);
+    }
   }
 }
