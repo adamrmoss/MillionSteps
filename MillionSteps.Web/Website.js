@@ -21,7 +21,7 @@ var Website;
         newChoices.hide();
         newChoices.fadeIn(Website.quickFadeTime);
     }
-    function handleAjaxError() {
+    function handleAjaxError(error) {
         window.location.replace("/");
     }
     function fadeOutOldChoices(form) {

@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using GuardClaws;
 using MillionSteps.Core;
 using MillionSteps.Core.Authentication;
+using MillionSteps.Core.Configuration;
 using MillionSteps.Core.Data;
 
 namespace MillionSteps.Web
@@ -13,12 +14,16 @@ namespace MillionSteps.Web
   [UnitWorker]
   public abstract class ControllerBase : Controller
   {
-    protected ControllerBase(MillionStepsDbContext dbContext)
+    protected ControllerBase(Settings settings, MillionStepsDbContext dbContext)
     {
+      Claws.NotNull(() => settings);
       Claws.NotNull(() => dbContext);
+
+      this.settings = settings;
       this.dbContext = dbContext;
     }
 
+    protected readonly Settings settings;
     protected readonly MillionStepsDbContext dbContext;
 
     protected void SetUserSessionCookie(Guid userSessionId)

@@ -1,13 +1,14 @@
 ﻿using System.Web.Mvc;
 using MillionSteps.Core.Authentication;
+using MillionSteps.Core.Configuration;
 using MillionSteps.Core.Data;
 
 namespace MillionSteps.Web
 {
   public class WebSiteController : ControllerBase
   {
-    public WebSiteController(MillionStepsDbContext dbContext, UserProfileClient userProfileClient)
-      : base(dbContext)
+    public WebSiteController(Settings settings, MillionStepsDbContext dbContext, UserProfileClient userProfileClient)
+      : base(settings, dbContext)
     {
       this.userProfileClient = userProfileClient;
     }

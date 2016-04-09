@@ -3,6 +3,7 @@ using System.Web.Mvc;
 using GuardClaws;
 using MillionSteps.Core.Adventures;
 using MillionSteps.Core.Authentication;
+using MillionSteps.Core.Configuration;
 using MillionSteps.Core.Data;
 using MillionSteps.Core.Events;
 using MillionSteps.Web.Exercises;
@@ -11,7 +12,7 @@ namespace MillionSteps.Web.Games
 {
   public class GameController : ControllerBase
   {
-    public GameController(MillionStepsDbContext dbContext, UserSession userSession, UserProfileClient userProfileClient, ActivityLogUpdater activityLogUpdater, EventDriver eventDriver, AdventureDao adventureDao) : base(dbContext)
+    public GameController(Settings settings, MillionStepsDbContext dbContext, UserSession userSession, UserProfileClient userProfileClient, ActivityLogUpdater activityLogUpdater, EventDriver eventDriver, AdventureDao adventureDao) : base(settings, dbContext)
     {
       Claws.NotNull(() => eventDriver);
 

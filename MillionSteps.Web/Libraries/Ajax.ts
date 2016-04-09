@@ -4,12 +4,12 @@ namespace Ajax {
   export let startTime = null;
 
   export function setupLiveForm(formSelector, success, error, meanwhile): void {
-    $(document).on("click", formSelector, {}, (event) => {
+    $(document).on("submit", formSelector, {}, (event) => {
       event.preventDefault();
 
       startTime = Date.now();
 
-      let form = $(event.target);
+      let form = $(event.target).closest("form");
       let action = form.attr("action");
       let method = form.attr("method");
       let data = form.serialize();
@@ -25,7 +25,7 @@ namespace Ajax {
         error: error
       });
 
-      //meanwhile(form);
+      meanwhile(form);
     });
   }
 

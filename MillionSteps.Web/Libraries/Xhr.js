@@ -5,6 +5,7 @@ var Xhr;
     Xhr.result = null;
     function xhr() {
         Xhr.result = $xhr();
+        return Xhr.result;
     }
     Xhr.xhr = xhr;
     function initialize() {
@@ -12,5 +13,5 @@ var Xhr;
     }
     Xhr.initialize = initialize;
 })(Xhr || (Xhr = {}));
-$(Xhr.initialize);
+$(function () { return Xhr.initialize(); });
 //# sourceMappingURL=Xhr.js.map

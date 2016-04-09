@@ -11,18 +11,15 @@ namespace MillionSteps.Web.Authentication
 {
   public class AuthenticationController : ControllerBase
   {
-    public AuthenticationController(MillionStepsDbContext dbContext, Settings settings, Authenticator authenticator, AuthenticationDao authenticationDao)
-      : base(dbContext)
+    public AuthenticationController(Settings settings, MillionStepsDbContext dbContext, Authenticator authenticator, AuthenticationDao authenticationDao)
+      : base(settings, dbContext)
     {
-      Claws.NotNull(() => settings);
       Claws.NotNull(() => authenticator);
 
-      this.settings = settings;
       this.authenticator = authenticator;
       this.authenticationDao = authenticationDao;
     }
 
-    private readonly Settings settings;
     private readonly Authenticator authenticator;
     private readonly AuthenticationDao authenticationDao;
 

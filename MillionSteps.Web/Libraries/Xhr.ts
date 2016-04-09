@@ -6,6 +6,7 @@ namespace Xhr {
 
   export function xhr(): void {
     result = $xhr();
+    return result;
   }
 
   export function initialize(): void {
@@ -13,4 +14,4 @@ namespace Xhr {
   }
 }
 
-$(Xhr.initialize);
+$(() => Xhr.initialize());

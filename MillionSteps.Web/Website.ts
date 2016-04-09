@@ -25,7 +25,7 @@
     newChoices.fadeIn(quickFadeTime);
   }
 
-  function handleAjaxError(): void {
+  function handleAjaxError(error): void {
     window.location.replace("/");
   }
 

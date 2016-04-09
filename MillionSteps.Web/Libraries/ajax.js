@@ -3,10 +3,10 @@ var Ajax;
 (function (Ajax) {
     Ajax.startTime = null;
     function setupLiveForm(formSelector, success, error, meanwhile) {
-        $(document).on("click", formSelector, {}, function (event) {
+        $(document).on("submit", formSelector, {}, function (event) {
             event.preventDefault();
             Ajax.startTime = Date.now();
-            var form = $(event.target);
+            var form = $(event.target).closest("form");
             var action = form.attr("action");
             var method = form.attr("method");
             var data = form.serialize();
@@ -20,7 +20,7 @@ var Ajax;
                 },
                 error: error
             });
-            //meanwhile(form);
+            meanwhile(form);
         });
     }
     Ajax.setupLiveForm = setupLiveForm;
