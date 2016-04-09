@@ -92,7 +92,9 @@ div.choice button {
   cursor: pointer;
 }
 
-div.choice button:after {
+div.narrator.choice button:after,
+div.audience.choice button:after
+{
   content: '';
   position: absolute;
   bottom: -36px;
