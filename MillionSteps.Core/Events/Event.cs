@@ -6,6 +6,7 @@ namespace MillionSteps.Core.Events
   public abstract class Event
   {
     public string Name => this.GetType().Name;
+    public abstract string Category { get; }
 
     public abstract bool CanExecute(FlagDictionary flagDictionary);
 

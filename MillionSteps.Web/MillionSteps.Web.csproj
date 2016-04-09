@@ -216,14 +216,14 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="packages.config" />
-    <Content Include="Events\Views\StoryStarted.cshtml" />
-    <Content Include="Events\Views\FemalePlayerChosen.cshtml" />
-    <Content Include="Events\Views\MalePlayerChosen.cshtml" />
-    <Content Include="Events\Views\YeahStory.cshtml" />
-    <Content Include="Events\Views\AllCapsStory.cshtml" />
-    <Content Include="Events\Views\AgreedToTellStory.cshtml" />
-    <Content Include="Events\Views\Origin.cshtml" />
-    <Content Include="Events\Views\OriginConfirmation.cshtml" />
+    <Content Include="Events\Views\Prelude\StoryStarted.cshtml" />
+    <Content Include="Events\Views\Prelude\FemalePlayerChosen.cshtml" />
+    <Content Include="Events\Views\Prelude\MalePlayerChosen.cshtml" />
+    <Content Include="Events\Views\Prelude\YeahStory.cshtml" />
+    <Content Include="Events\Views\Prelude\AllCapsStory.cshtml" />
+    <Content Include="Events\Views\Prelude\AgreedToTellStory.cshtml" />
+    <Content Include="Events\Views\Overview\Origin.cshtml" />
+    <Content Include="Events\Views\Overview\OriginConfirmation.cshtml" />
     <Content Include="Events\Views\web.config" />
     <Content Include="Configuration\Connections.config">
       <SubType>Designer</SubType>
