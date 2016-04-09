@@ -58,15 +58,30 @@ section.fitbit.logo {
   }
 }
 
-
-section.game {
-  padding-top: 30px;
-
+section.choices {
   div.choice {
     padding-bottom: 8px;
 
     &:last-child {
       padding-bottom: 0;
+    }
+
+    &.narrator button:after, &.audience button:after {
+      content: '';
+      position: absolute;
+      bottom: -36px;
+      display: block;
+      width: 0;
+    }
+
+    &.narrator button:after {
+      left: 36px;
+      border-width: 36px 0 0 36px;
+    }
+
+    &.audience button:after {
+      right: 36px;
+      border-width: 36px 36px 0 0;
     }
 
     button {
@@ -82,34 +97,13 @@ section.game {
   }
 }
 
-div.narrator.choice button:after,
-div.audience.choice button:after
-{
-  content: '';
-  position: absolute;
-  bottom: -36px;
-  display: block;
-  width: 0;
-}
-
-div.narrator.choice button:after {
-  left: 36px;
-  border-width: 36px 0 0 36px;
-}
-
-div.audience.choice button:after {
-  right: 36px;
-  border-width: 36px 36px 0 0;
-}
-
 footer {
   padding-top: 30px;
   font-size: 12px;
-}
 
-footer p {
-  font-size: 12px;
-  padding-top: 4px;
-  padding-bottom: 4px;
+  p {
+    font-size: 12px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+  }
 }
-

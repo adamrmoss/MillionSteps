@@ -49,16 +49,29 @@ section.fitbit.logo {
 section.fitbit.logo img {
   width: 250px;
 }
-section.game {
-  padding-top: 30px;
-}
-section.game div.choice {
+section.choices div.choice {
   padding-bottom: 8px;
 }
-section.game div.choice:last-child {
+section.choices div.choice:last-child {
   padding-bottom: 0;
 }
-section.game div.choice button {
+section.choices div.choice.narrator button:after,
+section.choices div.choice.audience button:after {
+  content: '';
+  position: absolute;
+  bottom: -36px;
+  display: block;
+  width: 0;
+}
+section.choices div.choice.narrator button:after {
+  left: 36px;
+  border-width: 36px 0 0 36px;
+}
+section.choices div.choice.audience button:after {
+  right: 36px;
+  border-width: 36px 36px 0 0;
+}
+section.choices div.choice button {
   position: relative;
   text-align: left;
   font-size: 32px;
@@ -67,22 +80,6 @@ section.game div.choice button {
   margin: 1em 0 1.5em;
   -ms-border-radius: 6px;
   border-radius: 6px;
-}
-div.narrator.choice button:after,
-div.audience.choice button:after {
-  content: '';
-  position: absolute;
-  bottom: -36px;
-  display: block;
-  width: 0;
-}
-div.narrator.choice button:after {
-  left: 36px;
-  border-width: 36px 0 0 36px;
-}
-div.audience.choice button:after {
-  right: 36px;
-  border-width: 36px 36px 0 0;
 }
 footer {
   padding-top: 30px;

@@ -26,8 +26,8 @@ div.choice button {
   border-color: #103810;
   cursor: pointer;
 }
-div.narrator.choice button:after,
-div.audience.choice button:after {
+div.choice.narrator button:after,
+div.choice.audience button:after {
   border-style: solid;
   border-color: #103810 transparent;
 }
