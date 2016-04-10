@@ -72,6 +72,7 @@ section.choices div.choice.narrator {
 section.choices div.choice.narrator button:after {
   left: 36px;
   border-width: 36px 0 0 36px;
+  box-shadow: 2px 0 0 black;
 }
 section.choices div.choice.audience {
   text-align: right;
@@ -89,6 +90,7 @@ section.choices div.choice button {
   margin: 1em 0 1.5em;
   -ms-border-radius: 6px;
   border-radius: 6px;
+  max-width: 700px;
 }
 footer {
   padding-top: 30px;
