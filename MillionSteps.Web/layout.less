@@ -66,22 +66,36 @@ section.choices {
       padding-bottom: 0;
     }
 
-    &.narrator button:after, &.audience button:after {
-      content: '';
-      position: absolute;
-      bottom: -36px;
-      display: block;
-      width: 0;
+    &.narrator, &.audience {
+      button:after {
+        content: '';
+        position: absolute;
+        bottom: -36px;
+        display: block;
+        width: 0;
+      }
     }
 
-    &.narrator button:after {
-      left: 36px;
-      border-width: 36px 0 0 36px;
+    &.meta {
+      text-align: center;
     }
 
-    &.audience button:after {
-      right: 36px;
-      border-width: 36px 36px 0 0;
+    &.narrator {
+      text-align: left;
+
+      button:after {
+        left: 36px;
+        border-width: 36px 0 0 36px;
+      }
+    }
+
+    &.audience {
+      text-align: right;
+
+      button:after {
+        right: 36px;
+        border-width: 36px 36px 0 0;
+      }
     }
 
     button {

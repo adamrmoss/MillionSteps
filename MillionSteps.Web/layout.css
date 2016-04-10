@@ -63,9 +63,18 @@ section.choices div.choice.audience button:after {
   display: block;
   width: 0;
 }
+section.choices div.choice.meta {
+  text-align: center;
+}
+section.choices div.choice.narrator {
+  text-align: left;
+}
 section.choices div.choice.narrator button:after {
   left: 36px;
   border-width: 36px 0 0 36px;
+}
+section.choices div.choice.audience {
+  text-align: right;
 }
 section.choices div.choice.audience button:after {
   right: 36px;

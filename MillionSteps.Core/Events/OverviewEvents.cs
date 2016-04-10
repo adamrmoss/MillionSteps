@@ -14,7 +14,7 @@ namespace MillionSteps.Core.Events
   {
     public override string Category => "Overview";
     public override bool CanExecute(FlagDictionary flagDictionary) => flagDictionary["Origin"];
-    public override Speaker SpokenBy => Speaker.Narrator;
+    public override Speaker SpokenBy => Speaker.Audience;
     public override bool Automatic => true;
   }
 }
