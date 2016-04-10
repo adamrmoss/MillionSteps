@@ -1,6 +1,6 @@
 ﻿namespace Website {
   export const flashFadeTime = 100;
-  export const quickFadeTime = 200;
+  export const quickFadeTime = 600;
   export const longFadeTime = 1200;
 
   const choicesSectionSelector = "section.choices";

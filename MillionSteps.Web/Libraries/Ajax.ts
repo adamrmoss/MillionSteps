@@ -9,7 +9,10 @@ namespace Ajax {
 
       startTime = Date.now();
 
-      let form = $(event.target).closest("form");
+      let target = $(event.target);
+      target.find("button").blur();
+
+      let form = target.closest("form");
       let action = form.attr("action");
       let method = form.attr("method");
       let data = form.serialize();

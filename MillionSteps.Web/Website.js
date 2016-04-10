@@ -1,7 +1,7 @@
 var Website;
 (function (Website) {
     Website.flashFadeTime = 100;
-    Website.quickFadeTime = 200;
+    Website.quickFadeTime = 600;
     Website.longFadeTime = 1200;
     var choicesSectionSelector = "section.choices";
     var choicesFormSelector = "section.choices form";

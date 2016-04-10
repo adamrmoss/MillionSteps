@@ -90,6 +90,7 @@
     <Compile Include="Adventures\Adventure.cs" />
     <Compile Include="Adventures\MomentFlag.cs" />
     <Compile Include="Authentication\UserProfileClient.cs" />
+    <Compile Include="Events\DepartureEvents.cs" />
     <Compile Include="Exercises\ActivityLogSummary.cs" />
     <Compile Include="EnumerableExtensions.cs" />
     <Compile Include="Events\EventDriver.cs" />

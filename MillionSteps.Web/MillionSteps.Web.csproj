@@ -246,6 +246,11 @@
     <None Include="compilerconfig.json.defaults">
       <DependentUpon>compilerconfig.json</DependentUpon>
     </None>
+    <Content Include="Events\Views\Overview\CameOnFoot.cshtml" />
+    <Content Include="Events\Views\Overview\Counted.cshtml" />
+    <Content Include="Events\Views\Departure\VillageDestroyed.cshtml" />
+    <Content Include="Events\Views\Overview\OverviewFinished.cshtml" />
+    <Content Include="Events\Views\Departure\StayOffRoads.cshtml" />
     <None Include="Properties\PublishProfiles\a-million-steps.org - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\Manual Deploy.pubxml" />
     <None Include="Web.Debug.config">
@@ -275,6 +280,7 @@
     <TypeScriptCompile Include="Libraries\Xhr.ts" />
     <TypeScriptCompile Include="Website.ts" />
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

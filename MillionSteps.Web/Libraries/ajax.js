@@ -6,7 +6,9 @@ var Ajax;
         $(document).on("submit", formSelector, {}, function (event) {
             event.preventDefault();
             Ajax.startTime = Date.now();
-            var form = $(event.target).closest("form");
+            var target = $(event.target);
+            target.find("button").blur();
+            var form = target.closest("form");
             var action = form.attr("action");
             var method = form.attr("method");
             var data = form.serialize();
