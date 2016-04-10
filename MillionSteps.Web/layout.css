@@ -16,7 +16,6 @@ main {
   text-align: left;
   margin: 0;
   padding: 16px;
-  -ms-border-radius: 12px;
   border-radius: 12px;
 }
 section,
@@ -92,7 +91,6 @@ section.choices div.choice button {
   font-family: 'Georgia', 'serif';
   padding: 16px;
   margin: 1em 0 1.5em;
-  -ms-border-radius: 6px;
   border-radius: 6px;
   max-width: 650px;
 }
