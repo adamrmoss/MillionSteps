@@ -49,6 +49,10 @@ section.fitbit.logo {
 section.fitbit.logo img {
   width: 250px;
 }
+section.fitbit.logo p {
+  margin-top: 12px;
+  margin-bottom: 0;
+}
 section.choices div.choice {
   padding-bottom: 8px;
 }
