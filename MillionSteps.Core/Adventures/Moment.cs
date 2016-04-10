@@ -16,12 +16,18 @@ namespace MillionSteps.Core.Adventures
     public int Ordinal { get; set; }
 
     public virtual Adventure Adventure { get; set; }
-    public virtual ICollection<MomentFlag> MomentFlags { get; set; }
+
+    private ICollection<MomentFlag> momentFlags;
+    public virtual ICollection<MomentFlag> MomentFlags {
+      get { return this.momentFlags; }
+      set { this.momentFlags = value; }
+    }
+
     public IEnumerable<string> Flags => this.MomentFlags.Select(mf => mf.Flag);
 
     public Moment()
     {
-      this.MomentFlags = new List<MomentFlag>();
+      this.momentFlags = new List<MomentFlag>();
     }
   }
 }

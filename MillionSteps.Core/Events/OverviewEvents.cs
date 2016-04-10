@@ -6,7 +6,8 @@ namespace MillionSteps.Core.Events
   public class Origin : Event
   {
     public override string Category => "Overview";
-    public override bool CanExecute(FlagDictionary flagDictionary) => flagDictionary["IntroductionFinished"];
+    public override bool CanExecute(FlagDictionary flagDictionary) => flagDictionary["IntroductionFinished"] && !flagDictionary["OverviewStarted"];
+    public override HashSet<string> FlagsToSet => new HashSet<string> { "OverviewStarted" };
     public override Speaker SpokenBy => Speaker.Narrator;
     public override bool Automatic => true;
   }
@@ -35,10 +36,11 @@ namespace MillionSteps.Core.Events
     public override bool Automatic => true;
   }
 
-  public class OverviewFinished : Event
+  public class HereWeGo : Event
   {
     public override string Category => "Overview";
     public override bool CanExecute(FlagDictionary flagDictionary) => flagDictionary["Counted"];
+    public override HashSet<string> FlagsToSet => new HashSet<string> { "OverviewFinished" };
     public override Speaker SpokenBy => Speaker.Narrator;
     public override bool Automatic => true;
   }

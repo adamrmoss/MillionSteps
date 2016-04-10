@@ -249,7 +249,7 @@
     <Content Include="Events\Views\Overview\CameOnFoot.cshtml" />
     <Content Include="Events\Views\Overview\Counted.cshtml" />
     <Content Include="Events\Views\Departure\VillageDestroyed.cshtml" />
-    <Content Include="Events\Views\Overview\OverviewFinished.cshtml" />
+    <Content Include="Events\Views\Overview\HereWeGo.cshtml" />
     <Content Include="Events\Views\Departure\StayOffRoads.cshtml" />
     <None Include="Properties\PublishProfiles\a-million-steps.org - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\Manual Deploy.pubxml" />

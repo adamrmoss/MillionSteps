@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Web.Mvc;
 using GuardClaws;
+using MillionSteps.Core;
 using MillionSteps.Core.Adventures;
 using MillionSteps.Core.Authentication;
 using MillionSteps.Core.Configuration;
@@ -71,7 +72,10 @@ namespace MillionSteps.Web.Games
 
       var readOnly = adventure.CurrentMomentId != momentId;
 
-      var flagDictionary = new FlagDictionary(moment.Flags);
+      var flags = moment.Flags;
+      if (moment.EventName != null)
+        flags = flags.Append(moment.EventName);
+      var flagDictionary = new FlagDictionary(flags);
       var events = this.eventDriver.GetValidEvents(flagDictionary);
 
       var viewModel = new MomentViewModel {

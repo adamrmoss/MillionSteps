@@ -6,7 +6,8 @@ namespace MillionSteps.Core.Events
   public class StoryStarted : Event
   {
     public override string Category => "Prelude";
-    public override bool CanExecute(FlagDictionary flagDictionary) => true;
+    public override bool CanExecute(FlagDictionary flagDictionary) => !flagDictionary["IntroductionStarted"];
+    public override HashSet<string> FlagsToSet => new HashSet<string> {"IntroductionStarted"};
     public override bool Automatic => true;
     public override Speaker SpokenBy => Speaker.Narrator;
   }
@@ -14,23 +15,23 @@ namespace MillionSteps.Core.Events
   public class FemalePlayerChosen : Event
   {
     public override string Category => "Prelude";
-    public override bool CanExecute(FlagDictionary flagDictionary) => flagDictionary["StoryStarted"] && !flagDictionary["PlayerGenderChosen"];
-    public override HashSet<string> FlagsToSet => new HashSet<string> {"PlayerGenderChosen"};
+    public override bool CanExecute(FlagDictionary flagDictionary) => flagDictionary["StoryStarted"];
+    public override HashSet<string> FlagsToSet => new HashSet<string> {"PlayerIsFemale"};
     public override Speaker SpokenBy => Speaker.Audience;
   }
 
   public class MalePlayerChosen : Event
   {
     public override string Category => "Prelude";
-    public override bool CanExecute(FlagDictionary flagDictionary) => flagDictionary["StoryStarted"] && !flagDictionary["PlayerGenderChosen"];
-    public override HashSet<string> FlagsToSet => new HashSet<string> {"PlayerGenderChosen"};
+    public override bool CanExecute(FlagDictionary flagDictionary) => flagDictionary["StoryStarted"];
+    public override HashSet<string> FlagsToSet => new HashSet<string> {"PlayerIsMale"};
     public override Speaker SpokenBy => Speaker.Audience;
   }
 
   public class YeahStory : Event
   {
     public override string Category => "Prelude";
-    public override bool CanExecute(FlagDictionary flagDictionary) => flagDictionary["PlayerGenderChosen"];
+    public override bool CanExecute(FlagDictionary flagDictionary) => flagDictionary["FemalePlayerChosen"] || flagDictionary["MalePlayerChosen"];
     public override Speaker SpokenBy => Speaker.Audience;
     public override bool Automatic => true;
   }

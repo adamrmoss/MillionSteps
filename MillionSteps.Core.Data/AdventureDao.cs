@@ -44,7 +44,7 @@ namespace MillionSteps.Core.Data
 
     public Moment BuildNextMoment(Adventure adventure, Moment priorMoment, Event @event)
     {
-      var flags = priorMoment.Flags.Append(@event.Name).Concat(@event.FlagsToSet).Except(@event.FlagsToClear).Distinct().ToArray();
+      var flags = priorMoment.Flags.Concat(@event.FlagsToSet).Except(@event.FlagsToClear).Distinct().ToArray();
       var newMoment = new Moment {
         Adventure = adventure,
         EventName = @event.Name,
