@@ -18,14 +18,15 @@
   }
 
   function fadeInNewChoices(response): void {
-    let newChoicesSection = $(response).find(choicesSectionSelector);
-    $(choicesSectionSelector).replaceWith(newChoicesSection);
+    let $response = $(response);
+    $(choicesSectionSelector).replaceWith($response);
     let newChoices = $(choicesFormSelector);
     newChoices.hide();
     newChoices.fadeIn(quickFadeTime);
   }
 
   function handleAjaxError(error): void {
+    alert("Ajax error: " + error);
     window.location.replace("/");
   }
 

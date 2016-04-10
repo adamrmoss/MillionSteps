@@ -15,13 +15,14 @@ var Website;
         window.setTimeout(function () { return fadeInNewChoices(response); }, timeToWait);
     }
     function fadeInNewChoices(response) {
-        var newChoicesSection = $(response).find(choicesSectionSelector);
-        $(choicesSectionSelector).replaceWith(newChoicesSection);
+        var $response = $(response);
+        $(choicesSectionSelector).replaceWith($response);
         var newChoices = $(choicesFormSelector);
         newChoices.hide();
         newChoices.fadeIn(Website.quickFadeTime);
     }
     function handleAjaxError(error) {
+        alert("Ajax error: " + error);
         window.location.replace("/");
     }
     function fadeOutOldChoices(form) {
