@@ -63,6 +63,10 @@
     <Compile Include="Migrations\201604110544287_CreateActivityLogEntriesTableMigration.Designer.cs">
       <DependentUpon>201604110544287_CreateActivityLogEntriesTableMigration.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201604110600381_CreateAdventureTablesMigration.cs" />
+    <Compile Include="Migrations\201604110600381_CreateAdventureTablesMigration.Designer.cs">
+      <DependentUpon>201604110600381_CreateAdventureTablesMigration.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="MillionStepsDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -83,6 +87,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201604110544287_CreateActivityLogEntriesTableMigration.resx">
       <DependentUpon>201604110544287_CreateActivityLogEntriesTableMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201604110600381_CreateAdventureTablesMigration.resx">
+      <DependentUpon>201604110600381_CreateAdventureTablesMigration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
