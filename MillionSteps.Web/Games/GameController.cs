@@ -68,7 +68,7 @@ namespace MillionSteps.Web.Games
         return this.RedirectToRoute("Game");
 
       // TODO: Should be using Dao
-      //var moment = this.dbContext.Moments.Find(momentId);
+      //var moment = this.DbContext.Moments.Find(momentId);
       //if (moment == null)
       //  return this.RedirectToRoute("Game");
 
@@ -101,7 +101,7 @@ namespace MillionSteps.Web.Games
       if (this.userSession == null)
         return this.RedirectToRoutePermanent("Welcome");
 
-      //var priorMoment = this.dbContext.Moments.Find(momentId);
+      //var priorMoment = this.DbContext.Moments.Find(momentId);
       //var adventure = priorMoment.Adventure;
 
       //if (adventure == null || adventure.CurrentMomentId != momentId)

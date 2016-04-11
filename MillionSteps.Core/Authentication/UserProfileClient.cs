@@ -1,7 +1,4 @@
-﻿using System.Net;
-using MillionSteps.Core.Work;
-using RestSharp;
-using RestSharp.Authenticators;
+﻿using MillionSteps.Core.Work;
 
 namespace MillionSteps.Core.Authentication
 {

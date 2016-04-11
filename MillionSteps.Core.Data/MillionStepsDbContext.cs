@@ -13,7 +13,7 @@ namespace MillionSteps.Core.Data
     { }
 
     public DbSet<UserSession> UserSessions { get; set; }
-    //public DbSet<ActivityLogEntry> ActivityLogEntries { get; set; }
+    public DbSet<ActivityLogEntry> ActivityLogEntries { get; set; }
 
     //public DbSet<Adventure> Adventures { get; set; }
     //public DbSet<Moment> Moments { get; set; }
