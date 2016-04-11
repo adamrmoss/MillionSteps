@@ -10,14 +10,13 @@ namespace MillionSteps.Core.Data
       : base(dbContext)
     {}
 
-    public UserSession CreateSession(string tempToken, string tempSecret)
+    public UserSession CreateSession(string accessToken, string refreshToken)
     {
-      var userSession = new UserSession
-      {
+      var userSession = new UserSession {
         Id = Guid.NewGuid(),
         DateCreated = DateTime.UtcNow,
-        TempToken = tempToken,
-        TempSecret = tempSecret
+        AccessToken = accessToken,
+        RefreshToken = refreshToken
       };
       this.dbContext.UserSessions.Add(userSession);
       return userSession;
@@ -26,11 +25,6 @@ namespace MillionSteps.Core.Data
     public UserSession LoadUserSession(Guid userSessionId)
     {
       return this.dbContext.UserSessions.Find(userSessionId);
-    }
-
-    public UserSession LookupSessionByTempToken(string tempToken)
-    {
-      return this.dbContext.UserSessions.SingleOrDefault(userSession => userSession.TempToken == tempToken);
     }
   }
 }

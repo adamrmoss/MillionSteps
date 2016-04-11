@@ -17,29 +17,30 @@ namespace MillionSteps.Core.Data
         UserId = userId,
         DateCreated = DateTime.UtcNow
       };
-      this.dbContext.Adventures.Add(adventure);
+      //this.dbContext.Adventures.Add(adventure);
 
-      var initialMoment = new Moment {
-        Ordinal = 0,
-        Adventure = adventure
-      };
-      this.dbContext.Moments.Add(initialMoment);
+      //var initialMoment = new Moment {
+      //  Ordinal = 0,
+      //  Adventure = adventure
+      //};
+      //this.dbContext.Moments.Add(initialMoment);
 
-      adventure.Moments.Add(initialMoment);
+      //adventure.Moments.Add(initialMoment);
 
-      this.dbContext.SaveChanges();
+      //this.dbContext.SaveChanges();
 
-      adventure.CurrentMomentId = initialMoment.Id;
+      //adventure.CurrentMomentId = initialMoment.Id;
 
       return adventure;
     }
 
     public AdventureSummary LookupAdventureByUserId(string userId)
     {
-      var adventure = this.dbContext.Adventures
-        .OrderByDescending(a => a.DateCreated)
-        .FirstOrDefault(a => a.UserId == userId);
-      return adventure?.GetSummary();
+      //var adventure = this.dbContext.Adventures
+      //  .OrderByDescending(a => a.DateCreated)
+      //  .FirstOrDefault(a => a.UserId == userId);
+      //return adventure?.GetSummary();
+      return null;
     }
 
     public Moment BuildNextMoment(Adventure adventure, Moment priorMoment, Event @event)
@@ -51,19 +52,19 @@ namespace MillionSteps.Core.Data
         StepsConsumed = @event.StepsConsumed,
         Ordinal = priorMoment.Ordinal + 1
       };
-      this.dbContext.Moments.Add(newMoment);
+      //this.dbContext.Moments.Add(newMoment);
 
-      foreach (var flag in flags) {
-        var momentFlag = new MomentFlag {
-          Flag = flag
-        };
-        this.dbContext.MomentFlags.Add(momentFlag);
-        newMoment.MomentFlags.Add(momentFlag);
-      };
+      //foreach (var flag in flags) {
+      //  var momentFlag = new MomentFlag {
+      //    Flag = flag
+      //  };
+      //  this.dbContext.MomentFlags.Add(momentFlag);
+      //  newMoment.MomentFlags.Add(momentFlag);
+      //};
 
-      adventure.Moments.Add(newMoment);
+      //adventure.Moments.Add(newMoment);
 
-      this.dbContext.SaveChanges();
+      //this.dbContext.SaveChanges();
 
       adventure.CurrentMomentId = newMoment.Id;
 

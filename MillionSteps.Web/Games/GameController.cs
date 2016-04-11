@@ -7,6 +7,7 @@ using MillionSteps.Core.Authentication;
 using MillionSteps.Core.Configuration;
 using MillionSteps.Core.Data;
 using MillionSteps.Core.Events;
+using MillionSteps.Core.Exercises;
 using MillionSteps.Web.Exercises;
 
 namespace MillionSteps.Web.Games
@@ -43,7 +44,7 @@ namespace MillionSteps.Web.Games
 
       Claws.NotNull(() => this.activityLogUpdater);
       this.activityLogUpdater.UpdateTodayAndYesterday();
-      this.userSession.OffsetFromUtcMillis = userProfile.OffsetFromUTCMillis;
+      this.userSession.OffsetFromUtcMillis = userProfile.OffsetFromUtcMillis;
 
       var existingAdventure = this.adventureDao.LookupAdventureByUserId(this.userSession.UserId);
       var currentMomentId = existingAdventure?.CurrentMomentId ?? this.adventureDao.CreateAdventure(this.userSession.UserId).CurrentMomentId ;
@@ -66,25 +67,26 @@ namespace MillionSteps.Web.Games
       if (adventure == null)
         return this.RedirectToRoute("Game");
 
-      var moment = this.dbContext.Moments.Find(momentId);
-      if (moment == null)
-        return this.RedirectToRoute("Game");
+      // TODO: Should be using Dao
+      //var moment = this.dbContext.Moments.Find(momentId);
+      //if (moment == null)
+      //  return this.RedirectToRoute("Game");
 
-      var readOnly = adventure.CurrentMomentId != momentId;
+      //var readOnly = adventure.CurrentMomentId != momentId;
 
-      var flags = moment.Flags;
-      if (moment.EventName != null)
-        flags = flags.Append(moment.EventName);
-      var flagDictionary = new FlagDictionary(flags);
-      var events = this.eventDriver.GetValidEvents(flagDictionary);
+      //var flags = moment.Flags;
+      //if (moment.EventName != null)
+      //  flags = flags.Append(moment.EventName);
+      //var flagDictionary = new FlagDictionary(flags);
+      //var events = this.eventDriver.GetValidEvents(flagDictionary);
 
       var viewModel = new MomentViewModel {
         DisplayName = userProfile.DisplayName,
         StrideLength = userProfile.StrideLengthWalking,
         MomentId = momentId,
-        ReadOnly = readOnly,
-        Flags = flagDictionary,
-        Choices = events,
+        //ReadOnly = readOnly,
+        //Flags = flagDictionary,
+        //Choices = events,
       };
 
       if (this.Request.IsAjaxRequest())
@@ -99,19 +101,20 @@ namespace MillionSteps.Web.Games
       if (this.userSession == null)
         return this.RedirectToRoutePermanent("Welcome");
 
-      var priorMoment = this.dbContext.Moments.Find(momentId);
-      var adventure = priorMoment.Adventure;
+      //var priorMoment = this.dbContext.Moments.Find(momentId);
+      //var adventure = priorMoment.Adventure;
 
-      if (adventure == null || adventure.CurrentMomentId != momentId)
-        return this.RedirectToRoute("Game");
+      //if (adventure == null || adventure.CurrentMomentId != momentId)
+      //  return this.RedirectToRoute("Game");
 
-      var @event = this.eventDriver.LookupEvent(eventName);
-      if (@event == null)
-        throw new InvalidOperationException($"Can't find event named: {eventName}");
+      //var @event = this.eventDriver.LookupEvent(eventName);
+      //if (@event == null)
+      //  throw new InvalidOperationException($"Can't find event named: {eventName}");
 
-      var newMoment = this.adventureDao.BuildNextMoment(adventure, priorMoment, @event);
+      //var newMoment = this.adventureDao.BuildNextMoment(adventure, priorMoment, @event);
 
-      return this.RedirectToRoutePermanent("Moment", new {momentId = newMoment.Id});
+      //return this.RedirectToRoutePermanent("Moment", new {momentId = newMoment.Id});
+      return null;
     }
   }
 }

@@ -13,33 +13,35 @@ namespace MillionSteps.Core.Data
 
     public Dictionary<DateTime, ActivityLogEntry> GetExistingActivityLogEntries(string userId, DateTime startDate, DateTime endDate)
     {
-      var existingActivityLogEntries = this.dbContext.ActivityLogEntries
-        .Where(ale => ale.UserId == userId && ale.Date >= startDate && ale.Date <= endDate);
-      return existingActivityLogEntries.ToDictionary(ale => ale.Date);
+      //var existingActivityLogEntries = this.dbContext.ActivityLogEntries
+      //  .Where(ale => ale.UserId == userId && ale.Date >= startDate && ale.Date <= endDate);
+      //return existingActivityLogEntries.ToDictionary(ale => ale.Date);
+      return null;
     }
 
     public ActivityLogSummary GetActivityLogSummary(string userId)
     {
-      var totalSteps = this.dbContext.ActivityLogEntries
-        .Where(ale => ale.UserId == userId)
-        .Sum(ale => ale.Steps);
+      //var totalSteps = this.dbContext.ActivityLogEntries
+      //  .Where(ale => ale.UserId == userId)
+      //  .Sum(ale => ale.Steps);
 
-      return new ActivityLogSummary
-      {
-        UserId = userId,
-        TotalSteps = totalSteps,
-      };
+      //return new ActivityLogSummary
+      //{
+      //  UserId = userId,
+      //  TotalSteps = totalSteps,
+      //};
+      return null;
     }
 
     public void AddActivityLogEntry(string userId, DateTime date, int steps)
     {
-      var activityLogEntry = new ActivityLogEntry
-      {
-        UserId = userId,
-        Date = date,
-        Steps = steps
-      };
-      this.dbContext.ActivityLogEntries.Add(activityLogEntry);
+      //var activityLogEntry = new ActivityLogEntry
+      //{
+      //  UserId = userId,
+      //  Date = date,
+      //  Steps = steps
+      //};
+      //this.dbContext.ActivityLogEntries.Add(activityLogEntry);
     }
   }
 }

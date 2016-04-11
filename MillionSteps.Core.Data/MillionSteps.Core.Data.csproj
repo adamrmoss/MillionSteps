@@ -55,15 +55,16 @@
     <Compile Include="AdventureDao.cs" />
     <Compile Include="AuthenticationDao.cs" />
     <Compile Include="Dao.cs" />
-    <Compile Include="Migrations\201604031816375_InitialMigration.cs" />
-    <Compile Include="Migrations\201604031816375_InitialMigration.Designer.cs">
-      <DependentUpon>201604031816375_InitialMigration.cs</DependentUpon>
+    <Compile Include="Migrations\201604110008261_CreateUserSessionsTableMigration.cs" />
+    <Compile Include="Migrations\201604110008261_CreateUserSessionsTableMigration.Designer.cs">
+      <DependentUpon>201604110008261_CreateUserSessionsTableMigration.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="MillionStepsDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -73,8 +74,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201604031816375_InitialMigration.resx">
-      <DependentUpon>201604031816375_InitialMigration.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201604110008261_CreateUserSessionsTableMigration.resx">
+      <DependentUpon>201604110008261_CreateUserSessionsTableMigration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
