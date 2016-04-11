@@ -7,7 +7,7 @@ namespace MillionSteps.Core.Authentication
   {
     public const string CookieName = "UserSessionId";
     public static readonly TimeSpan Lifetime = TimeSpan.FromDays(30);
-    
+
     [Key]
     public Guid Id { get; set; }
 

@@ -3,6 +3,5 @@
 namespace MillionSteps.Core
 {
   [AttributeUsage(AttributeTargets.Class)]
-  public class UnitWorkerAttribute : Attribute
-  {}
+  public class UnitWorkerAttribute : Attribute { }
 }

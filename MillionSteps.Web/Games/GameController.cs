@@ -47,9 +47,9 @@ namespace MillionSteps.Web.Games
       this.userSession.OffsetFromUtcMillis = userProfile.OffsetFromUtcMillis;
 
       var existingAdventure = this.adventureDao.LookupAdventureByUserId(this.userSession.UserId);
-      var currentMomentId = existingAdventure?.CurrentMomentId ?? this.adventureDao.CreateAdventure(this.userSession.UserId).CurrentMomentId ;
+      var currentMomentId = existingAdventure?.CurrentMomentId ?? this.adventureDao.CreateAdventure(this.userSession.UserId).CurrentMomentId;
 
-      return this.RedirectToRoute("Moment", new {momentId = currentMomentId});
+      return this.RedirectToRoute("Moment", new { momentId = currentMomentId });
     }
 
     [HttpGet]

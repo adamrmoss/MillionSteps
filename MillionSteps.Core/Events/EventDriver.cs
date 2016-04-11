@@ -23,7 +23,7 @@ namespace MillionSteps.Core.Events
     {
       var automaticEvents = this.allEvents.Where(@event => @event.Automatic && EventCanExecute(@event, flagDictionary)).ToList();
       if (automaticEvents.Any())
-        return new List<Event> {automaticEvents.First()};
+        return new List<Event> { automaticEvents.First() };
 
       return this.allEvents.Where(@event => EventCanExecute(@event, flagDictionary)).ToList();
     }

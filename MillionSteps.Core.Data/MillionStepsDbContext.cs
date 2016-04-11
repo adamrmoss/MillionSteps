@@ -5,7 +5,7 @@ using MillionSteps.Core.Exercises;
 
 namespace MillionSteps.Core.Data
 {
-  public class MillionStepsDbContext : DbContext
+  public class MillionStepsDbContext : DbContext, ISaveChanges
   {
     public MillionStepsDbContext()
       : base("MillionSteps")

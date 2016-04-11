@@ -102,6 +102,7 @@
     <Compile Include="Authentication\UserSession.cs" />
     <Compile Include="Configuration\CoreRegistry.cs" />
     <Compile Include="Configuration\Settings.cs" />
+    <Compile Include="ISaveChanges.cs" />
     <Compile Include="QueryStrings.cs" />
     <Compile Include="UnitWorkerAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

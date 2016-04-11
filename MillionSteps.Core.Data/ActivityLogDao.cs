@@ -9,7 +9,7 @@ namespace MillionSteps.Core.Data
   {
     public ActivityLogDao(MillionStepsDbContext dbContext)
       : base(dbContext)
-    {}
+    { }
 
     public Dictionary<DateTime, ActivityLogEntry> GetExistingActivityLogEntries(string userId, DateTime startDate, DateTime endDate)
     {

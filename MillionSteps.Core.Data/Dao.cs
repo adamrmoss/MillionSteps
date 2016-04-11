@@ -5,9 +5,9 @@
   {
     protected Dao(MillionStepsDbContext dbContext)
     {
-      this.dbContext = dbContext;
+      this.DbContext = dbContext;
     }
 
-    protected readonly MillionStepsDbContext dbContext;
+    protected readonly MillionStepsDbContext DbContext;
   }
 }
