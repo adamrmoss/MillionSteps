@@ -3,6 +3,7 @@ using GuardClaws;
 using MillionSteps.Core;
 using MillionSteps.Core.Authentication;
 using MillionSteps.Core.Data;
+using MillionSteps.Core.Work;
 
 namespace MillionSteps.Web.Exercises
 {

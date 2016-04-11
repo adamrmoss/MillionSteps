@@ -1,4 +1,6 @@
-﻿namespace MillionSteps.Core.Data
+﻿using MillionSteps.Core.Work;
+
+namespace MillionSteps.Core.Data
 {
   [UnitWorker]
   public abstract class Dao

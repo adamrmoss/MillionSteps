@@ -6,6 +6,7 @@ using MillionSteps.Core;
 using MillionSteps.Core.Authentication;
 using MillionSteps.Core.Configuration;
 using MillionSteps.Core.Data;
+using MillionSteps.Core.Work;
 using StructureMap;
 using StructureMap.Configuration.DSL;
 using StructureMap.Graph;

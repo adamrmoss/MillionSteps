@@ -19,6 +19,9 @@ namespace MillionSteps.Core.Authentication
     [MaxLength(256)]
     public string RefreshToken { get; set; }
 
+    [MaxLength(256)]
+    public string RedirectUrl { get; set; }
+
     [MaxLength(16)]
     public string UserId { get; set; }
 

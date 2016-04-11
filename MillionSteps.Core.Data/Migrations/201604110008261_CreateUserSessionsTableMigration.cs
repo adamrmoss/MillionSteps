@@ -13,6 +13,7 @@ namespace MillionSteps.Core.Data.Migrations
                          Verifier = c.Guid(nullable: false),
                          AccessToken = c.String(maxLength: 256),
                          RefreshToken = c.String(maxLength: 256),
+                         RedirectUrl = c.String(maxLength: 256),
                          UserId = c.String(maxLength: 16),
                          DateCreated = c.DateTime(nullable: false),
                          OffsetFromUtcMillis = c.Int(nullable: false),

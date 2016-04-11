@@ -1,4 +1,4 @@
-﻿namespace MillionSteps.Core
+﻿namespace MillionSteps.Core.Work
 {
   public interface ISaveChanges
   {

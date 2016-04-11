@@ -2,6 +2,7 @@
 using MillionSteps.Core.Adventures;
 using MillionSteps.Core.Authentication;
 using MillionSteps.Core.Exercises;
+using MillionSteps.Core.Work;
 
 namespace MillionSteps.Core.Data
 {

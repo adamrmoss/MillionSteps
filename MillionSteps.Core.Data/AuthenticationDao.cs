@@ -10,12 +10,13 @@ namespace MillionSteps.Core.Data
       : base(dbContext)
     { }
 
-    public UserSession CreateUserSession()
+    public UserSession CreateUserSession(string redirectUrl)
     {
       var userSession = new UserSession {
         Id = Guid.NewGuid(),
         Verifier = Guid.NewGuid(),
         DateCreated = DateTime.UtcNow,
+        RedirectUrl = redirectUrl,
       };
       this.DbContext.UserSessions.Add(userSession);
       return userSession;
