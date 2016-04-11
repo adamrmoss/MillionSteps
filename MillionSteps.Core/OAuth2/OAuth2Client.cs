@@ -7,7 +7,7 @@ using MillionSteps.Core.Work;
 using Newtonsoft.Json;
 using RestSharp;
 
-namespace MillionSteps.Core
+namespace MillionSteps.Core.OAuth2
 {
   [UnitWorker]
   public class OAuth2Client

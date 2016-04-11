@@ -89,10 +89,12 @@
     <Compile Include="Adventures\Moment.cs" />
     <Compile Include="Adventures\Adventure.cs" />
     <Compile Include="Adventures\MomentFlag.cs" />
+    <Compile Include="OAuth2\AuthenticatedClientBase.cs" />
     <Compile Include="Authentication\UserProfile.cs" />
     <Compile Include="Authentication\UserProfileClient.cs" />
     <Compile Include="Encodings.cs" />
     <Compile Include="Events\DepartureEvents.cs" />
+    <Compile Include="Exercises\ActivityLogClient.cs" />
     <Compile Include="Exercises\ActivityLogSummary.cs" />
     <Compile Include="EnumerableExtensions.cs" />
     <Compile Include="Events\EventDriver.cs" />
@@ -103,7 +105,7 @@
     <Compile Include="Authentication\UserSession.cs" />
     <Compile Include="Configuration\CoreRegistry.cs" />
     <Compile Include="Configuration\Settings.cs" />
-    <Compile Include="OAuth2Client.cs" />
+    <Compile Include="OAuth2\OAuth2Client.cs" />
     <Compile Include="Work\ISaveChanges.cs" />
     <Compile Include="QueryStrings.cs" />
     <Compile Include="Work\UnitWorkerAttribute.cs" />
@@ -117,6 +119,7 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

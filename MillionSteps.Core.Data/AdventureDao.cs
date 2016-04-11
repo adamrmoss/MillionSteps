@@ -42,6 +42,11 @@ namespace MillionSteps.Core.Data
       return adventure?.GetSummary();
     }
 
+    public Moment LoadMoment(int momentId)
+    {
+      return this.DbContext.Moments.Find(momentId);
+    }
+
     public Moment BuildNextMoment(Adventure adventure, Moment priorMoment, Event @event)
     {
       var flags = priorMoment.Flags.Concat(@event.FlagsToSet).Except(@event.FlagsToClear).Distinct().ToArray();

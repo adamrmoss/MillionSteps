@@ -1,18 +1,10 @@
 ﻿using System;
-using System.Collections.Specialized;
-using System.Net;
-using System.Text;
 using System.Web.Mvc;
 using GuardClaws;
-using MillionSteps.Core;
-using MillionSteps.Core.Authentication;
 using MillionSteps.Core.Configuration;
 using MillionSteps.Core.Data;
+using MillionSteps.Core.OAuth2;
 using MillionSteps.Core.Work;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using RestSharp;
-using RestSharp.Authenticators;
 
 namespace MillionSteps.Web.Authentication
 {
@@ -21,6 +13,8 @@ namespace MillionSteps.Web.Authentication
     public AuthenticationController(Settings settings, ISaveChanges unitOfWork, AuthenticationDao authenticationDao, OAuth2Client oAuth2Client)
       : base(settings, unitOfWork)
     {
+      Claws.NotNull(() => authenticationDao);
+      Claws.NotNull(() => oAuth2Client);
       this.authenticationDao = authenticationDao;
       this.oAuth2Client = oAuth2Client;
     }
