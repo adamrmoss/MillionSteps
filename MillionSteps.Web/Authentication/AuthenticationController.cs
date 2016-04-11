@@ -24,6 +24,9 @@ namespace MillionSteps.Web.Authentication
     public ActionResult Authenticate()
     {
       var completeAuthorizationUrl = new Uri(this.settings.AppUrl, this.Url.RouteUrl("CompleteAuthentication")).ToString();
+      var verifier = Guid.NewGuid();
+
+
       var nvc = new NameValueCollection {
         {"response_type", "code"},
         {"client_id", this.settings.ClientId },
@@ -37,7 +40,6 @@ namespace MillionSteps.Web.Authentication
     }
 
     [HttpGet]
-    // ReSharper disable InconsistentNaming
     public ActionResult Complete(string code)
     {
       //var userSession = this.authenticationDao.LookupSessionByTempToken(oauth_token);
@@ -56,7 +58,6 @@ namespace MillionSteps.Web.Authentication
 
       return this.RedirectToRoute("Index");
     }
-    // ReSharper restore InconsistentNaming
 
     [HttpGet]
     public ActionResult Logout()

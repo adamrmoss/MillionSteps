@@ -11,6 +11,8 @@ namespace MillionSteps.Core.Authentication
     [Key]
     public Guid Id { get; set; }
 
+    public Guid Verifier { get; set; }
+
     [MaxLength(128)]
     public string AccessToken { get; set; }
 
