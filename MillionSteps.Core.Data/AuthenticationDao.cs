@@ -26,9 +26,11 @@ namespace MillionSteps.Core.Data
       return this.DbContext.UserSessions.Find(userSessionId);
     }
 
-    public UserSession LookupUserSessionByVerifier(Guid verifier)
+    public UserSession LoadUserSessionByVerifier(Guid verifier)
     {
-      return this.DbContext.UserSessions.SingleOrDefault(us => us.Verifier == verifier);
+      var userSession = this.DbContext.UserSessions.SingleOrDefault(us => us.Verifier == verifier);
+      this.DbContext.UserSessions.Attach(userSession);
+      return userSession;
     }
   }
 }

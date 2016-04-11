@@ -91,6 +91,7 @@
     <Compile Include="Adventures\MomentFlag.cs" />
     <Compile Include="Authentication\UserProfile.cs" />
     <Compile Include="Authentication\UserProfileClient.cs" />
+    <Compile Include="Encodings.cs" />
     <Compile Include="Events\DepartureEvents.cs" />
     <Compile Include="Exercises\ActivityLogSummary.cs" />
     <Compile Include="EnumerableExtensions.cs" />

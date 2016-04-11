@@ -13,10 +13,10 @@ namespace MillionSteps.Core.Authentication
 
     public Guid Verifier { get; set; }
 
-    [MaxLength(128)]
+    [MaxLength(256)]
     public string AccessToken { get; set; }
 
-    [MaxLength(128)]
+    [MaxLength(256)]
     public string RefreshToken { get; set; }
 
     [MaxLength(16)]

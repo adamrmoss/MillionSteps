@@ -11,8 +11,8 @@ namespace MillionSteps.Core.Data.Migrations
                        c => new {
                          Id = c.Guid(nullable: false),
                          Verifier = c.Guid(nullable: false),
-                         AccessToken = c.String(maxLength: 128),
-                         RefreshToken = c.String(maxLength: 128),
+                         AccessToken = c.String(maxLength: 256),
+                         RefreshToken = c.String(maxLength: 256),
                          UserId = c.String(maxLength: 16),
                          DateCreated = c.DateTime(nullable: false),
                          OffsetFromUtcMillis = c.Int(nullable: false),

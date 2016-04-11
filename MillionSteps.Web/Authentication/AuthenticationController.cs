@@ -1,24 +1,31 @@
 ﻿using System;
 using System.Collections.Specialized;
+using System.Net;
+using System.Text;
 using System.Web.Mvc;
 using GuardClaws;
 using MillionSteps.Core;
 using MillionSteps.Core.Authentication;
 using MillionSteps.Core.Configuration;
 using MillionSteps.Core.Data;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using RestSharp;
 using RestSharp.Authenticators;
 
 namespace MillionSteps.Web.Authentication
 {
   public class AuthenticationController : ControllerBase
   {
-    public AuthenticationController(Settings settings, MillionStepsDbContext dbContext, AuthenticationDao authenticationDao)
+    public AuthenticationController(Settings settings, MillionStepsDbContext dbContext, AuthenticationDao authenticationDao, RestClient restClient)
       : base(settings, dbContext)
     {
       this.authenticationDao = authenticationDao;
+      this.restClient = restClient;
     }
 
     private readonly AuthenticationDao authenticationDao;
+    private readonly RestClient restClient;
 
     [HttpGet]
     public ActionResult Authenticate()
@@ -29,10 +36,10 @@ namespace MillionSteps.Web.Authentication
 
       var nvc = new NameValueCollection {
         { "response_type", "code" },
+        { "scope", "profile activity" },
         { "client_id", this.settings.ClientId },
         { "redirect_uri", completeAuthorizationUrl },
-        { "scope", "profile activity" },
-        { "state", userSession.Id.ToString() },
+        { "state", userSession.Verifier.ToString() },
       };
       var queryString = nvc.ToQueryString();
 
@@ -43,26 +50,39 @@ namespace MillionSteps.Web.Authentication
     [HttpGet]
     public ActionResult Complete(string code, string state)
     {
-      var userSession = this.authenticationDao.LookupUserSessionByVerifier(Guid.Parse(state));
+      var userSession = this.authenticationDao.LoadUserSessionByVerifier(Guid.Parse(state));
 
       if (userSession == null)
         throw new ArgumentException("User Session not found for verifier", nameof(state));
 
-      var nvc = new NameValueCollection {
-        { "code", code },
-        { "grant_type", "authorization_code" },
-      };
-      var queryString = nvc.ToQueryString();
+      var basicAuthHeader = "Basic " + "{0}:{1}".FormatWith(this.settings.ClientId, this.settings.ClientSecret).Base64Encode();
 
+      var completeAuthorizationUrl = new Uri(this.settings.AppUrl, this.Url.RouteUrl("CompleteAuthentication")).ToString();
 
-      //userSession.Verifier = oauth_verifier;
+      var restRequest = new RestRequest(this.settings.TokenUrl, Method.POST);
+      restRequest.AddHeader("Authorization", basicAuthHeader);
+      restRequest.AddParameter("grant_type", "authorization_code");
+      restRequest.AddParameter("code", code);
+      restRequest.AddParameter("client_id", this.settings.ClientId);
+      restRequest.AddParameter("redirect_uri", completeAuthorizationUrl);
+      restRequest.AddParameter("state", userSession.Verifier.ToString());
 
-      //var authCredential = this.authenticator.ProcessApprovedAuthCallback(BuildRequestToken(userSession));
-      //userSession.Token = authCredential.AuthToken;
-      //userSession.Secret = authCredential.AuthTokenSecret;
-      //userSession.UserId = authCredential.UserId;
+      var response = this.restClient.Execute(restRequest);
 
-      //this.SetUserSessionCookie(userSession.Id);
+      if (response.StatusCode != HttpStatusCode.OK)
+        // TODO: Better handling of token failure
+        return this.RedirectToRoute("Index");
+
+      var combinedToken = JsonConvert.DeserializeObject<dynamic>(response.Content);
+      var accessToken = (string) combinedToken.access_token;
+      var refreshToken = (string) combinedToken.refresh_token;
+      var userId = (string) combinedToken.user_id;
+
+      userSession.AccessToken = accessToken;
+      userSession.RefreshToken = refreshToken;
+      userSession.UserId = userId;
+
+      this.SetUserSessionCookie(userSession.Id);
 
       return this.RedirectToRoute("Index");
     }

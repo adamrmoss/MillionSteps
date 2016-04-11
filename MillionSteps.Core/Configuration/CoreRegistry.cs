@@ -1,5 +1,4 @@
 ﻿using RestSharp;
-using RestSharp.Authenticators;
 using StructureMap;
 using StructureMap.Configuration.DSL;
 using StructureMap.Pipeline;
