@@ -6,6 +6,7 @@ using MillionSteps.Core;
 using MillionSteps.Core.Authentication;
 using MillionSteps.Core.Configuration;
 using MillionSteps.Core.Data;
+using MillionSteps.Core.Work;
 using StructureMap;
 using StructureMap.Configuration.DSL;
 using StructureMap.Graph;
@@ -28,11 +29,11 @@ namespace MillionSteps.Web.Configuration
       this.For<MillionStepsDbContext>()
           .LifecycleIs<HttpContextLifecycle>();
 
-      this.Scan(scanner => {
-        scanner.AssembliesFromApplicationBaseDirectory();
-        scanner.Include(type => type.HasAttribute<UnitWorkerAttribute>());
-        scanner.Convention<HttpContextLifecycleConvention>();
-      });
+      this.For<ISaveChanges>()
+          .Use(context => context.GetInstance<MillionStepsDbContext>())
+          .LifecycleIs<HttpContextLifecycle>();
+
+      this.Scan(PerformScan);
     }
 
     private static UserSession BuildUserSession(IContext context)
@@ -44,6 +45,13 @@ namespace MillionSteps.Web.Configuration
       var userSessionId = Guid.Parse(request.Cookies[UserSession.CookieName].Value);
       var authenticationDao = context.GetInstance<AuthenticationDao>();
       return authenticationDao.LoadUserSession(userSessionId);
+    }
+
+    private static void PerformScan(IAssemblyScanner scanner)
+    {
+      scanner.AssembliesFromApplicationBaseDirectory();
+      scanner.Include(type => type.HasAttribute<UnitWorkerAttribute>());
+      scanner.Convention<HttpContextLifecycleConvention>();
     }
   }
 }

@@ -7,7 +7,7 @@ namespace MillionSteps.Core.Events
   {
     public override string Category => "Prelude";
     public override bool CanExecute(FlagDictionary flagDictionary) => !flagDictionary["IntroductionStarted"];
-    public override HashSet<string> FlagsToSet => new HashSet<string> {"IntroductionStarted"};
+    public override HashSet<string> FlagsToSet => new HashSet<string> { "IntroductionStarted" };
     public override bool Automatic => true;
     public override Speaker SpokenBy => Speaker.Narrator;
   }
@@ -16,7 +16,7 @@ namespace MillionSteps.Core.Events
   {
     public override string Category => "Prelude";
     public override bool CanExecute(FlagDictionary flagDictionary) => flagDictionary["StoryStarted"];
-    public override HashSet<string> FlagsToSet => new HashSet<string> {"PlayerIsFemale"};
+    public override HashSet<string> FlagsToSet => new HashSet<string> { "PlayerIsFemale" };
     public override Speaker SpokenBy => Speaker.Audience;
   }
 
@@ -24,7 +24,7 @@ namespace MillionSteps.Core.Events
   {
     public override string Category => "Prelude";
     public override bool CanExecute(FlagDictionary flagDictionary) => flagDictionary["StoryStarted"];
-    public override HashSet<string> FlagsToSet => new HashSet<string> {"PlayerIsMale"};
+    public override HashSet<string> FlagsToSet => new HashSet<string> { "PlayerIsMale" };
     public override Speaker SpokenBy => Speaker.Audience;
   }
 
@@ -48,7 +48,7 @@ namespace MillionSteps.Core.Events
   {
     public override string Category => "Prelude";
     public override bool CanExecute(FlagDictionary flagDictionary) => flagDictionary["AllCapsStory"];
-    public override HashSet<string> FlagsToSet => new HashSet<string> {"IntroductionFinished"};
+    public override HashSet<string> FlagsToSet => new HashSet<string> { "IntroductionFinished" };
     public override Speaker SpokenBy => Speaker.Narrator;
     public override bool Automatic => true;
   }

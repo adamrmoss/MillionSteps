@@ -8,23 +8,24 @@ using MillionSteps.Core;
 using MillionSteps.Core.Authentication;
 using MillionSteps.Core.Configuration;
 using MillionSteps.Core.Data;
+using MillionSteps.Core.Work;
 
 namespace MillionSteps.Web
 {
   [UnitWorker]
   public abstract class ControllerBase : Controller
   {
-    protected ControllerBase(Settings settings, MillionStepsDbContext dbContext)
+    protected ControllerBase(Settings settings, ISaveChanges unitOfWork)
     {
       Claws.NotNull(() => settings);
-      Claws.NotNull(() => dbContext);
+      Claws.NotNull(() => unitOfWork);
 
       this.settings = settings;
-      this.dbContext = dbContext;
+      this.unitOfWork = unitOfWork;
     }
 
     protected readonly Settings settings;
-    protected readonly MillionStepsDbContext dbContext;
+    protected readonly ISaveChanges unitOfWork;
 
     protected void SetUserSessionCookie(Guid userSessionId)
     {
@@ -70,7 +71,7 @@ namespace MillionSteps.Web
     protected override void OnActionExecuted(ActionExecutedContext filterContext)
     {
       if (filterContext.Exception == null)
-        this.dbContext.SaveChanges();
+        this.unitOfWork.SaveChanges();
     }
   }
 }

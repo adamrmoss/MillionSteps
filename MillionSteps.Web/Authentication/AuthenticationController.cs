@@ -1,69 +1,49 @@
 ﻿using System;
 using System.Web.Mvc;
-using Fitbit.Api;
-using Fitbit.Models;
 using GuardClaws;
-using MillionSteps.Core.Authentication;
 using MillionSteps.Core.Configuration;
 using MillionSteps.Core.Data;
+using MillionSteps.Core.OAuth2;
+using MillionSteps.Core.Work;
 
 namespace MillionSteps.Web.Authentication
 {
   public class AuthenticationController : ControllerBase
   {
-    public AuthenticationController(Settings settings, MillionStepsDbContext dbContext, Authenticator authenticator, AuthenticationDao authenticationDao)
-      : base(settings, dbContext)
+    public AuthenticationController(Settings settings, ISaveChanges unitOfWork, AuthenticationDao authenticationDao, OAuth2Client oAuth2Client)
+      : base(settings, unitOfWork)
     {
-      Claws.NotNull(() => authenticator);
-
-      this.authenticator = authenticator;
+      Claws.NotNull(() => authenticationDao);
+      Claws.NotNull(() => oAuth2Client);
       this.authenticationDao = authenticationDao;
+      this.oAuth2Client = oAuth2Client;
     }
 
-    private readonly Authenticator authenticator;
     private readonly AuthenticationDao authenticationDao;
+    private readonly OAuth2Client oAuth2Client;
 
     [HttpGet]
     public ActionResult Authenticate()
     {
       var completeAuthorizationUrl = new Uri(this.settings.AppUrl, this.Url.RouteUrl("CompleteAuthentication")).ToString();
-      var requestToken = this.authenticator.GetRequestToken(completeAuthorizationUrl);
+      var userSession = this.authenticationDao.CreateUserSession(completeAuthorizationUrl);
 
-      var userSession = this.authenticationDao.CreateSession(requestToken.Token, requestToken.Secret);
-
-      var redirectUrl = this.authenticator.GenerateAuthUrlFromRequestToken(requestToken, false);
+      var redirectUrl = this.oAuth2Client.GetAuthorizationUrl(userSession);
       return this.Redirect(redirectUrl);
     }
 
     [HttpGet]
-    // ReSharper disable InconsistentNaming
-    public ActionResult Complete(string oauth_token, string oauth_verifier)
+    public ActionResult Complete(string code, string state)
     {
-      var userSession = this.authenticationDao.LookupSessionByTempToken(oauth_token);
+      var userSession = this.authenticationDao.LoadUserSessionByVerifier(Guid.Parse(state));
 
       if (userSession == null)
-        throw new ArgumentException("Session not found", nameof(oauth_token));
+        throw new ArgumentException("User Session not found for verifier", nameof(state));
 
-      userSession.Verifier = oauth_verifier;
-
-      var authCredential = this.authenticator.ProcessApprovedAuthCallback(BuildRequestToken(userSession));
-      userSession.Token = authCredential.AuthToken;
-      userSession.Secret = authCredential.AuthTokenSecret;
-      userSession.UserId = authCredential.UserId;
+      this.oAuth2Client.RequestTokens(userSession, code);
 
       this.SetUserSessionCookie(userSession.Id);
-
       return this.RedirectToRoute("Index");
-    }
-    // ReSharper restore InconsistentNaming
-
-    private static RequestToken BuildRequestToken(UserSession userSession)
-    {
-      return new RequestToken {
-        Token = userSession.TempToken,
-        Secret = userSession.TempSecret,
-        Verifier = userSession.Verifier,
-      };
     }
 
     [HttpGet]

@@ -1,13 +1,15 @@
-﻿namespace MillionSteps.Core.Data
+﻿using MillionSteps.Core.Work;
+
+namespace MillionSteps.Core.Data
 {
   [UnitWorker]
   public abstract class Dao
   {
     protected Dao(MillionStepsDbContext dbContext)
     {
-      this.dbContext = dbContext;
+      this.DbContext = dbContext;
     }
 
-    protected readonly MillionStepsDbContext dbContext;
+    protected readonly MillionStepsDbContext DbContext;
   }
 }

@@ -43,12 +43,12 @@ namespace MillionSteps.Web.Games
 
       Claws.NotNull(() => this.activityLogUpdater);
       this.activityLogUpdater.UpdateTodayAndYesterday();
-      this.userSession.OffsetFromUtcMillis = userProfile.OffsetFromUTCMillis;
+      this.userSession.OffsetFromUtcMillis = userProfile.OffsetFromUtcMillis;
 
       var existingAdventure = this.adventureDao.LookupAdventureByUserId(this.userSession.UserId);
-      var currentMomentId = existingAdventure?.CurrentMomentId ?? this.adventureDao.CreateAdventure(this.userSession.UserId).CurrentMomentId ;
+      var currentMomentId = existingAdventure?.CurrentMomentId ?? this.adventureDao.CreateAdventure(this.userSession.UserId).CurrentMomentId;
 
-      return this.RedirectToRoute("Moment", new {momentId = currentMomentId});
+      return this.RedirectToRoute("Moment", new { momentId = currentMomentId });
     }
 
     [HttpGet]
@@ -66,7 +66,7 @@ namespace MillionSteps.Web.Games
       if (adventure == null)
         return this.RedirectToRoute("Game");
 
-      var moment = this.dbContext.Moments.Find(momentId);
+      var moment = this.adventureDao.LoadMoment(momentId);
       if (moment == null)
         return this.RedirectToRoute("Game");
 
@@ -99,7 +99,7 @@ namespace MillionSteps.Web.Games
       if (this.userSession == null)
         return this.RedirectToRoutePermanent("Welcome");
 
-      var priorMoment = this.dbContext.Moments.Find(momentId);
+      var priorMoment = this.adventureDao.LoadMoment(momentId);
       var adventure = priorMoment.Adventure;
 
       if (adventure == null || adventure.CurrentMomentId != momentId)
@@ -111,7 +111,7 @@ namespace MillionSteps.Web.Games
 
       var newMoment = this.adventureDao.BuildNextMoment(adventure, priorMoment, @event);
 
-      return this.RedirectToRoutePermanent("Moment", new {momentId = newMoment.Id});
+      return this.RedirectToRoutePermanent("Moment", new { momentId = newMoment.Id });
     }
   }
 }

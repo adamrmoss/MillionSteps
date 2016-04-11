@@ -7,24 +7,20 @@ namespace MillionSteps.Core.Authentication
   {
     public const string CookieName = "UserSessionId";
     public static readonly TimeSpan Lifetime = TimeSpan.FromDays(30);
-    
+
     [Key]
     public Guid Id { get; set; }
 
-    [MaxLength(128)]
-    public string TempToken { get; set; }
+    public Guid Verifier { get; set; }
 
-    [MaxLength(128)]
-    public string TempSecret { get; set; }
+    [MaxLength(256)]
+    public string AccessToken { get; set; }
 
-    [MaxLength(128)]
-    public string Verifier { get; set; }
+    [MaxLength(256)]
+    public string RefreshToken { get; set; }
 
-    [MaxLength(128)]
-    public string Token { get; set; }
-
-    [MaxLength(128)]
-    public string Secret { get; set; }
+    [MaxLength(256)]
+    public string RedirectUrl { get; set; }
 
     [MaxLength(16)]
     public string UserId { get; set; }

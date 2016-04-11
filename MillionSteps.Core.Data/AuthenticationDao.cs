@@ -8,29 +8,30 @@ namespace MillionSteps.Core.Data
   {
     public AuthenticationDao(MillionStepsDbContext dbContext)
       : base(dbContext)
-    {}
+    { }
 
-    public UserSession CreateSession(string tempToken, string tempSecret)
+    public UserSession CreateUserSession(string redirectUrl)
     {
-      var userSession = new UserSession
-      {
+      var userSession = new UserSession {
         Id = Guid.NewGuid(),
+        Verifier = Guid.NewGuid(),
         DateCreated = DateTime.UtcNow,
-        TempToken = tempToken,
-        TempSecret = tempSecret
+        RedirectUrl = redirectUrl,
       };
-      this.dbContext.UserSessions.Add(userSession);
+      this.DbContext.UserSessions.Add(userSession);
       return userSession;
     }
 
     public UserSession LoadUserSession(Guid userSessionId)
     {
-      return this.dbContext.UserSessions.Find(userSessionId);
+      return this.DbContext.UserSessions.Find(userSessionId);
     }
 
-    public UserSession LookupSessionByTempToken(string tempToken)
+    public UserSession LoadUserSessionByVerifier(Guid verifier)
     {
-      return this.dbContext.UserSessions.SingleOrDefault(userSession => userSession.TempToken == tempToken);
+      var userSession = this.DbContext.UserSessions.SingleOrDefault(us => us.Verifier == verifier);
+      this.DbContext.UserSessions.Attach(userSession);
+      return userSession;
     }
   }
 }

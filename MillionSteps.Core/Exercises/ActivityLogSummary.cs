@@ -6,6 +6,7 @@ namespace MillionSteps.Core.Exercises
   {
     [MaxLength(16)]
     public string UserId { get; set; }
+
     public int TotalSteps { get; set; }
   }
 }

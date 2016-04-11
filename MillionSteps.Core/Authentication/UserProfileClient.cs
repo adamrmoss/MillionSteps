@@ -1,33 +1,33 @@
-﻿using System.Net;
-using Fitbit.Api;
-using Fitbit.Models;
+﻿using MillionSteps.Core.OAuth2;
+using MillionSteps.Core.Work;
 
 namespace MillionSteps.Core.Authentication
 {
   [UnitWorker]
-  public class UserProfileClient
+  public class UserProfileClient : AuthenticatedClientBase
   {
-    public UserProfileClient(UserSession userSession, FitbitClient fitbitClient)
-    {
-      this.userSession = userSession;
-      this.fitbitClient = fitbitClient;
-    }
-
-    private readonly UserSession userSession;
-    private readonly FitbitClient fitbitClient;
+    public UserProfileClient(OAuth2Client oAuth2Client, UserSession userSession)
+      : base(oAuth2Client, userSession)
+    { }
 
     public UserProfile GetUserProfile()
     {
-      if (this.userSession == null || this.fitbitClient == null)
+      if (this.UserSession == null)
         return null;
 
-      try {
-        return this.fitbitClient.GetUserProfile(this.userSession.UserId);
-      } catch (FitbitException fitbitException) {
-        if (fitbitException.HttpStatusCode == HttpStatusCode.Unauthorized)
-          return null;
-        throw;
-      }
+      var url = "1/user/-/profile.json";
+      var userProfile = this.OAuth2Client.MakeRequest(url, this.UserSession, this.BuildUserProfile);
+      return userProfile;
+    }
+
+    private UserProfile BuildUserProfile(dynamic json)
+    {
+      return new UserProfile {
+        UserId = this.UserSession.UserId,
+        DisplayName = json.user.fullName,
+        OffsetFromUtcMillis = json.user.offsetFromUTCMillis,
+        StrideLengthWalking = json.user.strideLengthWalking,
+      };
     }
   }
 }

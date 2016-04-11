@@ -9,23 +9,22 @@ namespace MillionSteps.Core.Data
   {
     public ActivityLogDao(MillionStepsDbContext dbContext)
       : base(dbContext)
-    {}
+    { }
 
     public Dictionary<DateTime, ActivityLogEntry> GetExistingActivityLogEntries(string userId, DateTime startDate, DateTime endDate)
     {
-      var existingActivityLogEntries = this.dbContext.ActivityLogEntries
+      var existingActivityLogEntries = this.DbContext.ActivityLogEntries
         .Where(ale => ale.UserId == userId && ale.Date >= startDate && ale.Date <= endDate);
       return existingActivityLogEntries.ToDictionary(ale => ale.Date);
     }
 
     public ActivityLogSummary GetActivityLogSummary(string userId)
     {
-      var totalSteps = this.dbContext.ActivityLogEntries
+      var totalSteps = this.DbContext.ActivityLogEntries
         .Where(ale => ale.UserId == userId)
         .Sum(ale => ale.Steps);
 
-      return new ActivityLogSummary
-      {
+      return new ActivityLogSummary {
         UserId = userId,
         TotalSteps = totalSteps,
       };
@@ -33,13 +32,12 @@ namespace MillionSteps.Core.Data
 
     public void AddActivityLogEntry(string userId, DateTime date, int steps)
     {
-      var activityLogEntry = new ActivityLogEntry
-      {
+      var activityLogEntry = new ActivityLogEntry {
         UserId = userId,
         Date = date,
         Steps = steps
       };
-      this.dbContext.ActivityLogEntries.Add(activityLogEntry);
+      this.DbContext.ActivityLogEntries.Add(activityLogEntry);
     }
   }
 }
