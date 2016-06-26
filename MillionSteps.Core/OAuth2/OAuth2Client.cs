@@ -38,7 +38,7 @@ namespace MillionSteps.Core.OAuth2
     public void RequestTokens(UserSession userSession, string code, Action<IRestResponse> errorAction=null)
     {
       var restRequest = new RestRequest(this.settings.TokenUrl, Method.POST);
-      restRequest.AddHeader("Authorization", this.GetBasicAuthHeader());
+      restRequest.AddHeader("Authorization", this.getBasicAuthHeader());
       restRequest.AddParameter("grant_type", "authorization_code");
       restRequest.AddParameter("code", code);
       restRequest.AddParameter("client_id", this.settings.ClientId);
@@ -62,7 +62,7 @@ namespace MillionSteps.Core.OAuth2
     public void RefreshToken(UserSession userSession, Action<IRestResponse> errorAction=null)
     {
       var restRequest = new RestRequest(this.settings.TokenUrl, Method.POST);
-      restRequest.AddHeader("Authorization", this.GetBasicAuthHeader());
+      restRequest.AddHeader("Authorization", this.getBasicAuthHeader());
       restRequest.AddParameter("grant_type", "refresh_token");
       restRequest.AddParameter("refresh_token", userSession.RefreshToken);
 
@@ -79,7 +79,7 @@ namespace MillionSteps.Core.OAuth2
       userSession.RefreshToken = (string) combinedToken.refresh_token;
     }
 
-    private string GetBasicAuthHeader()
+    private string getBasicAuthHeader()
     {
       return "Basic " + "{0}:{1}".FormatWith(this.settings.ClientId, this.settings.ClientSecret).Base64Encode();
     }

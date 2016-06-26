@@ -12,7 +12,7 @@ namespace MillionSteps.Web
     protected void Application_Start()
     {
       RegisterRoutes();
-      BuildControllerFactory();
+      buildControllerFactory();
     }
 
     public static void RegisterRoutes()
@@ -35,7 +35,7 @@ namespace MillionSteps.Web
       routes.MapRoute("Choose", "Choose/{momentId}", new { controller = "Game", action = "Choose" });
     }
 
-    private static void BuildControllerFactory()
+    private static void buildControllerFactory()
     {
       var container = new Container(config => {
         config.AddRegistry<CoreRegistry>();

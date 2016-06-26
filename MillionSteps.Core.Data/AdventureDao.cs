@@ -17,17 +17,17 @@ namespace MillionSteps.Core.Data
         UserId = userId,
         DateCreated = DateTime.UtcNow
       };
-      this.DbContext.Adventures.Add(adventure);
+      this.dbContext.Adventures.Add(adventure);
 
       var initialMoment = new Moment {
         Ordinal = 0,
         Adventure = adventure
       };
-      this.DbContext.Moments.Add(initialMoment);
+      this.dbContext.Moments.Add(initialMoment);
 
       adventure.Moments.Add(initialMoment);
 
-      this.DbContext.SaveChanges();
+      this.dbContext.SaveChanges();
 
       adventure.CurrentMomentId = initialMoment.Id;
 
@@ -36,7 +36,7 @@ namespace MillionSteps.Core.Data
 
     public AdventureSummary LookupAdventureByUserId(string userId)
     {
-      var adventure = this.DbContext.Adventures
+      var adventure = this.dbContext.Adventures
         .OrderByDescending(a => a.DateCreated)
         .FirstOrDefault(a => a.UserId == userId);
       return adventure?.GetSummary();
@@ -44,7 +44,7 @@ namespace MillionSteps.Core.Data
 
     public Moment LoadMoment(int momentId)
     {
-      return this.DbContext.Moments.Find(momentId);
+      return this.dbContext.Moments.Find(momentId);
     }
 
     public Moment BuildNextMoment(Adventure adventure, Moment priorMoment, Event @event)
@@ -56,19 +56,19 @@ namespace MillionSteps.Core.Data
         StepsConsumed = @event.StepsConsumed,
         Ordinal = priorMoment.Ordinal + 1
       };
-      this.DbContext.Moments.Add(newMoment);
+      this.dbContext.Moments.Add(newMoment);
 
       foreach (var flag in flags) {
         var momentFlag = new MomentFlag {
           Flag = flag
         };
-        this.DbContext.MomentFlags.Add(momentFlag);
+        this.dbContext.MomentFlags.Add(momentFlag);
         newMoment.MomentFlags.Add(momentFlag);
       };
 
       adventure.Moments.Add(newMoment);
 
-      this.DbContext.SaveChanges();
+      this.dbContext.SaveChanges();
 
       adventure.CurrentMomentId = newMoment.Id;
 

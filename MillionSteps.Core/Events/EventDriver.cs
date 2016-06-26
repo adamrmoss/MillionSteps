@@ -21,14 +21,14 @@ namespace MillionSteps.Core.Events
 
     public List<Event> GetValidEvents(FlagDictionary flagDictionary)
     {
-      var automaticEvents = this.allEvents.Where(@event => @event.Automatic && EventCanExecute(@event, flagDictionary)).ToList();
+      var automaticEvents = this.allEvents.Where(@event => @event.Automatic && eventCanExecute(@event, flagDictionary)).ToList();
       if (automaticEvents.Any())
         return new List<Event> { automaticEvents.First() };
 
-      return this.allEvents.Where(@event => EventCanExecute(@event, flagDictionary)).ToList();
+      return this.allEvents.Where(@event => eventCanExecute(@event, flagDictionary)).ToList();
     }
 
-    private static bool EventCanExecute(Event @event, FlagDictionary flagDictionary)
+    private static bool eventCanExecute(Event @event, FlagDictionary flagDictionary)
     {
       return (@event.Repeatable || !flagDictionary[@event.Name]) && @event.CanExecute(flagDictionary);
     }

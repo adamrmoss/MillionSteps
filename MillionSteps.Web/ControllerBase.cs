@@ -27,23 +27,23 @@ namespace MillionSteps.Web
     protected readonly Settings settings;
     protected readonly ISaveChanges unitOfWork;
 
-    protected void SetUserSessionCookie(Guid userSessionId)
+    protected void setUserSessionCookie(Guid userSessionId)
     {
       var expires = DateTime.UtcNow + UserSession.Lifetime;
-      this.SetUserSessionCookie(userSessionId, expires);
+      this.setUserSessionCookie(userSessionId, expires);
     }
 
-    protected void ClearUserSessionCookie()
+    protected void clearUserSessionCookie()
     {
       if (this.Request.Cookies.AllKeys.Contains(UserSession.CookieName)) {
         // ReSharper disable once PossibleNullReferenceException
         var userSessionId = Guid.Parse(this.Request.Cookies[UserSession.CookieName].Value);
         var expires = DateTime.UtcNow - TimeSpan.FromDays(1);
-        this.SetUserSessionCookie(userSessionId, expires);
+        this.setUserSessionCookie(userSessionId, expires);
       }
     }
 
-    private void SetUserSessionCookie(Guid userSessionId, DateTime expires)
+    private void setUserSessionCookie(Guid userSessionId, DateTime expires)
     {
       var httpCookie = new HttpCookie(UserSession.CookieName, userSessionId.ToString()) {
         Expires = expires
@@ -51,19 +51,19 @@ namespace MillionSteps.Web
       this.Response.Cookies.Add(httpCookie);
     }
 
-    protected JsonResult BuildJsonResult(object data)
+    protected JsonResult buildJsonResult(object data)
     {
       return new JsonResult {
         Data = data,
       };
     }
 
-    protected HttpStatusCodeResult ForbiddenResult()
+    protected HttpStatusCodeResult forbiddenResult()
     {
       return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
     }
 
-    protected HttpStatusCodeResult PreconditionFailedResult()
+    protected HttpStatusCodeResult preconditionFailedResult()
     {
       return new HttpStatusCodeResult(HttpStatusCode.PreconditionFailed);
     }

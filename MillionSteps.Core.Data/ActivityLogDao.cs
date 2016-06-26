@@ -13,14 +13,14 @@ namespace MillionSteps.Core.Data
 
     public Dictionary<DateTime, ActivityLogEntry> GetExistingActivityLogEntries(string userId, DateTime startDate, DateTime endDate)
     {
-      var existingActivityLogEntries = this.DbContext.ActivityLogEntries
+      var existingActivityLogEntries = this.dbContext.ActivityLogEntries
         .Where(ale => ale.UserId == userId && ale.Date >= startDate && ale.Date <= endDate);
       return existingActivityLogEntries.ToDictionary(ale => ale.Date);
     }
 
     public ActivityLogSummary GetActivityLogSummary(string userId)
     {
-      var totalSteps = this.DbContext.ActivityLogEntries
+      var totalSteps = this.dbContext.ActivityLogEntries
         .Where(ale => ale.UserId == userId)
         .Sum(ale => ale.Steps);
 
@@ -37,7 +37,7 @@ namespace MillionSteps.Core.Data
         Date = date,
         Steps = steps
       };
-      this.DbContext.ActivityLogEntries.Add(activityLogEntry);
+      this.dbContext.ActivityLogEntries.Add(activityLogEntry);
     }
   }
 }

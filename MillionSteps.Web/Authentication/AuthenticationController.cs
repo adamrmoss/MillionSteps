@@ -42,14 +42,14 @@ namespace MillionSteps.Web.Authentication
 
       this.oAuth2Client.RequestTokens(userSession, code);
 
-      this.SetUserSessionCookie(userSession.Id);
+      this.setUserSessionCookie(userSession.Id);
       return this.RedirectToRoute("Index");
     }
 
     [HttpGet]
     public ActionResult Logout()
     {
-      this.ClearUserSessionCookie();
+      this.clearUserSessionCookie();
       return this.RedirectToRoute("Index");
     }
   }

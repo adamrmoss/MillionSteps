@@ -29,7 +29,7 @@ namespace MillionSteps.Web
     [HttpGet]
     public ActionResult Welcome()
     {
-      this.ClearUserSessionCookie();
+      this.clearUserSessionCookie();
 
       return this.View("~/Authentication/Views/Welcome.cshtml");
     }

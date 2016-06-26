@@ -23,7 +23,7 @@ namespace MillionSteps.Web.Configuration
           .LifecycleIs<HttpContextLifecycle>();
 
       this.For<UserSession>()
-          .Use(context => BuildUserSession(context))
+          .Use(context => buildUserSession(context))
           .LifecycleIs<HttpContextLifecycle>();
 
       this.For<MillionStepsDbContext>()
@@ -33,10 +33,10 @@ namespace MillionSteps.Web.Configuration
           .Use(context => context.GetInstance<MillionStepsDbContext>())
           .LifecycleIs<HttpContextLifecycle>();
 
-      this.Scan(PerformScan);
+      this.Scan(performScan);
     }
 
-    private static UserSession BuildUserSession(IContext context)
+    private static UserSession buildUserSession(IContext context)
     {
       var request = context.GetInstance<HttpRequest>();
       if (!request.Cookies.AllKeys.Contains(UserSession.CookieName))
@@ -47,7 +47,7 @@ namespace MillionSteps.Web.Configuration
       return authenticationDao.LoadUserSession(userSessionId);
     }
 
-    private static void PerformScan(IAssemblyScanner scanner)
+    private static void performScan(IAssemblyScanner scanner)
     {
       scanner.AssembliesFromApplicationBaseDirectory();
       scanner.Include(type => type.HasAttribute<UnitWorkerAttribute>());

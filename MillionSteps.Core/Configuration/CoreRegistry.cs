@@ -13,19 +13,19 @@ namespace MillionSteps.Core.Configuration
           .LifecycleIs<SingletonLifecycle>();
 
       this.For<RestClient>()
-          .Use(context => BuildRestClient(context))
+          .Use(context => buildRestClient(context))
           .LifecycleIs<UniquePerRequestLifecycle>();
 
-      this.ConfigureFitbitApi();
+      this.configureFitbitApi();
     }
 
-    private static RestClient BuildRestClient(IContext context)
+    private static RestClient buildRestClient(IContext context)
     {
       var settings = context.GetInstance<Settings>();
       return new RestClient(settings.ApiUrl.OriginalString);
     }
 
-    private void ConfigureFitbitApi()
+    private void configureFitbitApi()
     {
     }
   }

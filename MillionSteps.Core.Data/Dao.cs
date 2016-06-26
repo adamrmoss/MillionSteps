@@ -7,9 +7,9 @@ namespace MillionSteps.Core.Data
   {
     protected Dao(MillionStepsDbContext dbContext)
     {
-      this.DbContext = dbContext;
+      this.dbContext = dbContext;
     }
 
-    protected readonly MillionStepsDbContext DbContext;
+    protected readonly MillionStepsDbContext dbContext;
   }
 }

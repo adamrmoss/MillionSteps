@@ -180,6 +180,7 @@
   <ItemGroup>
     <Content Include="Authentication\fitbit_logo_dark_1000px.png" />
     <Content Include="Authentication\fitbit_logo_light_1000px.png" />
+    <Content Include="Configuration\Settings.config" />
     <Content Include="Global.asax" />
     <Content Include="layout.css">
       <DependentUpon>layout.less</DependentUpon>
@@ -218,9 +219,6 @@
     <Content Include="Views\Footer.cshtml" />
     <Content Include="Games\Views\Moment.cshtml" />
     <Content Include="Games\Views\web.config" />
-    <Content Include="Configuration\Settings.config">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="packages.config" />
     <Content Include="Events\Views\Prelude\StoryStarted.cshtml" />
     <Content Include="Events\Views\Prelude\FemalePlayerChosen.cshtml" />
@@ -231,10 +229,6 @@
     <Content Include="Events\Views\Overview\Origin.cshtml" />
     <Content Include="Events\Views\Overview\OriginConfirmation.cshtml" />
     <Content Include="Events\Views\web.config" />
-    <Content Include="Configuration\Connections.config">
-      <SubType>Designer</SubType>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="Games\Views\Choices.cshtml" />
     <Content Include="layout.less" />
     <None Include="compilerconfig.json" />
@@ -246,6 +240,9 @@
     <Content Include="Events\Views\Departure\VillageDestroyed.cshtml" />
     <Content Include="Events\Views\Overview\HereWeGo.cshtml" />
     <Content Include="Events\Views\Departure\StayOffRoads.cshtml" />
+    <Content Include="Configuration\Connections.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="Properties\PublishProfiles\a-million-steps.org - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\Manual Deploy.pubxml" />
     <None Include="Web.Debug.config">

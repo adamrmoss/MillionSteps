@@ -12,18 +12,18 @@ namespace MillionSteps.Core.Authentication
 
     public UserProfile GetUserProfile()
     {
-      if (this.UserSession == null)
+      if (this.userSession == null)
         return null;
 
       var url = "1/user/-/profile.json";
-      var userProfile = this.OAuth2Client.MakeRequest(url, this.UserSession, this.BuildUserProfile);
+      var userProfile = this.oAuth2Client.MakeRequest(url, this.userSession, this.buildUserProfile);
       return userProfile;
     }
 
-    private UserProfile BuildUserProfile(dynamic json)
+    private UserProfile buildUserProfile(dynamic json)
     {
       return new UserProfile {
-        UserId = this.UserSession.UserId,
+        UserId = this.userSession.UserId,
         DisplayName = json.user.fullName,
         OffsetFromUtcMillis = json.user.offsetFromUTCMillis,
         StrideLengthWalking = json.user.strideLengthWalking,

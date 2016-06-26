@@ -5,14 +5,14 @@ namespace MillionSteps.Core.Configuration
 {
   public class Settings : SettingsBase
   {
-    public Uri AppUrl => new Uri(GetAppSetting("AppUrl"));
-    public string ClientId => GetAppSetting("ClientId");
-    public string ClientSecret => GetAppSetting("ClientSecret");
-    public Uri AuthorizationUrl => new Uri(GetAppSetting("AuthorizationUrl"));
-    public Uri TokenUrl => new Uri(GetAppSetting("TokenUrl"));
-    public Uri ApiUrl => new Uri(GetAppSetting("ApiUrl"));
+    public Uri AppUrl => new Uri(getAppSetting("AppUrl"));
+    public string ClientId => getAppSetting("ClientId");
+    public string ClientSecret => getAppSetting("ClientSecret");
+    public Uri AuthorizationUrl => new Uri(getAppSetting("AuthorizationUrl"));
+    public Uri TokenUrl => new Uri(getAppSetting("TokenUrl"));
+    public Uri ApiUrl => new Uri(getAppSetting("ApiUrl"));
 
-    private static string GetAppSetting(string settingName)
+    private static string getAppSetting(string settingName)
     {
       return ConfigurationManager.AppSettings[settingName];
     }

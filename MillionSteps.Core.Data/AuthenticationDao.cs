@@ -18,19 +18,19 @@ namespace MillionSteps.Core.Data
         DateCreated = DateTime.UtcNow,
         RedirectUrl = redirectUrl,
       };
-      this.DbContext.UserSessions.Add(userSession);
+      this.dbContext.UserSessions.Add(userSession);
       return userSession;
     }
 
     public UserSession LoadUserSession(Guid userSessionId)
     {
-      return this.DbContext.UserSessions.Find(userSessionId);
+      return this.dbContext.UserSessions.Find(userSessionId);
     }
 
     public UserSession LoadUserSessionByVerifier(Guid verifier)
     {
-      var userSession = this.DbContext.UserSessions.SingleOrDefault(us => us.Verifier == verifier);
-      this.DbContext.UserSessions.Attach(userSession);
+      var userSession = this.dbContext.UserSessions.SingleOrDefault(us => us.Verifier == verifier);
+      this.dbContext.UserSessions.Attach(userSession);
       return userSession;
     }
   }
